@@ -1,0 +1,11 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Reload AGS Script",
+      "type": "node", // This can be any installed debugger type
+      "request": "launch",
+      "preLaunchTask": "Reload AGS"
+    }
+  ]
+}

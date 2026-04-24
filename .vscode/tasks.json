@@ -1,0 +1,10 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Reload AGS",
+      "type": "shell",
+      "command": "bash ./reload.sh"
+    }
+  ]
+}
