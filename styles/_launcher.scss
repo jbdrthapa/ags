@@ -1,0 +1,22 @@
+@use "theme" as *;
+
+launcher-detail-container {
+  background-color: $base_transparent;
+  border: 2px solid $border;
+  min-width: 400px;
+  min-height: 800px;
+  padding: 40px;
+  border-radius: $border-radius;
+}
+
+bar-launcher-component{
+  background-color: transparent;
+  background: none;
+  padding: 4px;
+}
+
+launcher-button{
+  padding-left: 20px;
+  border-radius: $border-radius;
+
+}

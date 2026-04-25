@@ -7,13 +7,13 @@ window.Bar {
 
   background: $base_transparent;
   color: $text;
-  border-radius: 99px;
-  border: 2px solid $border;
+  // border-radius: 99px;
+  border-bottom: 2px solid $border;
 
-  >centerbox {
+  >bar {
     background: transparent;
     margin: 8px;
-    min-height: 10px;
+    min-height: 40px;
     margin: 0;
   }
 

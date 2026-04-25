@@ -1,6 +1,7 @@
 import app from "ags/gtk4/app"
 import { Astal, Gdk } from "ags/gtk4"
 import { Clock } from "./Clock"
+import { Launcher } from "./Launcher"
 
 
 export default function Bar(gdkmonitor: Gdk.Monitor) {
@@ -17,8 +18,9 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
       anchor={TOP | LEFT | RIGHT}
       application={app}
     >
-      <centerbox cssName="centerbox">
+      <centerbox cssName="bar">
         <box $type="start">
+          <Launcher />
         </box>
         <box $type="center">
           <Clock />

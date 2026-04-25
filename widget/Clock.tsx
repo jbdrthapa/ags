@@ -5,10 +5,7 @@ import { createPoll } from "ags/time"
 import { Astal } from "ags/gtk4"
 
 
-export function Clock({
-    time_fmt = "%H:%M",
-    date_fmt = "%a, %b %e"
-} = {}) {
+export function Clock({ time_fmt = "%H:%M", date_fmt = "%a, %b %e"} = {}) {
 
     const worldClocks =
         [
@@ -42,7 +39,7 @@ export function Clock({
         name: "clock-detail-window",
         namespace: "js-clock-detail-window",
         anchor: Astal.WindowAnchor.TOP,
-        marginTop: 15,
+        margin: 8,
         child: (
             <box cssName="clock-detail-container" orientation={Gtk.Orientation.VERTICAL}>
                 <box orientation={Gtk.Orientation.HORIZONTAL} cssName="time-container">
