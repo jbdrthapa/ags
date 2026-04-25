@@ -1,7 +1,7 @@
 @use "theme" as *;
 
 clock-detail-container {
-  background-color: $base_transparent;
+  background-color: $base-transparent;
   border: 2px solid $border;
   min-height: 800px;
   padding: 40px;
@@ -10,17 +10,18 @@ clock-detail-container {
 
 /* Clock */
 
-bar-datetime-component{
+bar-datetime-component {
   background-color: transparent;
   background: none;
   padding: 4px;
 }
 
-bar-time, bar-date{
+bar-time,
+bar-date {
   font-weight: 600;
 }
 
-bar-separator{
+bar-separator {
   background-color: transparent;
   padding-left: 5px;
   padding-right: 5px;
@@ -43,25 +44,29 @@ local-clock-minutes {
 }
 
 local-clock-hours {
-  background-color: transparent;
+  background-color: $mantle-transparent;
+  border: 2px solid $surface0;
+  margin-bottom: 10px;
 }
 
 local-clock-minutes {
-  background-color: $accent-background;
+  background-color: $accent-background-transparent;
+  border: 2px solid $black;
 }
 
 world-clock-panel {
-  background-color: $mantle_transparent;
+  background-color: $mantle-transparent;
   border-radius: $border-radius;
   margin-left: 40px;
   margin-right: -30px;
   padding: 10px;
   min-width: 450px;
+  border: 2px solid $surface0;
 }
 
 world-clock-name,
 world-clock-time,
-world-clock-date{
+world-clock-date {
   font-weight: bold;
   padding: 10px;
   min-width: 100px;
@@ -79,9 +84,10 @@ world-clock-name {
 /* Calendar */
 
 detail-calendar {
-  background-color: $mantle_transparent;
+  background-color: $mantle-transparent;
   padding: 20px;
   border-radius: $border-radius;
+  border: 2px solid $surface0;
 }
 
 detail-calendar .day-name {
@@ -93,7 +99,7 @@ detail-calendar .day-name {
 /* Style the current day */
 detail-calendar .today {
   color: $accent-foreground;
-  background-color: $accent-background;
+  background-color: $accent-background-transparent;
   border-radius: $border-radius;
   font-weight: bold;
 }

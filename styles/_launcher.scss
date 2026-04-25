@@ -1,9 +1,9 @@
 @use "theme" as *;
 
 launcher-detail-container {
-  background-color: $base_transparent;
+  background-color: $base-transparent;
   border: 2px solid $border;
-  min-width: 400px;
+  min-width: 500px;
   min-height: 800px;
   padding: 40px;
   border-radius: $border-radius;
@@ -18,11 +18,15 @@ bar-launcher-component {
 launcher-button {
   padding-left: 20px;
   border-radius: $border-radius;
-
 }
 
 app-item {
   padding: 10px;
+}
+
+app-item:hover{
+  background-color: $accent-background-transparent;
+  border-radius: $border-radius;
 }
 
 app-icon-wrapper {
@@ -54,4 +58,12 @@ scrollbar trough,
 scrollbar slider {
   min-width: 0;
   min-height: 0;
+}
+
+search-entry{
+  min-height: 60px;
+  background-color: $crust-transparent;
+  padding-left: 40px;
+  border-radius: $border-radius;
+  border: 2px solid $border;
 }

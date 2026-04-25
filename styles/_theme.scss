@@ -4,19 +4,22 @@
 
 $border-radius: 15px;
 
-$base_transparent: rgba(30, 30, 46, 0.8);
+$base-transparent: rgba(30, 30, 46, 0.8);
 $base: #1e1e2e;
-$mantle_transparent: rgba(24, 24, 37, 0.8);
+
+$mantle-transparent: rgba(24, 24, 37, 0.8);
 $mantle: #181825;
-$crust_transparent: rgba(17, 17, 27, 0.8);
+
+$crust-transparent: rgba(17, 17, 27, 0.5);
 $crust: #11111b;
 
 $accent-background: #40a02b;
+$accent-background-transparent: rgba(64, 160, 43, 0.8);
 $accent-foreground: #cad3f5;
+
 $border: #313244;
 $hover-background: #7f849c;
 $hover-foreground: #313244;
-
 
 $text: #cad3f5;
 $subtext0: #a6adc8;
