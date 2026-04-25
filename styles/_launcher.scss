@@ -9,14 +9,49 @@ launcher-detail-container {
   border-radius: $border-radius;
 }
 
-bar-launcher-component{
+bar-launcher-component {
   background-color: transparent;
   background: none;
   padding: 4px;
 }
 
-launcher-button{
+launcher-button {
   padding-left: 20px;
   border-radius: $border-radius;
 
+}
+
+app-item {
+  padding: 10px;
+}
+
+app-icon-wrapper {
+  background-color: $border;
+  border-radius: $border-radius;
+  overflow: hidden;
+  min-width: 64px;
+  min-height: 64px;
+  padding: 0px;
+}
+
+app-icon {
+  -gtk-icon-size: 64px;
+  margin: 0;
+}
+
+app-name {
+  margin-left: 20px;
+  font-size: 22px;
+}
+
+/* In your .css file */
+scrollbar {
+  opacity: 0;
+}
+
+/* Or just the trough/slider */
+scrollbar trough,
+scrollbar slider {
+  min-width: 0;
+  min-height: 0;
 }
