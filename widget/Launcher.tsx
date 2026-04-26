@@ -3,14 +3,15 @@ import Apps from "gi://AstalApps"
 import PopupWindow from "./PopupWindow"
 import { Astal } from "ags/gtk4"
 
+let popup: any;
 
 function AppItem({ app }: { app: Apps.Application }) {
     return (
         <button
             cssName="app-item"
             onClicked={() => {
+                popup.hide_all();
                 app.launch();
-                popup.toggle();
             }}
         >
             <box>
@@ -48,7 +49,7 @@ export function Launcher() {
         </box >
     )
 
-    const popup = new PopupWindow({
+    popup = new PopupWindow({
         name: "launcher-detail-window",
         namespace: "js-launcher-detail-window",
         anchor: Astal.WindowAnchor.TOP | Astal.WindowAnchor.LEFT,
@@ -67,8 +68,10 @@ export function Launcher() {
     popup.connect("notify::visible", () => {
         if (popup.visible) {
             console.log("Launcher window is opened");
+            searchEntry.text = "";
+            searchEntry.grab_focus();
         }
-        else{
+        else {
             console.log("Launcher window is closed");
         }
     });
