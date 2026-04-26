@@ -7,8 +7,8 @@ import { Launcher } from "./Launcher"
 export default function Bar(gdkmonitor: Gdk.Monitor) {
   const { TOP, LEFT, RIGHT } = Astal.WindowAnchor
 
-  const clock = new Clock();
-  const launcher = new Launcher();
+  const clock = new (Clock as any)();
+  const launcher = new (Launcher as any)();
 
   const backdropName = "bar-backdrop";
   const backdrop = (
