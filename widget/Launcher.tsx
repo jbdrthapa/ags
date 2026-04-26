@@ -50,7 +50,7 @@ export function Launcher() {
     )
 
     const button = (
-        <button onClicked={() => popup.toggle()}>
+        <button onClicked={() => popup.toggle()} cssName={"bar-button"}>
             <label label="" />
         </button>
     ) as any;
