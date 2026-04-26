@@ -8,7 +8,10 @@ function AppItem({ app }: { app: Apps.Application }) {
     return (
         <button
             cssName="app-item"
-            onClicked={() => app.launch()}
+            onClicked={() => {
+                app.launch();
+                popup.toggle();
+            }}
         >
             <box>
                 <box cssName="app-icon-wrapper">
@@ -20,17 +23,6 @@ function AppItem({ app }: { app: Apps.Application }) {
     );
 }
 
-const fuzzyMatch = (text: string, search: string) => {
-    const term = search.toLowerCase();
-    const target = text.toLowerCase();
-    let i = 0;
-    for (const char of target) {
-        if (char === term[i]) i++;
-        if (i === term.length) return true;
-    }
-    return false;
-};
-
 export function Launcher() {
 
     const apps = new Apps.Apps();
@@ -40,30 +32,21 @@ export function Launcher() {
 
     const searchEntry = (
         <entry
-            placeholderText="> "
+            placeholderText=""
             cssName={"search-entry"}
             onNotifyText={(self) => {
-                updateList(self.text);
+                console.log(self.text);
             }}
         />
     ) as any;
 
-    const updateList = (query: string) => {
-        if (!listRoot) return;
-
-        let child = listRoot.get_first_child();
-        while (child) {
-            let next = child.get_next_sibling();
-            listRoot.remove(child);
-            child = next;
-        }
-
-        apps.get_list()
-            .filter((app: Apps.Application) => fuzzyMatch(app.name || "", query))
-            .forEach((app: Apps.Application) => {
-                listRoot.append(<AppItem app={app} />);
-            });
-    };
+    const appsListing = (
+        <box orientation={Gtk.Orientation.VERTICAL}>
+            {apps.get_list().map((app: Apps.Application) => (
+                <AppItem app={app} />
+            ))}
+        </box >
+    )
 
     const popup = new PopupWindow({
         name: "launcher-detail-window",
@@ -74,7 +57,7 @@ export function Launcher() {
             <box cssName="launcher-detail-container" orientation={Gtk.Orientation.VERTICAL}>
                 {searchEntry}
                 <scrolledwindow vexpand heightRequest={400}>
-                    {listRoot}
+                    {appsListing}
                 </scrolledwindow>
             </box>
         )
@@ -83,9 +66,10 @@ export function Launcher() {
     // reset on visible
     popup.connect("notify::visible", () => {
         if (popup.visible) {
-            searchEntry.text = "";
-            searchEntry.grab_focus();
-            updateList("");
+            console.log("Launcher window is opened");
+        }
+        else{
+            console.log("Launcher window is closed");
         }
     });
 

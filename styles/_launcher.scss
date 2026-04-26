@@ -32,7 +32,6 @@ app-item:hover{
 app-icon-wrapper {
   background-color: $border;
   border-radius: $border-radius;
-  overflow: hidden;
   min-width: 64px;
   min-height: 64px;
   padding: 0px;
@@ -60,10 +59,14 @@ scrollbar slider {
   min-height: 0;
 }
 
-search-entry{
+search-entry {
   min-height: 60px;
   background-color: $crust-transparent;
+  color: $overlay0;
   padding-left: 40px;
   border-radius: $border-radius;
   border: 2px solid $border;
+  margin-bottom: 20px;
+  font-size: 24px;
+  font-weight: 800;
 }
