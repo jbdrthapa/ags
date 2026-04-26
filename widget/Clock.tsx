@@ -4,8 +4,9 @@ import PopupWindow from "./PopupWindow"
 import { createPoll } from "ags/time"
 import { Astal } from "ags/gtk4"
 
+let popup: any;
 
-export function Clock({ time_fmt = "%H:%M", date_fmt = "%a, %b %e"} = {}) {
+export function Clock({ time_fmt = "%H:%M", date_fmt = "%a, %b %e" } = {}) {
 
     const worldClocks =
         [
@@ -35,7 +36,17 @@ export function Clock({ time_fmt = "%H:%M", date_fmt = "%a, %b %e"} = {}) {
         css_name: "detail-calendar",
     });
 
-    const popup = new PopupWindow({
+    const button = (
+        <button onClicked={() => popup.toggle()} cssName={"bar-datetime-component"}>
+            <box orientation={Gtk.Orientation.HORIZONTAL}>
+                <label label={times[0].as(t => t.tz_time)} cssName={"bar-time"} />
+                <label label="" cssName={"bar-separator"} />
+                <label label={times[0].as(t => t.tz_date)} cssName={"bar-date"} />
+            </box>
+        </button>
+    ) as any;
+
+    popup = new PopupWindow({
         name: "clock-detail-window",
         namespace: "js-clock-detail-window",
         anchor: Astal.WindowAnchor.TOP,
@@ -72,14 +83,8 @@ export function Clock({ time_fmt = "%H:%M", date_fmt = "%a, %b %e"} = {}) {
         }
     });
 
-    return (
-        <button onClicked={() => popup.toggle()} cssName={"bar-datetime-component"}>
-            <box orientation={Gtk.Orientation.HORIZONTAL}>
-                <label label={times[0].as(t => t.tz_time)} cssName={"bar-time"} />
-                <label label="" cssName={"bar-separator"} />
-                <label label={times[0].as(t => t.tz_date)} cssName={"bar-date"} />
-            </box>
-        </button>
-    );
+    button.popup = popup;
+
+    return button;
 
 }

@@ -7,6 +7,33 @@ import { Launcher } from "./Launcher"
 export default function Bar(gdkmonitor: Gdk.Monitor) {
   const { TOP, LEFT, RIGHT } = Astal.WindowAnchor
 
+  const clock = new Clock();
+  const launcher = new Launcher();
+
+  const backdropName = "bar-backdrop";
+  const backdrop = (
+    <window
+      name={backdropName}
+      namespace={backdropName}
+      layer={Astal.Layer.BACKGROUND}
+      visible={true}
+      anchor={Astal.WindowAnchor.TOP | Astal.WindowAnchor.BOTTOM | Astal.WindowAnchor.LEFT | Astal.WindowAnchor.RIGHT}
+      application={app}
+      cssName={"invisible-backdrop-window"}
+    >
+      <button
+        cssName="invisible-backdrop"
+        onClicked={() => {
+          clock.popup.hide_all();
+          launcher.popup.hide_all();
+          console.log("bar invisible layer clicked")
+        }}
+      />
+    </window>
+  ) as Astal.Window;
+
+  app.add_window(backdrop);
+
   return (
     <window
       visible
@@ -20,10 +47,10 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
     >
       <centerbox cssName="bar">
         <box $type="start">
-          <Launcher />
+          {launcher}
         </box>
         <box $type="center">
-          <Clock />
+          {clock}
         </box>
         <box $type="end">
         </box>

@@ -9,7 +9,6 @@ import { subprocess } from "ags/process";
 export default GObject.registerClass({
     GTypeName: "PopupWindow",
 }, class PopupWindow extends Astal.Window {
-    private backdrop!: Astal.Window;
 
     constructor(props: any & { child: Gtk.Widget }) {
         const { name, child, ...rest } = props;
@@ -43,26 +42,6 @@ export default GObject.registerClass({
             (err) => console.error("Niri IPC Error:", err)
         );
 
-        const backdropName = `${name}-backdrop`;
-        this.backdrop = (
-            <window
-                name={backdropName}
-                namespace={backdropName}
-                layer={Astal.Layer.TOP}
-                visible={false}
-                anchor={Astal.WindowAnchor.TOP | Astal.WindowAnchor.BOTTOM | Astal.WindowAnchor.LEFT | Astal.WindowAnchor.RIGHT}
-                application={App}
-                cssName={"invisible-backdrop-window"}
-            >
-                <button
-                    cssName="invisible-backdrop"
-                    onClicked={() => this.hide_all()}
-                />
-            </window>
-        ) as Astal.Window;
-
-        App.add_window(this.backdrop);
-
         const controller = new Gtk.EventControllerKey();
         controller.connect("key-pressed", (_, keyval) => {
             if (keyval === Gdk.KEY_Escape) {
@@ -76,12 +55,10 @@ export default GObject.registerClass({
 
     hide_all() {
         this.set_visible(false);
-        this.backdrop.set_visible(false);
     }
 
     toggle() {
         const isShowing = this.get_visible();
         this.set_visible(!isShowing);
-        this.backdrop.set_visible(!isShowing);
     }
 });

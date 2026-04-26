@@ -49,6 +49,12 @@ export function Launcher() {
         </box >
     )
 
+    const button = (
+        <button onClicked={() => popup.toggle()}>
+            <label label="" />
+        </button>
+    ) as any;
+
     popup = new PopupWindow({
         name: "launcher-detail-window",
         namespace: "js-launcher-detail-window",
@@ -76,13 +82,7 @@ export function Launcher() {
         }
     });
 
-    return (
-        <button onClicked={() => popup.toggle()} cssName={"bar-launcher-component"}>
-            <box orientation={Gtk.Orientation.HORIZONTAL}>
-                <button label={""} cssName={"launcher-button"} />
-            </box>
-        </button>
-    );
+    button.popup = popup;
 
-
+    return button;
 }
