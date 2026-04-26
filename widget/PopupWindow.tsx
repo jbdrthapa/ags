@@ -23,8 +23,14 @@ export default GObject.registerClass({
 
         this.name = "PopupWindow";
 
-        // Add the child after super to ensure the window is initialized
         this.set_child(child);
+
+        this.connect("notify::is-active", () => {
+            if (!this.isActive) {
+                // console.log("Focus lost, hiding PopupWindow");
+                this.hide_all();
+            }
+        });
 
         subprocess(
             ["bash", "-c", "niri msg --json event-stream"],
