@@ -57,7 +57,7 @@ export function Launcher() {
 
     popup = new PopupWindow({
         name: "launcher-detail-window",
-        namespace: "js-launcher-detail-window",
+        namespace: "js-shell-launcher",
         anchor: Astal.WindowAnchor.TOP | Astal.WindowAnchor.LEFT,
         margin: 8,
         child: (

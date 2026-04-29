@@ -48,7 +48,7 @@ export function Clock({ time_fmt = "%H:%M", date_fmt = "%a, %b %e" } = {}) {
 
     popup = new PopupWindow({
         name: "clock-detail-window",
-        namespace: "js-clock-detail-window",
+        namespace: "js-shell-clock",
         anchor: Astal.WindowAnchor.TOP,
         margin: 8,
         child: (
