@@ -1,8 +1,8 @@
 import app from "ags/gtk4/app"
 import { Astal, Gdk } from "ags/gtk4"
-import { Clock } from "./Clock"
-import { Launcher } from "./Launcher"
-import { Menu } from "./Menu"
+import { Clock } from "./modules-center/Clock"
+import { Launcher } from "./modules-left/Launcher"
+import { Menu } from "./modules-right/Menu"
 
 
 export default function Bar(gdkmonitor: Gdk.Monitor) {

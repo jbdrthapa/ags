@@ -1,6 +1,7 @@
 @forward "theme";
 @forward "shared";
 @use "bar";
-@use "clock";
-@use "launcher";
-@use "menu";
+@use "./modules-center/clock";
+@use "./modules-left/launcher";
+@use "./modules-right/menu";
+@use "./modules-right/audiocontrols";

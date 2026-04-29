@@ -1,6 +1,6 @@
 import Gtk from "gi://Gtk?version=4.0"
 import GLib from "gi://GLib"
-import PopupWindow from "./PopupWindow"
+import PopupWindow from "../PopupWindow"
 import { createPoll } from "ags/time"
 import { Astal } from "ags/gtk4"
 

@@ -1,6 +1,6 @@
 import Gtk from "gi://Gtk?version=4.0"
 import Apps from "gi://AstalApps"
-import PopupWindow from "./PopupWindow"
+import PopupWindow from "../PopupWindow"
 import { Astal } from "ags/gtk4"
 
 let popup: any;
