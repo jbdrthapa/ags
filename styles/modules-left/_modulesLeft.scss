@@ -1,8 +1,8 @@
 @use "theme" as *;
 
-launcher-detail-container {
+modules-left-container{
   background-color: $base-transparent;
-  border: 2px solid $border;
+  border: 2px solid $base;
   min-width: 500px;
   min-height: 840px;
   padding: 40px;
@@ -27,6 +27,7 @@ app-item {
 
 app-item:hover{
   background-color: $accent-background-transparent;
+  color: $accent-foreground;
   border-radius: $border-radius;
 }
 
@@ -66,7 +67,7 @@ search-entry {
   color: $overlay0;
   padding-left: 40px;
   border-radius: $border-radius;
-  border: 2px solid $border;
+  border: 2px solid $base;
   margin-bottom: 20px;
   font-size: 24px;
   font-weight: 800;

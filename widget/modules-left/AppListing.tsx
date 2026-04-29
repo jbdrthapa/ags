@@ -1,16 +1,18 @@
+
 import Gtk from "gi://Gtk?version=4.0"
 import Apps from "gi://AstalApps"
 import PopupWindow from "../PopupWindow"
 import { Astal } from "ags/gtk4"
 
-let popup: any;
+let appListingWindow: any;
 
 function AppItem({ app }: { app: Apps.Application }) {
+
     return (
         <button
             cssName="app-item"
             onClicked={() => {
-                popup.hide_all();
+                appListingWindow.hide_all();
                 app.launch();
             }}
         >
@@ -24,7 +26,7 @@ function AppItem({ app }: { app: Apps.Application }) {
     );
 }
 
-export function Launcher() {
+export function AppListing() {
 
     const apps = new Apps.Apps();
 
@@ -49,19 +51,13 @@ export function Launcher() {
         </box >
     )
 
-    const button = (
-        <button onClicked={() => popup.toggle()} cssName={"bar-button"}>
-            <label label="" />
-        </button>
-    ) as any;
-
-    popup = new PopupWindow({
-        name: "launcher-detail-window",
-        namespace: "js-shell-launcher",
+    appListingWindow = new PopupWindow({
+        name: "modules-left-container",
+        namespace: "js-shell-modules-left",
         anchor: Astal.WindowAnchor.TOP | Astal.WindowAnchor.LEFT,
         margin: 8,
         child: (
-            <box cssName="launcher-detail-container" orientation={Gtk.Orientation.VERTICAL}>
+            <box cssName="modules-left-container" orientation={Gtk.Orientation.VERTICAL}>
                 {searchEntry}
                 <scrolledwindow vexpand heightRequest={400}>
                     {appsListing}
@@ -71,8 +67,8 @@ export function Launcher() {
     });
 
     // reset on visible
-    popup.connect("notify::visible", () => {
-        if (popup.visible) {
+    appListingWindow.connect("notify::visible", () => {
+        if (appListingWindow.visible) {
             console.log("Launcher window is opened");
             searchEntry.text = "";
             searchEntry.grab_focus();
@@ -82,7 +78,5 @@ export function Launcher() {
         }
     });
 
-    button.popup = popup;
-
-    return button;
+    return appListingWindow;
 }
