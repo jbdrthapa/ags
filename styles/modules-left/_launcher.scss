@@ -27,6 +27,7 @@ app-item {
 
 app-item:hover{
   background-color: $accent-background-transparent;
+  color: $accent-foreground;
   border-radius: $border-radius;
 }
 

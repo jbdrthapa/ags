@@ -28,7 +28,7 @@ export default GObject.registerClass({
         this.connect("notify::is-active", () => {
             if (!this.isActive) {
                 // console.log("Focus lost, hiding PopupWindow");
-                this.hide_all();
+                // this.hide_all();
             }
         });
 
