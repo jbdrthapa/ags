@@ -3,26 +3,28 @@ import GLib from "gi://GLib"
 import PopupWindow from "../PopupWindow"
 import { createPoll } from "ags/time"
 import { Astal } from "ags/gtk4"
+import { AudioControlsWidget } from "./AudioControlsWidget"
 
 let popup: any;
 
 export function ModulesRight() {
 
-    
+    const audioControlsWidget = AudioControlsWidget();
+
     const button = (
         <button onClicked={() => popup.toggle()} cssName={"bar-module-button"}>
-            <label label={"M"} />
+            <label label={""} />
         </button>
     ) as any;
 
     popup = new PopupWindow({
         name: "modules-right-container",
         namespace: "js-shell-modules-right",
-        anchor: Astal.WindowAnchor.TOP| Astal.WindowAnchor.RIGHT,
+        anchor: Astal.WindowAnchor.TOP | Astal.WindowAnchor.RIGHT,
         margin: 8,
         child: (
             <box cssName="modules-right-container" orientation={Gtk.Orientation.VERTICAL}>
-                
+                {audioControlsWidget}
             </box>
         )
     });
