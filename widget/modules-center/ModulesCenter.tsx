@@ -1,40 +1,18 @@
 import Gtk from "gi://Gtk?version=4.0"
 import GLib from "gi://GLib"
 import PopupWindow from "../PopupWindow"
-import { createPoll } from "ags/time"
 import { Astal } from "ags/gtk4"
+import { WorldClocks } from "../../services/WorldClocks"
+import { ClockWidget } from "./ClockWidget"
+import { CalendarWidget } from "./CalendarWidget"
 
 let popup: any;
 
-export function ModulesCenter({ time_fmt = "%H:%M", date_fmt = "%a, %b %e" } = {}) {
+export function ModulesCenter() {
 
-    const worldClocks =
-        [
-            "America/Los_Angeles",
-            "Asia/Kathmandu",
-            "America/New_York"
-        ];
-
-
-    const tzObjects = worldClocks.map(zone => GLib.TimeZone.new(zone));
-
-    const times = tzObjects.map(tz => {
-        return createPoll({ tz_time: "", tz_date: "", hours: "", minutes: "", name: "" }, 1000, () => {
-            const now = GLib.DateTime.new_now(tz);
-            return {
-                tz_time: now.format(time_fmt) || "",
-                tz_date: now.format(date_fmt) || "",
-                hours: now.format("%H") || "",
-                minutes: now.format("%M") || "",
-                name: now.get_timezone_abbreviation() || ""
-            };
-        });
-    });
-
-    // Declare the calendar control to be used
-    const calendar = new Gtk.Calendar({
-        css_name: "detail-calendar",
-    });
+    const times = WorldClocks();
+    const clockWidget = ClockWidget();
+    const calendarWidget = CalendarWidget();
 
     const button = (
         <button onClicked={() => popup.toggle()} cssName={"bar-datetime-component"}>
@@ -53,24 +31,8 @@ export function ModulesCenter({ time_fmt = "%H:%M", date_fmt = "%a, %b %e" } = {
         margin: 8,
         child: (
             <box cssName="modules-center-container" orientation={Gtk.Orientation.VERTICAL}>
-                <box orientation={Gtk.Orientation.HORIZONTAL} cssName="time-container">
-                    <box orientation={Gtk.Orientation.VERTICAL}>
-                        <label cssName="local-clock-hours" label={times[0].as(t => t.hours)} />
-                        <label cssName="local-clock-minutes" label={times[0].as(t => t.minutes)} />
-                    </box>
-                    <box cssName="world-clock-panel">
-                        <box orientation={Gtk.Orientation.VERTICAL}>
-                            {times.map((time) => (
-                                <box orientation={Gtk.Orientation.HORIZONTAL}>
-                                    <label xalign={0} cssName="world-clock-name" label={time.as(t => t.name)} />
-                                    <label xalign={0} cssName="world-clock-time" label={time.as(t => t.tz_time)} />
-                                    <label xalign={0} cssName="world-clock-time" label={time.as(t => t.tz_date)} />
-                                </box>
-                            ))}
-                        </box>
-                    </box>
-                </box>
-                {calendar}
+                {clockWidget}
+                {calendarWidget}
             </box>
         )
     });
@@ -79,7 +41,7 @@ export function ModulesCenter({ time_fmt = "%H:%M", date_fmt = "%a, %b %e" } = {
 
     popup.connect("notify::visible", () => {
         if (popup.visible) {
-            calendar.set_date(GLib.DateTime.new_now_local());
+            calendarWidget.set_date(GLib.DateTime.new_now_local());
         }
     });
 
