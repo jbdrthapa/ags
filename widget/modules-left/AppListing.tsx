@@ -34,11 +34,12 @@ export function AppListing() {
     let win: Astal.Window
 
     const apps = new Apps.Apps();
-    const [list, setList] = createState(new Array<Apps.Application>())
+    const initialResults = apps.fuzzy_query("")
+    const [list, setList] = createState(initialResults)
 
     function search(text: string) {
-        if (text === "") setList([])
-        else setList(apps.fuzzy_query(text).slice(0, 8))
+        const results = text === "" ? apps.fuzzy_query("") : apps.fuzzy_query(text)
+        setList(results)
     }
 
     function launch(app?: Apps.Application) {
@@ -93,7 +94,7 @@ export function AppListing() {
 
     const appsListing = (
 
-        <box orientation={Gtk.Orientation.VERTICAL}>
+        <box orientation={Gtk.Orientation.VERTICAL} vexpand>
             <For each={list}>
                 {(app, index) => (
                     <AppItem app={app} />
