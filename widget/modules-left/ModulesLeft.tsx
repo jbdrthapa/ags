@@ -24,7 +24,7 @@ function AppItem({ app }: { app: Apps.Application }) {
     );
 }
 
-export function Launcher() {
+export function ModulesLeft() {
 
     const apps = new Apps.Apps();
 
@@ -50,18 +50,18 @@ export function Launcher() {
     )
 
     const button = (
-        <button onClicked={() => popup.toggle()} cssName={"bar-button"}>
+        <button onClicked={() => popup.toggle()} cssName={"bar-module-button"}>
             <label label="" />
         </button>
     ) as any;
 
     popup = new PopupWindow({
-        name: "launcher-detail-window",
-        namespace: "js-shell-launcher",
+        name: "modules-left-container",
+        namespace: "js-shell-modules-left",
         anchor: Astal.WindowAnchor.TOP | Astal.WindowAnchor.LEFT,
         margin: 8,
         child: (
-            <box cssName="launcher-detail-container" orientation={Gtk.Orientation.VERTICAL}>
+            <box cssName="modules-left-container" orientation={Gtk.Orientation.VERTICAL}>
                 {searchEntry}
                 <scrolledwindow vexpand heightRequest={400}>
                     {appsListing}

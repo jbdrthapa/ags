@@ -1,16 +1,16 @@
 import app from "ags/gtk4/app"
 import { Astal, Gdk } from "ags/gtk4"
-import { Clock } from "./modules-center/Clock"
-import { Launcher } from "./modules-left/Launcher"
-import { Menu } from "./modules-right/Menu"
+import { ModulesCenter } from "./modules-center/ModulesCenter"
+import { ModulesLeft } from "./modules-left/ModulesLeft"
+import { ModulesRight } from "./modules-right/ModulesRight"
 
 
 export default function Bar(gdkmonitor: Gdk.Monitor) {
   const { TOP, LEFT, RIGHT } = Astal.WindowAnchor
 
-  const clock = new (Clock as any)();
-  const launcher = new (Launcher as any)();
-  const menu = new (Menu as any)();
+  const modulesCenter = new (ModulesCenter as any)();
+  const modulesLeft = new (ModulesLeft as any)();
+  const modulesRight = new (ModulesRight as any)();
 
   const backdropName = "bar-backdrop";
   const backdrop = (
@@ -26,9 +26,11 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
       <button
         cssName="invisible-backdrop"
         onClicked={() => {
-          clock.popup.hide_all();
-          launcher.popup.hide_all();
-          menu.popup.hide_all();
+
+          modulesCenter.popup.hide_all();
+          modulesLeft.popup.hide_all();
+          modulesRight.popup.hide_all();
+
           console.log("bar invisible layer clicked")
         }}
       />
@@ -51,13 +53,13 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
     >
       <centerbox cssName="bar">
         <box $type="start">
-          {launcher}
+          {modulesLeft}
         </box>
         <box $type="center">
-          {clock}
+          {modulesCenter}
         </box>
         <box $type="end">
-          {menu}
+          {modulesRight}
         </box>
       </centerbox>
     </window>

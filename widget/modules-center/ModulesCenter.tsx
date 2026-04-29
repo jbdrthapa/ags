@@ -6,7 +6,7 @@ import { Astal } from "ags/gtk4"
 
 let popup: any;
 
-export function Clock({ time_fmt = "%H:%M", date_fmt = "%a, %b %e" } = {}) {
+export function ModulesCenter({ time_fmt = "%H:%M", date_fmt = "%a, %b %e" } = {}) {
 
     const worldClocks =
         [
@@ -47,12 +47,12 @@ export function Clock({ time_fmt = "%H:%M", date_fmt = "%a, %b %e" } = {}) {
     ) as any;
 
     popup = new PopupWindow({
-        name: "clock-detail-window",
-        namespace: "js-shell-clock",
+        name: "modules-center-container",
+        namespace: "js-shell-modules-center",
         anchor: Astal.WindowAnchor.TOP,
         margin: 8,
         child: (
-            <box cssName="clock-detail-container" orientation={Gtk.Orientation.VERTICAL}>
+            <box cssName="modules-center-container" orientation={Gtk.Orientation.VERTICAL}>
                 <box orientation={Gtk.Orientation.HORIZONTAL} cssName="time-container">
                     <box orientation={Gtk.Orientation.VERTICAL}>
                         <label cssName="local-clock-hours" label={times[0].as(t => t.hours)} />

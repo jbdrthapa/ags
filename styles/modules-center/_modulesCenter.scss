@@ -1,6 +1,6 @@
 @use "theme" as *;
 
-clock-detail-container {
+modules-center-container {
   background-color: $base-transparent;
   border: 2px solid $border;
   min-height: 840px;
@@ -45,6 +45,7 @@ local-clock-minutes {
 
 local-clock-hours {
   background-color: $mantle-transparent;
+  color: $text;
   border: 2px solid $surface0;
   margin-bottom: 10px;
 }

@@ -6,22 +6,22 @@ import { Astal } from "ags/gtk4"
 
 let popup: any;
 
-export function Menu() {
+export function ModulesRight() {
 
     
     const button = (
-        <button onClicked={() => popup.toggle()} cssName={"bar-menu-component"}>
+        <button onClicked={() => popup.toggle()} cssName={"bar-module-button"}>
             <label label={"M"} />
         </button>
     ) as any;
 
     popup = new PopupWindow({
-        name: "menu-detail-window",
-        namespace: "js-shell-menu",
+        name: "modules-right-container",
+        namespace: "js-shell-modules-right",
         anchor: Astal.WindowAnchor.TOP| Astal.WindowAnchor.RIGHT,
         margin: 8,
         child: (
-            <box cssName="menu-detail-container" orientation={Gtk.Orientation.VERTICAL}>
+            <box cssName="modules-right-container" orientation={Gtk.Orientation.VERTICAL}>
                 
             </box>
         )
