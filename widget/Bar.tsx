@@ -2,6 +2,7 @@ import app from "ags/gtk4/app"
 import { Astal, Gdk } from "ags/gtk4"
 import { Clock } from "./Clock"
 import { Launcher } from "./Launcher"
+import { Menu } from "./Menu"
 
 
 export default function Bar(gdkmonitor: Gdk.Monitor) {
@@ -9,6 +10,7 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
 
   const clock = new (Clock as any)();
   const launcher = new (Launcher as any)();
+  const menu = new (Menu as any)();
 
   const backdropName = "bar-backdrop";
   const backdrop = (
@@ -26,6 +28,7 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
         onClicked={() => {
           clock.popup.hide_all();
           launcher.popup.hide_all();
+          menu.popup.hide_all();
           console.log("bar invisible layer clicked")
         }}
       />
@@ -54,6 +57,7 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
           {clock}
         </box>
         <box $type="end">
+          {menu}
         </box>
       </centerbox>
     </window>
