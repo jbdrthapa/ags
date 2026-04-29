@@ -12,8 +12,8 @@ export function ModulesRight() {
     const audioControlsWidget = AudioControlsWidget();
 
     const button = (
-        <button onClicked={() => popup.toggle()} cssName={"bar-module-button"}>
-            <label label={""} />
+        <button onClicked={() => popup.toggle()} cssName={"bar-module-button-right"}>
+            <label label={""} />
         </button>
     ) as any;
 
