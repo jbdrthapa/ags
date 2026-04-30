@@ -10,8 +10,6 @@ export function AudioControlsWidget() {
 
     // simple component for a slider with an icon, used for both speaker and microphone
     function SliderSet({ endpoint }: { endpoint: AstalWp.Endpoint }) {
-
-        const endpointName = endpoint.name || "Unknown"
         const volumeIcon = createBinding(endpoint, "volumeIcon");
         const volume = createBinding(endpoint, "volume");
         const volumeText = volume.as((value) => String(Math.trunc(value * 100)) + "%");
@@ -33,9 +31,6 @@ export function AudioControlsWidget() {
     }
 
     return (
-
-
-
         <box orientation={Gtk.Orientation.VERTICAL} cssName="audio-controls-container">
             <SliderSet endpoint={speaker} />
             <SliderSet endpoint={microphone} />
