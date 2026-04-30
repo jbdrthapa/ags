@@ -1,7 +1,14 @@
 @forward "theme";
 @forward "shared";
 @use "bar";
-@use "./modules-center/modulesCenter";
+
 @use "./modules-left/modulesLeft";
+
+
+@use "./modules-center/modulesCenter";
+
+
+
 @use "./modules-right/modulesRight";
 @use "./modules-right/audiocontrols";
+@use "./modules-right/displaycontrols";

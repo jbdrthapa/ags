@@ -3,11 +3,14 @@ import GLib from "gi://GLib"
 import PopupWindow from "../PopupWindow"
 import { createPoll } from "ags/time"
 import { Astal } from "ags/gtk4"
+import { DisplayControlsWidget } from "./DisplayControlsWidget"
 import { AudioControlsWidget } from "./AudioControlsWidget"
 
 let popup: any;
 
 export function ModulesRight() {
+
+    const displayControlsWidget = DisplayControlsWidget();
 
     const audioControlsWidget = AudioControlsWidget();
 
@@ -24,6 +27,7 @@ export function ModulesRight() {
         margin: 8,
         child: (
             <box cssName="modules-right-container" orientation={Gtk.Orientation.VERTICAL}>
+                {displayControlsWidget}
                 {audioControlsWidget}
             </box>
         )
