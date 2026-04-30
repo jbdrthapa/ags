@@ -42,8 +42,8 @@ export function MprisWidget() {
 
         return (
             <box valign={Gtk.Align.CENTER} halign={Gtk.Align.FILL} orientation={Gtk.Orientation.VERTICAL} cssName={"mpris-media-info"}>
-                <label xalign={0} label={titleText} cssName={"mpris-title"} />
-                <label xalign={0} label={artist} cssName={"mpris-artist"} />
+                <label xalign={0} label={titleText} tooltipText={title} cssName={"mpris-title"} />
+                <label xalign={0} label={artistText} tooltipText={artist} cssName={"mpris-artist"} />
             </box>
         );
     }

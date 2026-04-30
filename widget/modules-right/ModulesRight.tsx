@@ -29,8 +29,8 @@ export function ModulesRight() {
         anchor: Astal.WindowAnchor.TOP | Astal.WindowAnchor.RIGHT,
         margin: 8,
         child: (
-            <box cssName="modules-right-container" orientation={Gtk.Orientation.VERTICAL}>
-                {displayControlsWidget}
+            <box spacing={20} cssName="modules-right-container" orientation={Gtk.Orientation.VERTICAL}>
+                {/* {displayControlsWidget} */}
                 {audioControlsWidget}
                 {mprisWidget}
             </box>
