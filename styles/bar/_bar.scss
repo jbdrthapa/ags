@@ -5,13 +5,15 @@ window.Bar {
   font-family: "Inter", "JetBrainsMono Nerd Font Propo", "Noto Sans CJK JP", "Noto Sans CJK KR";
   font-size: 18px;
 
-  background: $base-transparent;
   color: $text;
   border-radius: 99px;
+  margin-top: 2px;
+  margin-left: 10px;
+  margin-right: 10px;
   border-bottom: 2px solid $base;
 
   >bar {
-    background: transparent;
+    background: $base-transparent;
     margin: 0px;
     min-height: 40px;
   }

@@ -6,7 +6,7 @@ tray-container {
   margin-right: 6px;
   padding-left:4px;
   padding-right: 4px;
-  background-color: $surface1;
+  background-color: $surface1-transparent;
   border-radius: $border-radius;
 }
 
@@ -17,8 +17,8 @@ tray-module-button {
   min-width: 50px;
   margin-top: 7px;
   margin-bottom: 7px;
-  margin-left: 2px;
-  margin-right: 2px;
+  margin-left: 3px;
+  margin-right: 3px;
 }
 
 tray-module-button>button {
