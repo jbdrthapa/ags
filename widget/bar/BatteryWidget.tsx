@@ -29,6 +29,27 @@ export function BatteryWidget() {
     const energyRate = createBinding(battery, "energyRate",)((w) => `${Math.floor(w)}W`);
 
 
+    const batteryClass = createBinding(battery, "state")((s): string[] => {
+        switch (s) {
+            case AstalBattery.State.CHARGING:
+                console.log("Charging")
+                return ["battery-charging"]
+            case AstalBattery.State.DISCHARGING:
+                console.log("Discharging")
+                return ["battery-discharging"]
+            case AstalBattery.State.EMPTY:
+                return ["battery-empty"]
+            case AstalBattery.State.FULLY_CHARGED:
+                return ["battery-full"]
+            case AstalBattery.State.PENDING_CHARGE:
+                return ["battery-pending-charge"]
+            case AstalBattery.State.PENDING_DISCHARGE:
+                return ["battery-pending-discharge"]
+            default:
+                return ["battery-unknown"]
+        }
+    })
+
     const stateIcon = createBinding(battery, "state",)((s) => {
         switch (s) {
             case AstalBattery.State.CHARGING:
@@ -83,7 +104,7 @@ export function BatteryWidget() {
 
     return (
         <button cssName="bar-module-button" tooltipText={batteryTooltip}>
-            <label label={stateIcon} />
+            <label label={stateIcon} cssClasses={batteryClass} />
         </button>
     )
 }
