@@ -4,6 +4,7 @@ import Apps from "gi://AstalApps"
 import PopupWindow from "../PopupWindow"
 import { Astal, Gdk } from "ags/gtk4"
 import { For, createState } from "ags";
+import app from "ags/gtk4/app";
 
 let appListingWindow: any;
 
@@ -31,6 +32,7 @@ function AppItem({ app }: { app: Apps.Application }) {
 
 export function AppListing() {
     let searchentry: Gtk.Entry
+    let appsScroll: Gtk.ScrolledWindow
     let win: Astal.Window
 
     const apps = new Apps.Apps();
@@ -45,6 +47,8 @@ export function AppListing() {
     function launch(app?: Apps.Application) {
         if (app) {
             appListingWindow.hide()
+
+            // launch the app, for console apps make sure xdg-terminal-exec is installed
             app.launch()
         }
     }
@@ -112,7 +116,7 @@ export function AppListing() {
         child: (
             <box cssName="modules-left-container" orientation={Gtk.Orientation.VERTICAL}>
                 {searchEntry}
-                <scrolledwindow vexpand heightRequest={400}>
+                <scrolledwindow vexpand heightRequest={400} $={(ref) => (appsScroll = ref)}>
                     {appsListing}
                 </scrolledwindow>
             </box>
@@ -124,15 +128,25 @@ export function AppListing() {
     keyController.connect("key-pressed", onKey);
     appListingWindow.add_controller(keyController);
 
-    // reset on visible
+    // connect to visibility changes
     appListingWindow.connect("notify::visible", () => {
         if (appListingWindow.visible) {
-            console.log("Launcher window is opened");
+
+            // console.log("Launcher window is opened");
+
+            // reset search and focus
             searchEntry.text = "";
             searchEntry.grab_focus();
+
+            // scroll to top
+            if (appsScroll) {
+                const vadjustment = appsScroll.get_vadjustment()
+                vadjustment.set_value(vadjustment.get_lower())
+            }
         }
         else {
-            console.log("Launcher window is closed");
+
+            // console.log("Launcher window is closed");
         }
     });
 
