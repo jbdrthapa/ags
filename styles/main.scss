@@ -6,6 +6,8 @@
 @use "./modules-center/modulesCenter";
 @use "./modules-right/modulesRight";
 
+@use "./bar/trayControls";
+@use "./bar/batteryControls";
 @use "./modules-right/audiocontrols";
 @use "./modules-right/displaycontrols";
 @use "./modules-right/mpriscontrols";

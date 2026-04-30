@@ -1,0 +1,29 @@
+@use "theme" as *;
+
+.battery-charging {
+    color: $green;
+}
+
+.battery-full {
+    color: $green;
+}
+
+.battery-discharging {
+    color: $red;
+}
+
+.battery-empty {
+    color: $red;
+}
+
+.battery-pending-charge {
+    color: $overlay0;
+}
+
+.battery-pending-discharge {
+    color: $overlay0;
+}
+
+.battery-unknown {
+    color: $red;
+}

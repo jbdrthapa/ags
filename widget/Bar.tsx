@@ -4,6 +4,7 @@ import { Astal, Gdk } from "ags/gtk4"
 import { ModulesCenter } from "./modules-center/ModulesCenter"
 import { ModulesLeft } from "./modules-left/ModulesLeft"
 import { ModulesRight } from "./modules-right/ModulesRight"
+import { TrayWidget } from "./bar/TrayWidget"
 import { PowerProfileWidget } from "./bar/PowerProfileWidget"
 import { BatteryWidget } from "./bar/BatteryWidget"
 
@@ -15,6 +16,7 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
   const modulesLeft = new (ModulesLeft as any)();
   const modulesRight = new (ModulesRight as any)();
   
+  const trayWidget = TrayWidget();
   const powerProfileWidget = PowerProfileWidget();
   const batteryWidget = BatteryWidget();
   
@@ -66,6 +68,7 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
         </box>
         <box $type="end">
           <box orientation={Gtk.Orientation.HORIZONTAL}>
+            {trayWidget}
             {powerProfileWidget}
             {batteryWidget}
             {modulesRight}

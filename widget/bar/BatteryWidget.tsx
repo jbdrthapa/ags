@@ -4,60 +4,107 @@ import { createBinding } from "ags"
 
 export function BatteryWidget() {
 
-  const battery = AstalBattery.get_default()
+    const battery = AstalBattery.get_default()
 
-  const percent = createBinding(
-    battery,
-    "percentage",
-  )((p) => `${Math.floor(p * 100)}%`)
+    const percent = createBinding(battery, "percentage",)((p) => `${Math.floor(p * 100)}%`)
 
-  const state = createBinding(battery, "state")
+    const timeToEmpty = createBinding(battery, "time_to_empty",)((t) => {
+        if (t === -1) {
+            return "Calculating..."
+        }
+        const hours = Math.floor(t / 3600)
+        const minutes = Math.floor((t % 3600) / 60)
+        return `${hours}h ${minutes}m`
+    })
 
-  const getIcon = (profile: string) => {
-    console.log(state.get())
-    const status = state.get()
-    switch(state.get()){
-        case AstalBattery.State.CHARGING:
-            return "󰂅"
-        case AstalBattery.State.DISCHARGING:
-            return "󱟟"
-        case AstalBattery.State.EMPTY:
-            return "󰂎"
-        case AstalBattery.State.FULLY_CHARGED:
-            return "󱟢"
-        case AstalBattery.State.PENDING_CHARGE:
-            return "󱈏"
-        case AstalBattery.State.PENDING_DISCHARGE:
-            return "󱈐"
-        default:
-            return "󱃍"
-    }
-  }
+    const timeToFull = createBinding(battery, "time_to_full",)((t) => {
+        if (t === -1) {
+            return "Calculating..."
+        }
+        const hours = Math.floor(t / 3600)
+        const minutes = Math.floor((t % 3600) / 60)
+        return `${hours}h ${minutes}m`
+    })
 
-  function getTooltip() {
-    console.log(state.get())
-    const status = state.get()
-    switch(state.get()){
-        case AstalBattery.State.CHARGING:
-            return `Charging: ${percent.get()}`
-        case AstalBattery.State.DISCHARGING:
-            return `Discharging: ${percent.get()}`
-        case AstalBattery.State.EMPTY:
-            return `Empty: ${percent.get()}`
-        case AstalBattery.State.FULLY_CHARGED:
-            return `Fully Charged: ${percent.get()}`
-        case AstalBattery.State.PENDING_CHARGE:
-            return `Pending Charge: ${percent.get()}`
-        case AstalBattery.State.PENDING_DISCHARGE:
-            return `Pending Discharge: ${percent.get()}`
-        default:
-            return `Unknown Status: ${percent.get()}`
-    }
-  }
+    const energyRate = createBinding(battery, "energyRate",)((w) => `${Math.floor(w)}W`);
 
-  return (
-    <button cssName="bar-module-button" tooltipText={getTooltip()}>
-     <label label={getIcon()} />
-    </button>
-  )
+
+    const batteryClass = createBinding(battery, "state")((s): string[] => {
+        switch (s) {
+            case AstalBattery.State.CHARGING:
+                console.log("Charging")
+                return ["battery-charging"]
+            case AstalBattery.State.DISCHARGING:
+                console.log("Discharging")
+                return ["battery-discharging"]
+            case AstalBattery.State.EMPTY:
+                return ["battery-empty"]
+            case AstalBattery.State.FULLY_CHARGED:
+                return ["battery-full"]
+            case AstalBattery.State.PENDING_CHARGE:
+                return ["battery-pending-charge"]
+            case AstalBattery.State.PENDING_DISCHARGE:
+                return ["battery-pending-discharge"]
+            default:
+                return ["battery-unknown"]
+        }
+    })
+
+    const stateIcon = createBinding(battery, "state",)((s) => {
+        switch (s) {
+            case AstalBattery.State.CHARGING:
+                return "󰂅"
+            case AstalBattery.State.DISCHARGING:
+                return "󱟟"
+            case AstalBattery.State.EMPTY:
+                return "󰂎"
+            case AstalBattery.State.FULLY_CHARGED:
+                return "󱟢"
+            case AstalBattery.State.PENDING_CHARGE:
+                return "󱈏"
+            case AstalBattery.State.PENDING_DISCHARGE:
+                return "󱈐"
+            default:
+                return "󱃍"
+        }
+    })
+
+    const batteryTooltip = createBinding(battery, "state",)((s) => {
+        let tooltip = "";
+        let battery_state = ""
+
+        switch (s) {
+            case AstalBattery.State.CHARGING:
+                battery_state = "Charging"
+                break
+            case AstalBattery.State.DISCHARGING:
+                battery_state = "Discharging"
+                break
+            case AstalBattery.State.EMPTY:
+                battery_state = "Empty"
+                break
+            case AstalBattery.State.FULLY_CHARGED:
+                battery_state = "Fully Charged"
+                break
+            case AstalBattery.State.PENDING_CHARGE:
+                battery_state = "Pending Charge"
+                break
+            case AstalBattery.State.PENDING_DISCHARGE:
+                battery_state = "Pending Discharge"
+                break
+            default:
+                battery_state = "Unknown Status"
+        }
+
+        tooltip = `State : ${battery_state} \nPercentage: ${percent.peek()} \nTime to Empty: ${timeToEmpty.peek()} \nTime to Full: ${timeToFull.peek()}\nEnergy Rate: ${energyRate.peek()}`
+
+        return tooltip;
+
+    })
+
+    return (
+        <button cssName="bar-module-button" tooltipText={batteryTooltip}>
+            <label label={stateIcon} cssClasses={batteryClass} />
+        </button>
+    )
 }
