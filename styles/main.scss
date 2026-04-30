@@ -1,15 +1,11 @@
 @forward "theme";
 @forward "shared";
-@use "bar";
 
+@use "./bar/bar";
 @use "./modules-left/modulesLeft";
-
-
 @use "./modules-center/modulesCenter";
-
-
-
 @use "./modules-right/modulesRight";
+
 @use "./modules-right/audiocontrols";
 @use "./modules-right/displaycontrols";
 @use "./modules-right/mpriscontrols";
