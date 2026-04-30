@@ -1,8 +1,11 @@
 import app from "ags/gtk4/app"
+import Gtk from "gi://Gtk?version=4.0"
 import { Astal, Gdk } from "ags/gtk4"
 import { ModulesCenter } from "./modules-center/ModulesCenter"
 import { ModulesLeft } from "./modules-left/ModulesLeft"
 import { ModulesRight } from "./modules-right/ModulesRight"
+import { PowerProfileWidget } from "./bar/PowerProfileWidget"
+import { BatteryWidget } from "./bar/BatteryWidget"
 
 
 export default function Bar(gdkmonitor: Gdk.Monitor) {
@@ -11,7 +14,10 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
   const modulesCenter = new (ModulesCenter as any)();
   const modulesLeft = new (ModulesLeft as any)();
   const modulesRight = new (ModulesRight as any)();
-
+  
+  const powerProfileWidget = PowerProfileWidget();
+  const batteryWidget = BatteryWidget();
+  
   const backdropName = "bar-backdrop";
   const backdrop = (
     <window
@@ -59,7 +65,11 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
           {modulesCenter}
         </box>
         <box $type="end">
-          {modulesRight}
+          <box orientation={Gtk.Orientation.HORIZONTAL}>
+            {powerProfileWidget}
+            {batteryWidget}
+            {modulesRight}
+          </box>
         </box>
       </centerbox>
     </window>

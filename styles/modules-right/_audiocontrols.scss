@@ -1,0 +1,13 @@
+@use "theme" as *;
+
+audio-icon {
+    min-width: 64px;
+    min-height: 64px;
+    color: $overlay0;
+}
+
+audio-percent {
+    min-width: 40px;
+    padding: 10px;
+
+}
