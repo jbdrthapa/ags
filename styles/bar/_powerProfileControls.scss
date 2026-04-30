@@ -1,0 +1,17 @@
+@use "theme" as *;
+
+.power-profile-power-saver {
+    color: $green;
+}
+
+.power-profile-balanced {
+    color: $overlay0;
+}
+
+.power-profile-performance {
+    color: $red;
+}
+
+.power-profile-unknown {
+    color: $red;
+}

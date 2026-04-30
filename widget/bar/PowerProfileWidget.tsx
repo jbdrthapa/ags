@@ -8,6 +8,19 @@ export function PowerProfileWidget() {
 
   const activeProfile = createBinding(powerprofiles, "active_profile")
 
+  const batteryClass = createBinding(powerprofiles, "active_profile")((p): string[] => {
+    switch (p) {
+      case "power-saver":
+        return ["power-profile-power-saver"]
+      case "balanced":
+        return ["power-profile-balanced"]
+      case "performance":
+        return ["power-profile-performance"]
+      default:
+        return ["power-profile-unknown"]
+    }
+  })
+
   const getIcon = (profile: string) => {
     switch (profile) {
       case "power-saver":
@@ -33,7 +46,7 @@ export function PowerProfileWidget() {
 
   return (
     <button onClicked={cycleProfile} tooltipText={activeProfile} cssName="bar-module-button">
-      <label label={activeProfile.as(getIcon)}  cssName="active-power-profile-icon" />
+      <label label={activeProfile.as(getIcon)} cssClasses={batteryClass} />
     </button>
   )
 }
