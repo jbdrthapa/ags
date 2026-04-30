@@ -14,7 +14,7 @@ export function BatteryWidget() {
   const state = createBinding(battery, "state")
 
   const getIcon = (profile: string) => {
-    console.log(state.get())
+    // console.log(state.get())
     const status = state.get()
     switch(state.get()){
         case AstalBattery.State.CHARGING:
