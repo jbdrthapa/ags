@@ -92,7 +92,7 @@ export function AppListing() {
             $={(ref) => (searchentry = ref)}
             onNotifyText={({ text }) => search(text)}
             onActivate={() => launch(list.peek()[0])}
-            placeholderText="Start typing to search"
+            placeholderText=">"
         />
     ) as any;
 
