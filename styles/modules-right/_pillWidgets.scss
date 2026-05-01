@@ -38,3 +38,43 @@ pill-button-image {
   -gtk-icon-size: 26px;
 
 }
+
+pill-summary-property-name{
+  font-weight: 800;
+  color: $overlay0;
+  padding: 5px;
+}
+
+pill-summary-property-value{
+  color: $overlay2;
+  padding: 5px
+}
+
+pill-popover-container {
+  min-width: 400px;
+  min-height: 400px;
+  padding: 20px;
+}
+
+pill-popover-details-area-container {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 20px;
+  background-color: $mantle;
+  border-radius: $border-radius;
+  border: 2px solid $base;
+}
+
+pill-popover-details-header{
+  color: $overlay0;
+  font-weight: 800;
+  margin-bottom: 20px;
+}
+
+wifi-access-point-item {
+  background: none;
+}
+
+wifi-access-point-item:hover {
+  color: $accent-background;
+}
