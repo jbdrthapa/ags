@@ -1,15 +1,21 @@
 @forward "theme";
 @forward "shared";
 
+// bar
 @use "./bar/bar";
-@use "./modules-left/modulesLeft";
-@use "./modules-center/modulesCenter";
-@use "./modules-right/modulesRight";
-
+@use "./bar/workspaceControls";
 @use "./bar/trayControls";
 @use "./bar/powerProfileControls";
 @use "./bar/batteryControls";
 
+// modules-left
+@use "./modules-left/modulesLeft";
+
+// modules-center
+@use "./modules-center/modulesCenter";
+
+// modules-right
+@use "./modules-right/modulesRight";
 @use "./modules-right/systeminfocontrols";
 @use "./modules-right/audiocontrols";
 @use "./modules-right/displaycontrols";
