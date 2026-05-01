@@ -15,7 +15,7 @@ export function PillWidgets() {
     const wirelessPillWidget6 = WirelessPillWidget();
     const wirelessPillWidget7 = WirelessPillWidget();
     const wirelessPillWidget8 = WirelessPillWidget();
-    
+
 
 
     return (
@@ -23,14 +23,14 @@ export function PillWidgets() {
             <box orientation={Gtk.Orientation.HORIZONTAL} halign={Gtk.Align.CENTER}>
                 {wirelessPillWidget}
                 {wirelessPillWidget2}
+            </box>
+            <box orientation={Gtk.Orientation.HORIZONTAL} halign={Gtk.Align.CENTER}>
                 {wirelessPillWidget3}
                 {wirelessPillWidget4}
             </box>
             <box orientation={Gtk.Orientation.HORIZONTAL} halign={Gtk.Align.CENTER}>
                 {wirelessPillWidget5}
                 {wirelessPillWidget6}
-                {wirelessPillWidget7}
-                {wirelessPillWidget8}
             </box>
         </box>
     );
