@@ -36,9 +36,12 @@ export function ModulesRight() {
         margin: 8,
         child: (
             <box spacing={20} cssName="modules-right-container" orientation={Gtk.Orientation.VERTICAL}>
-                {systemInfoWidget}
+                <box orientation={Gtk.Orientation.VERTICAL} cssName="system-info-pill-container">
+                    {systemInfoWidget}
+                    {pillWidgets}
+                </box>
+
                 {/* {displayControlsWidget} */}
-                {pillWidgets}
                 {audioControlsWidget}
                 {mprisWidget}
             </box>

@@ -19,16 +19,16 @@ export function PillWidgets() {
 
 
     return (
-        <box orientation={Gtk.Orientation.VERTICAL} cssName="pill-container">
-            <box orientation={Gtk.Orientation.HORIZONTAL} halign={Gtk.Align.CENTER}>
+        <box orientation={Gtk.Orientation.VERTICAL} >
+            <box orientation={Gtk.Orientation.HORIZONTAL} halign={Gtk.Align.CENTER} cssName="pill-container">
                 {wirelessPillWidget}
                 {wirelessPillWidget2}
             </box>
-            <box orientation={Gtk.Orientation.HORIZONTAL} halign={Gtk.Align.CENTER}>
+            <box orientation={Gtk.Orientation.HORIZONTAL} halign={Gtk.Align.CENTER} cssName="pill-container">
                 {wirelessPillWidget3}
                 {wirelessPillWidget4}
             </box>
-            <box orientation={Gtk.Orientation.HORIZONTAL} halign={Gtk.Align.CENTER}>
+            <box orientation={Gtk.Orientation.HORIZONTAL} halign={Gtk.Align.CENTER} cssName="pill-container">
                 {wirelessPillWidget5}
                 {wirelessPillWidget6}
             </box>
