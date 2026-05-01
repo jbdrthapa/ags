@@ -9,6 +9,8 @@
 @use "./bar/trayControls";
 @use "./bar/powerProfileControls";
 @use "./bar/batteryControls";
+
+@use "./modules-right/systeminfocontrols";
 @use "./modules-right/audiocontrols";
 @use "./modules-right/displaycontrols";
 @use "./modules-right/mpriscontrols";
