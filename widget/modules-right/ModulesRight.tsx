@@ -3,7 +3,8 @@ import GLib from "gi://GLib"
 import PopupWindow from "../PopupWindow"
 import { createPoll } from "ags/time"
 import { Astal } from "ags/gtk4"
-import {SystemInfoWidget} from "./SystemInfoWidget"
+import { SystemInfoWidget } from "./SystemInfoWidget"
+import { PillWidgets } from "./PillWidgets"
 import { DisplayControlsWidget } from "./DisplayControlsWidget"
 import { AudioControlsWidget } from "./AudioControlsWidget"
 import { MprisWidget } from "./MprisWidget"
@@ -13,7 +14,9 @@ let popup: any;
 export function ModulesRight() {
 
     const systemInfoWidget = SystemInfoWidget();
-    
+
+    const pillWidgets = PillWidgets();
+
     const displayControlsWidget = DisplayControlsWidget();
 
     const audioControlsWidget = AudioControlsWidget();
@@ -35,6 +38,7 @@ export function ModulesRight() {
             <box spacing={20} cssName="modules-right-container" orientation={Gtk.Orientation.VERTICAL}>
                 {systemInfoWidget}
                 {/* {displayControlsWidget} */}
+                {pillWidgets}
                 {audioControlsWidget}
                 {mprisWidget}
             </box>
