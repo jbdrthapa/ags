@@ -30,7 +30,7 @@ export function WorkspaceWidget() {
                 })}
                 onClicked={() => ws.focus()}
               >
-                <label label={ws.name || `${ws.id}`} />
+                <label label={ws.name || `${workspaces.peek().indexOf(ws) + 1}`} />
               </button>
             )}
           </For>
