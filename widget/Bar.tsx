@@ -9,20 +9,28 @@ import { TrayWidget } from "./bar/TrayWidget"
 import { PowerProfileWidget } from "./bar/PowerProfileWidget"
 import { BatteryWidget } from "./bar/BatteryWidget"
 
+let modulesLeft: any;
+let modulesCenter: any;
+let modulesRight: any;
+
+function CloseAllMenus() {
+  modulesCenter.popup.hide_all();
+  modulesLeft.popup.hide_all();
+  modulesRight.popup.hide_all();
+}
 
 export default function Bar(gdkmonitor: Gdk.Monitor) {
   const { TOP, LEFT, RIGHT } = Astal.WindowAnchor
 
-  const modulesCenter = new (ModulesCenter as any)();
-  
-  const modulesLeft = new (ModulesLeft as any)();
-  const workspaceWidget = WorkspaceWidget();
+  modulesLeft = new (ModulesLeft as any)();
+  modulesCenter = new (ModulesCenter as any)();
+  modulesRight = new (ModulesRight as any)();
 
-  const modulesRight = new (ModulesRight as any)();
+  const workspaceWidget = WorkspaceWidget();
   const trayWidget = TrayWidget();
   const powerProfileWidget = PowerProfileWidget();
   const batteryWidget = BatteryWidget();
-  
+
   const backdropName = "bar-backdrop";
   const backdrop = (
     <window
@@ -37,12 +45,7 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
       <button
         cssName="invisible-backdrop"
         onClicked={() => {
-
-          modulesCenter.popup.hide_all();
-          modulesLeft.popup.hide_all();
-          modulesRight.popup.hide_all();
-
-          console.log("bar invisible layer clicked")
+          CloseAllMenus();
         }}
       />
     </window>
