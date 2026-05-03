@@ -1,9 +1,8 @@
 import Gtk from "gi://Gtk?version=4.0";
 import Gdk from "gi://Gdk?version=4.0";
 import { Astal } from "ags/gtk4";
-import App from "ags/gtk4/app"
+import AstalNiri from "gi://AstalNiri"
 import GObject from "gnim/gobject";
-import { subprocess } from "ags/process";
 
 // Explicitly register the class using GObject
 export default GObject.registerClass({
@@ -25,29 +24,6 @@ export default GObject.registerClass({
 
         this.set_child(child);
 
-        this.connect("notify::is-active", () => {
-            if (!this.isActive) {
-                // console.log("Focus lost, hiding PopupWindow");
-                // this.hide_all();
-            }
-        });
-
-        subprocess(
-            ["bash", "-c", "niri msg --json event-stream"],
-            (output) => {
-                try {
-                    const event = JSON.parse(output);
-                    if (event.OverviewOpenedOrClosed && event.OverviewOpenedOrClosed.is_open) {
-                        console.log("Niri overview toggled, closing the PopupWindow")
-                        this.hide_all();
-                    }
-                } catch (e) {
-                    // JSON parsing might fail on partial lines, safe to ignore
-                }
-            },
-            (err) => console.error("Niri IPC Error:", err)
-        );
-
         const controller = new Gtk.EventControllerKey();
         controller.connect("key-pressed", (_, keyval) => {
             if (keyval === Gdk.KEY_Escape) {
@@ -57,6 +33,21 @@ export default GObject.registerClass({
             return false;
         });
         this.add_controller(controller);
+
+        // Use the niri's window focus behavior to close the window
+        const niri = AstalNiri.get_default()
+        niri.connect("notify::focused-window", (service) => {
+            const focused = service.focused_window
+
+            if (focused?.title) {
+                this.hide_all();
+            }
+        })
+
+        // Use the niri's overview behavior to close the window
+        niri.connect("overview-opened-or-closed", (service) => {
+            this.hide_all();
+        })
     }
 
     hide_all() {
