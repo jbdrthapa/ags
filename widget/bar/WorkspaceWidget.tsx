@@ -52,6 +52,11 @@ export function WorkspaceWidget() {
               ? win.title.substring(0, maxLength) + "..."
               : win.title;
           })}
+          tooltipText={focused.as(win => {
+            if (!win || !win.title) return "";
+
+            return win.title;
+          })}
         />
       </box>
     </box>

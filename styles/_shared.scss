@@ -1,5 +1,13 @@
 @use "theme" as *;
 
+tooltip{
+  background-color: $mantle-transparent;
+  color: $overlay0;
+  border-radius: $border-radius;
+  border: 2px solid $base;
+  padding: 10px;
+}
+
 window#PopupWindow {
   background-color: transparent;
   background-image: none;
