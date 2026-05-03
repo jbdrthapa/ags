@@ -45,7 +45,7 @@ local-clock-minutes {
 
 local-clock-hours {
   background-color: $mantle-transparent;
-  color: $text;
+  color: $overlay0;
   border: 2px solid $base;
   margin-bottom: 10px;
 }
@@ -75,11 +75,11 @@ world-clock-date {
 
 world-clock-time,
 world-clock-date {
-  color: $text
+  color: $overlay0
 }
 
 world-clock-name {
-  color: $overlay0
+  color: $surface0
 }
 
 /* Calendar */
@@ -92,7 +92,7 @@ detail-calendar {
 }
 
 detail-calendar .day-name {
-  color: $subtext1;
+  color: $surface0;
   font-weight: 600;
   min-width: 50px;
 }
@@ -113,13 +113,14 @@ detail-calendar .other-month {
 /* Style the header (month/year switcher) */
 detail-calendar header {
   background-color: transparent;
+  color: $overlay0;
   padding-bottom: 20px;
   border-bottom: 1px solid $base;
 }
 
 /* Days */
 detail-calendar grid label {
-  color: $text;
+  color: $overlay0;
   font-size: 22px;
   background-color: transparent;
   padding-top: 20px;

@@ -18,14 +18,14 @@ invisible-backdrop-window {
   background-color: transparent;
   background: none;
   box-shadow: none;
-  border-radius: $border-radius;
+  border-radius: 0;
 }
 
 invisible-backdrop {
   background: rgba(0, 0, 0, 0.0039);
   border: none;
   box-shadow: none;
-  border-radius: $border-radius;
+  border-radius: 0px;
 }
 
 bar-module-button {
