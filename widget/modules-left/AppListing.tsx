@@ -6,12 +6,25 @@ import { Astal, Gdk } from "ags/gtk4"
 import { For, createState } from "ags";
 import { subprocess } from "ags/process";
 
+const terminal = "kitty";
 let appListingWindow: any;
 
 function launch(app?: Apps.Application) {
     if (app) {
         appListingWindow.hide()
-        subprocess(["bash", "-c", `(setsid ${app.executable} >/dev/null 2>&1 &)`]);
+
+        // Check if the .desktop file has Terminal=true
+        const needsTerminal = app.app.get_boolean("Terminal");
+
+        const launchCmd = needsTerminal
+            ? `${terminal} -e ${app.executable}`
+            : app.executable;
+        if (needsTerminal) {
+            subprocess(["bash", "-c", `${launchCmd} >/dev/null 2>&1 &`]);
+        }
+        else {
+            app.launch()
+        }
     }
 }
 
