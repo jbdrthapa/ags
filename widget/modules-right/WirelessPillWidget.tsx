@@ -48,13 +48,35 @@ export function WirelessPillWidget() {
         )
     }
 
+    function PillInfo(icon: any, name: string, detail: any) {
+        return (
+            <box orientation={Gtk.Orientation.HORIZONTAL}>
+                <image iconName={icon} cssName="pill-button-image" />
+                <box orientation={Gtk.Orientation.VERTICAL}>
+                    {/* Remove quotes to use the variable, not the string "name" */}
+                    <label xalign={0} label={name} cssName="pill-button-name" />
+                    <label xalign={0} label={detail} cssName="pill-button-detail" />
+                </box>
+            </box>
+        )
+    }
+
+    function WiFiPillInfo() {
+        const iconName = wifi.as(w => w?.iconName || "")
+        const ssidLabel = wifi.as(w => w?.ssid || "Disconnected")
+
+        return PillInfo(iconName, "Wireless", ssidLabel);
+    }
+
     return (
         <box visible={wifi(Boolean)}>
             <With value={wifi}>
                 {(wifi) =>
                     wifi && (
                         <menubutton cssName="pill-button">
-                            <image iconName={createBinding(wifi, "iconName")} cssName={"pill-button-image"} />
+                            <box orientation={Gtk.Orientation.HORIZONTAL}>
+                                {WiFiPillInfo()}
+                            </box>
                             <popover>
                                 <box orientation={Gtk.Orientation.VERTICAL} heightRequest={400} cssName="pill-popover-container">
 
