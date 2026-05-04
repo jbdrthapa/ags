@@ -5,7 +5,8 @@ settings-container {
   border: 2px solid $base;
   min-width: 1400px;
   min-height: 1000px;
-  border-radius: $border-radius;
+  border-top-left-radius: $border-radius;
+  border-top-right-radius: $border-radius;
 }
 
 settings-titlebar {
