@@ -12,7 +12,7 @@ export function AudioControlsWidget() {
     function SliderSet({ endpoint }: { endpoint: AstalWp.Endpoint }) {
         const volumeIcon = createBinding(endpoint, "volumeIcon");
         const volume = createBinding(endpoint, "volume");
-        const volumeText = volume.as((value) => String(Math.trunc(value * 100)) + "%");
+        const volumeText = volume.as((value) => String(Math.trunc(value * 100)));
 
         return (
             <box orientation={Gtk.Orientation.HORIZONTAL}>
