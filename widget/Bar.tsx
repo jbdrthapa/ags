@@ -3,23 +3,34 @@ import Gtk from "gi://Gtk?version=4.0"
 import { Astal, Gdk } from "ags/gtk4"
 import { ModulesCenter } from "./modules-center/ModulesCenter"
 import { ModulesLeft } from "./modules-left/ModulesLeft"
+import { WorkspaceWidget } from "./bar/WorkspaceWidget"
 import { ModulesRight } from "./modules-right/ModulesRight"
 import { TrayWidget } from "./bar/TrayWidget"
 import { PowerProfileWidget } from "./bar/PowerProfileWidget"
 import { BatteryWidget } from "./bar/BatteryWidget"
 
+let modulesLeft: any;
+let modulesCenter: any;
+let modulesRight: any;
+
+function CloseAllMenus() {
+  modulesCenter.popup.hide_all();
+  modulesLeft.popup.hide_all();
+  modulesRight.popup.hide_all();
+}
 
 export default function Bar(gdkmonitor: Gdk.Monitor) {
   const { TOP, LEFT, RIGHT } = Astal.WindowAnchor
 
-  const modulesCenter = new (ModulesCenter as any)();
-  const modulesLeft = new (ModulesLeft as any)();
-  const modulesRight = new (ModulesRight as any)();
-  
+  modulesLeft = new (ModulesLeft as any)();
+  modulesCenter = new (ModulesCenter as any)();
+  modulesRight = new (ModulesRight as any)();
+
+  const workspaceWidget = WorkspaceWidget();
   const trayWidget = TrayWidget();
   const powerProfileWidget = PowerProfileWidget();
   const batteryWidget = BatteryWidget();
-  
+
   const backdropName = "bar-backdrop";
   const backdrop = (
     <window
@@ -34,12 +45,7 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
       <button
         cssName="invisible-backdrop"
         onClicked={() => {
-
-          modulesCenter.popup.hide_all();
-          modulesLeft.popup.hide_all();
-          modulesRight.popup.hide_all();
-
-          console.log("bar invisible layer clicked")
+          CloseAllMenus();
         }}
       />
     </window>
@@ -55,13 +61,14 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
       class="Bar"
       gdkmonitor={gdkmonitor}
       exclusivity={Astal.Exclusivity.EXCLUSIVE}
-      layer={Astal.Layer.BACKGROUND}
+      layer={Astal.Layer.TOP}
       anchor={TOP | LEFT | RIGHT}
       application={app}
     >
       <centerbox cssName="bar">
         <box $type="start">
           {modulesLeft}
+          {workspaceWidget}
         </box>
         <box $type="center">
           {modulesCenter}

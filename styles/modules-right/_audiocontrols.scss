@@ -7,7 +7,10 @@ audio-icon {
 }
 
 audio-percent {
-    min-width: 40px;
-    padding: 10px;
-
+    color:$overlay0;
+    background-color: $mantle-transparent;
+    border: 1px solid $base;
+    border-radius: $border-radius;
+    min-width: 65px;
+    min-height: 55px;
 }

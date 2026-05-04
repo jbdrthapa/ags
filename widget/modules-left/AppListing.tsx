@@ -4,9 +4,29 @@ import Apps from "gi://AstalApps"
 import PopupWindow from "../PopupWindow"
 import { Astal, Gdk } from "ags/gtk4"
 import { For, createState } from "ags";
-import app from "ags/gtk4/app";
+import { subprocess } from "ags/process";
 
+const terminal = "kitty";
 let appListingWindow: any;
+
+function launch(app?: Apps.Application) {
+    if (app) {
+        appListingWindow.hide()
+
+        // Check if the .desktop file has Terminal=true
+        const needsTerminal = app.app.get_boolean("Terminal");
+
+        const launchCmd = needsTerminal
+            ? `${terminal} -e ${app.executable}`
+            : app.executable;
+        if (needsTerminal) {
+            subprocess(["bash", "-c", `${launchCmd} >/dev/null 2>&1 &`]);
+        }
+        else {
+            app.launch()
+        }
+    }
+}
 
 function AppItem({ app }: { app: Apps.Application }) {
 
@@ -15,9 +35,8 @@ function AppItem({ app }: { app: Apps.Application }) {
             cssName="app-item"
             onClicked={() => {
                 appListingWindow.hide_all();
-                app.launch();
-            }}
-        >
+                launch(app);
+            }}>
             <box>
                 <box cssName="app-icon-wrapper">
                     <image iconName={app.icon_name || "image-missing"} cssName="app-icon" />
@@ -44,14 +63,6 @@ export function AppListing() {
         setList(results)
     }
 
-    function launch(app?: Apps.Application) {
-        if (app) {
-            appListingWindow.hide()
-
-            // launch the app, for console apps make sure xdg-terminal-exec is installed
-            app.launch()
-        }
-    }
 
     // handle key events for the entire window
     function onKey(
