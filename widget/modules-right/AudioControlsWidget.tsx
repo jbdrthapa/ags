@@ -19,8 +19,9 @@ export function AudioControlsWidget() {
                 <image
                     iconSize={Gtk.IconSize.LARGE}
                     iconName={volumeIcon} cssName={"audio-icon"} />
-                <label label={volumeText} widthRequest={80} cssName={"audio-percent"} />
+                <label valign={Gtk.Align.CENTER} label={volumeText} cssName={"audio-percent"} />
                 <slider
+                    cssClasses={["slider-control"]}
                     tooltipText={volumeText}
                     widthRequest={360}
                     heightRequest={40}
