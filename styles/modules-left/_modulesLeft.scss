@@ -28,7 +28,7 @@ app-item {
 }
 
 app-item:hover {
-  background-color: $accent-background;
+  background-color: $accent-background-transparent;
   color: $accent-foreground;
   border-radius: $border-radius;
 }
@@ -47,7 +47,6 @@ app-icon {
 }
 
 app-name {
-  color: $overlay0;
   margin-left: 20px;
   font-size: 22px;
 }
