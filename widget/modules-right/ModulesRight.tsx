@@ -26,7 +26,7 @@ export function ModulesRight() {
 
     const button = (
         <button onClicked={() => ModulesRightPopup.toggle()} cssName={"bar-module-button-right"}>
-            <label label={""} />
+            <label label={"󰣇"} />
         </button>
     ) as any;
 
