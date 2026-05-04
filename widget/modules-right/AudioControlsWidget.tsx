@@ -32,7 +32,7 @@ export function AudioControlsWidget() {
     }
 
     return (
-        <box orientation={Gtk.Orientation.VERTICAL} cssName="audio-controls-container">
+        <box halign={Gtk.Align.CENTER} orientation={Gtk.Orientation.VERTICAL} cssName="audio-controls-container">
             <SliderSet endpoint={speaker} />
             <SliderSet endpoint={microphone} />
         </box>

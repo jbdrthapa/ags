@@ -5,15 +5,12 @@ modules-right-container {
   border: 2px solid $base;
   min-width: 500px;
   min-height: 840px;
-  padding: 40px;
   border-radius: $border-radius;
 }
 
 system-info-pill-container {
-  margin-left: -20px;
-  margin-right: -20px;
-  padding-top: 30px;
-  padding-bottom: 30px;
+  margin: 20px;
+  padding: 20px;
   background-color: $mantle-transparent;
   border-radius: $border-radius;
   border: 2px solid $base;
