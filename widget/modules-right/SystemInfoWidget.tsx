@@ -1,9 +1,10 @@
 import Gtk from "gi://Gtk?version=4.0";
 import GLib from 'gi://GLib';
-import { createBinding } from "ags"
+import app from "ags/gtk4/app";
 
 export function SystemInfoWidget() {
 
+    const settingsWindowName = "js-shell-settings"
 
     return (
         <box orientation={Gtk.Orientation.HORIZONTAL} cssName="system-info-container">
@@ -29,7 +30,7 @@ export function SystemInfoWidget() {
                     </box>
                     <box>
                         <button label="" cssName="system-info-button" tooltipText="Settings" onClicked={() => {
-                            // GLib.spawn_command_line_async('bash -c "ags quit; ags run"');
+                            app.toggle_window(settingsWindowName)
                         }} />
 
                         <button label="" cssName="system-info-button" tooltipText="Restart Shell" onClicked={() => {
