@@ -28,8 +28,8 @@ app-item {
 }
 
 app-item:hover {
-  background-color: $accent-background-transparent;
-  color: $surface2;
+  background-color: $accent-background;
+  color: $accent-foreground;
   border-radius: $border-radius;
 }
 
