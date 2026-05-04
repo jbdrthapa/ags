@@ -6,9 +6,11 @@ import { PillWidgets } from "./PillWidgets"
 import { DisplayControlsWidget } from "./DisplayControlsWidget"
 import { AudioControlsWidget } from "./AudioControlsWidget"
 import { MprisWidget } from "./MprisWidget"
+import { WindowName } from "../../constants"
+
+const windowName = WindowName.modulesRight;
 
 let ModulesRightPopup: any;
-const modulesRightContainer = "js-shell-modules-right";
 
 export function ModulesRight() {
 
@@ -29,8 +31,8 @@ export function ModulesRight() {
     ) as any;
 
     ModulesRightPopup = new PopupWindow({
-        name: modulesRightContainer,
-        namespace: modulesRightContainer,
+        name: windowName,
+        namespace: windowName,
         anchor: Astal.WindowAnchor.TOP | Astal.WindowAnchor.RIGHT,
         margin: 8,
         child: (

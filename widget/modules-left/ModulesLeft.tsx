@@ -4,7 +4,6 @@ import PopupWindow from "../PopupWindow"
 import { Astal } from "ags/gtk4"
 import { AppListing } from "./AppListing"
 
-
 export function ModulesLeft() {
 
     const appListingWindow = AppListing();

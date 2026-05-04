@@ -5,6 +5,9 @@ import { Astal } from "ags/gtk4"
 import { WorldClocks } from "../../services/WorldClocks"
 import { ClockWidget } from "./ClockWidget"
 import { CalendarWidget } from "./CalendarWidget"
+import { WindowName } from "../../constants"
+
+const windowName = WindowName.modulesCenter;
 
 let popup: any;
 
@@ -25,8 +28,8 @@ export function ModulesCenter() {
     ) as any;
 
     popup = new PopupWindow({
-        name: "modules-center-container",
-        namespace: "js-shell-modules-center",
+        name: windowName,
+        namespace: windowName,
         anchor: Astal.WindowAnchor.TOP,
         margin: 8,
         child: (

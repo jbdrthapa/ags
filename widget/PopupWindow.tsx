@@ -20,8 +20,6 @@ export default GObject.registerClass({
             keymode: Astal.Keymode.ON_DEMAND,
         });
 
-        this.name = "PopupWindow";
-
         this.set_child(child);
 
         const controller = new Gtk.EventControllerKey();

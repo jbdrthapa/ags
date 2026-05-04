@@ -5,6 +5,9 @@ import PopupWindow from "../PopupWindow"
 import { Astal, Gdk } from "ags/gtk4"
 import { For, createState } from "ags";
 import { subprocess } from "ags/process";
+import { WindowName } from "../../constants"
+
+const windowName = WindowName.modulesLeft;
 
 const terminal = "kitty";
 let appListingWindow: any;
@@ -120,8 +123,8 @@ export function AppListing() {
 
 
     appListingWindow = new PopupWindow({
-        name: "modules-left-container",
-        namespace: "js-shell-modules-left",
+        name: windowName,
+        namespace: windowName,
         anchor: Astal.WindowAnchor.TOP | Astal.WindowAnchor.LEFT,
         margin: 8,
         child: (

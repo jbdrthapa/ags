@@ -1,10 +1,12 @@
 import Gtk from "gi://Gtk?version=4.0";
 import GLib from 'gi://GLib';
 import app from "ags/gtk4/app";
+import { WindowName } from "../../constants";
+
+const settingsWindowName = WindowName.settings
+const modulesRightWindowName = WindowName.modulesRight;
 
 export function SystemInfoWidget() {
-
-    const settingsWindowName = "js-shell-settings"
 
     return (
         <box orientation={Gtk.Orientation.HORIZONTAL} cssName="system-info-container">
@@ -30,6 +32,7 @@ export function SystemInfoWidget() {
                     </box>
                     <box>
                         <button label="" cssName="system-info-button" tooltipText="Settings" onClicked={() => {
+                            app.toggle_window(modulesRightWindowName);
                             app.toggle_window(settingsWindowName)
                         }} />
 
