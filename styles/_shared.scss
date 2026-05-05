@@ -1,5 +1,14 @@
 @use "theme" as *;
 
+#js-shell-modules-left,
+#js-shell-modules-center,
+#js-shell-modules-right {
+  background-color: transparent;
+  background: none;
+  border: none;
+  box-shadow: none;
+}
+
 tooltip {
   background-color: $mantle-transparent;
   color: $overlay0;
