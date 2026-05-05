@@ -11,9 +11,12 @@ modules-center-container {
 /* Clock */
 
 bar-datetime-component {
-  background-color: transparent;
-  background: none;
-  padding: 4px;
+  background-color: $surface1-transparent;
+  border-radius: $border-radius;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 4px;
+  padding-bottom: 4px;
 }
 
 bar-time,
@@ -21,7 +24,24 @@ bar-date {
   font-weight: 600;
 }
 
+bar-time {
+  background: linear-gradient(180deg, $surface0 0%, $base 100%);
+  box-shadow: inset 0 -1px 0 0 $base, 0 4px 6px rgba(0, 0, 0, 0.5);
+  border-radius: $border-radius;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+bar-date {
+  background: linear-gradient(180deg, $surface0 0%, $base 100%);
+  box-shadow: inset 0 -1px 0 0 $base, 0 4px 6px rgba(0, 0, 0, 0.5);
+  border-radius: $border-radius;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
 bar-separator {
+  color: $accent-background;
   background-color: transparent;
   padding-left: 5px;
   padding-right: 5px;
