@@ -51,17 +51,18 @@ bar-module-button {
   color: $overlay0;
   border-radius: $border-radius;
   min-width: 50px;
-  margin: 2px;
+  padding: 4px;
+  margin: 3px;
 }
 
 bar-module-button-left {
   @extend bar-module-button;
-  margin-left: 1px;
+  margin-left: 4px;
 }
 
 bar-module-button-right {
   @extend bar-module-button;
-  margin-right: 1px;
+  margin-right: 4px;
 }
 
 bar-module-button:hover {

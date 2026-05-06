@@ -1,4 +1,3 @@
-import Gtk from "gi://Gtk?version=4.0"
 import AstalBattery from "gi://AstalBattery"
 import { createBinding } from "ags"
 
@@ -28,14 +27,31 @@ export function BatteryWidget() {
 
     const energyRate = createBinding(battery, "energyRate",)((w) => `${Math.floor(w)}W`);
 
+    const batteryBorderClass = createBinding(battery, "state")((s): string[] => {
+        switch (s) {
+            case AstalBattery.State.CHARGING:
+                return ["battery-launcher-background-charging"]
+            case AstalBattery.State.DISCHARGING:
+                return ["battery-launcher-background-discharging"]
+            case AstalBattery.State.EMPTY:
+                return ["battery-launcher-background-empty"]
+            case AstalBattery.State.FULLY_CHARGED:
+                return ["battery-launcher-background-full"]
+            case AstalBattery.State.PENDING_CHARGE:
+                return ["battery-launcher-background-pending-charge"]
+            case AstalBattery.State.PENDING_DISCHARGE:
+                return ["battery-launcher-background-pending-discharge"]
+            default:
+                return ["battery-launcher-background-unknown"]
+        }
+    })
+
 
     const batteryClass = createBinding(battery, "state")((s): string[] => {
         switch (s) {
             case AstalBattery.State.CHARGING:
-                console.log("Charging")
                 return ["battery-charging"]
             case AstalBattery.State.DISCHARGING:
-                console.log("Discharging")
                 return ["battery-discharging"]
             case AstalBattery.State.EMPTY:
                 return ["battery-empty"]
@@ -103,7 +119,7 @@ export function BatteryWidget() {
     })
 
     return (
-        <box cssName="app-launcher-background">
+        <box cssClasses={batteryBorderClass}>
             <button cssName="bar-module-button" tooltipText={batteryTooltip}>
                 <label label={stateIcon} cssClasses={batteryClass} />
             </button>
