@@ -45,8 +45,10 @@ export function PowerProfileWidget() {
   }
 
   return (
-    <button onClicked={cycleProfile} tooltipText={activeProfile} cssName="bar-module-button">
-      <label label={activeProfile.as(getIcon)} cssClasses={batteryClass} />
-    </button>
+    <box cssName="app-launcher-background">
+      <button onClicked={cycleProfile} tooltipText={activeProfile} cssName="bar-module-button">
+        <label label={activeProfile.as(getIcon)} cssClasses={batteryClass} />
+      </button>
+    </box>
   )
 }

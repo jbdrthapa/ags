@@ -25,9 +25,11 @@ export function ModulesRight() {
     const mprisWidget = MprisWidget();
 
     const button = (
-        <button onClicked={() => ModulesRightPopup.toggle()} cssName={"bar-module-button-right"}>
-            <label label={"󰣇"} />
-        </button>
+        <box cssName={"app-launcher-background-right"}>
+            <button onClicked={() => ModulesRightPopup.toggle()} cssName={"bar-module-button-right"}>
+                <label label={"󰣇"} />
+            </button>
+        </box>
     ) as any;
 
     ModulesRightPopup = new PopupWindow({

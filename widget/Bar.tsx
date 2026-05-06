@@ -76,7 +76,7 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
       application={app}
     >
       <centerbox cssName="bar">
-        <box $type="start">
+        <box $type="start" spacing={10}>
           {modulesLeft}
           {workspaceWidget}
         </box>
@@ -84,7 +84,7 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
           {modulesCenter}
         </box>
         <box $type="end">
-          <box orientation={Gtk.Orientation.HORIZONTAL}>
+          <box orientation={Gtk.Orientation.HORIZONTAL} spacing={10}>
             {trayWidget}
             {powerProfileWidget}
             {batteryWidget}

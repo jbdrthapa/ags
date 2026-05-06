@@ -103,8 +103,10 @@ export function BatteryWidget() {
     })
 
     return (
-        <button cssName="bar-module-button" tooltipText={batteryTooltip}>
-            <label label={stateIcon} cssClasses={batteryClass} />
-        </button>
+        <box cssName="app-launcher-background">
+            <button cssName="bar-module-button" tooltipText={batteryTooltip}>
+                <label label={stateIcon} cssClasses={batteryClass} />
+            </button>
+        </box>
     )
 }
