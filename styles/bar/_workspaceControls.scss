@@ -42,4 +42,13 @@ active-window-icon {
 active-window-name {
     font-weight: 600;
     color: $overlay0;
+    padding-left: 20px;
+    padding-right: 20px;
+    background-color: $base-transparent;
+    border-radius: $border-radius;
+}
+
+active-window-name.empty {
+    padding: 0;
+    margin: 0;
 }
