@@ -1,23 +1,9 @@
 @use "theme" as *;
 
-window.Bar {
-
+bar {
   font-family: "Inter", "JetBrainsMono Nerd Font Propo", "Noto Sans CJK JP", "Noto Sans CJK KR";
   font-size: 18px;
-
   color: $overlay0;
+  padding: 5px;
   border-radius: 99px;
-  margin-left: 10px;
-  margin-right: 10px;
-  border-bottom: 2px solid $base;
-
-  >bar {
-    background: $base-transparent;
-    margin: 0px;
-    min-height: 40px;
-  }
 }
-
-
-
-

@@ -8,10 +8,13 @@ import { ModulesRight } from "./modules-right/ModulesRight"
 import { TrayWidget } from "./bar/TrayWidget"
 import { PowerProfileWidget } from "./bar/PowerProfileWidget"
 import { BatteryWidget } from "./bar/BatteryWidget"
+import { WindowName } from "../constants";
 
 let modulesLeft: any;
 let modulesCenter: any;
 let modulesRight: any;
+
+const windowName = WindowName.bar;
 
 function CloseAllMenus() {
   modulesCenter.popup.hide_all();
@@ -31,11 +34,10 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
   const powerProfileWidget = PowerProfileWidget();
   const batteryWidget = BatteryWidget();
 
-  const backdropName = "bar-backdrop";
   const backdrop = (
     <window
-      name={backdropName}
-      namespace={backdropName}
+      name={windowName}
+      namespace={windowName}
       layer={Astal.Layer.BACKGROUND}
       visible={true}
       anchor={Astal.WindowAnchor.TOP | Astal.WindowAnchor.BOTTOM | Astal.WindowAnchor.LEFT | Astal.WindowAnchor.RIGHT}
@@ -51,14 +53,22 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
     </window>
   ) as Astal.Window;
 
+  console.debug("Bar rendered, registering backdrop and popups...");
+
   app.add_window(backdrop);
+  app.add_window(modulesLeft.popup);
+  app.add_window(modulesCenter.popup);
+  app.add_window(modulesRight.popup);
+
+  console.debug("Current windows in app:");
+  app.windows.forEach(win => console.log(win.name));
 
   return (
     <window
       visible
-      name="bar"
-      namespace={"js-shell-bar"}
-      class="Bar"
+      name={windowName}
+      namespace={windowName}
+      class={windowName}
       gdkmonitor={gdkmonitor}
       exclusivity={Astal.Exclusivity.EXCLUSIVE}
       layer={Astal.Layer.TOP}
@@ -66,7 +76,7 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
       application={app}
     >
       <centerbox cssName="bar">
-        <box $type="start">
+        <box $type="start" spacing={10}>
           {modulesLeft}
           {workspaceWidget}
         </box>
@@ -74,7 +84,7 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
           {modulesCenter}
         </box>
         <box $type="end">
-          <box orientation={Gtk.Orientation.HORIZONTAL}>
+          <box orientation={Gtk.Orientation.HORIZONTAL} spacing={10}>
             {trayWidget}
             {powerProfileWidget}
             {batteryWidget}

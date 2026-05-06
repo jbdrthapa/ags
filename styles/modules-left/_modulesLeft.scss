@@ -9,6 +9,11 @@ modules-left-container {
   border-radius: $border-radius;
 }
 
+app-launcher-background-left{
+  background-color: $peach;
+  border-radius: $border-radius;
+}
+
 bar-launcher-component {
   background-color: transparent;
   background: none;
@@ -28,7 +33,7 @@ app-item {
 }
 
 app-item:hover {
-  background-color: $accent-background;
+  background-color: $accent-background-transparent;
   color: $accent-foreground;
   border-radius: $border-radius;
 }
@@ -47,7 +52,6 @@ app-icon {
 }
 
 app-name {
-  color: $overlay0;
   margin-left: 20px;
   font-size: 22px;
 }

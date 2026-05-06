@@ -1,6 +1,9 @@
 @forward "theme";
 @forward "shared";
 
+// settings
+@use "./settings";
+
 // bar
 @use "./bar/bar";
 @use "./bar/workspaceControls";

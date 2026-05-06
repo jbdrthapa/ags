@@ -5,6 +5,9 @@ import { Astal } from "ags/gtk4"
 import { WorldClocks } from "../../services/WorldClocks"
 import { ClockWidget } from "./ClockWidget"
 import { CalendarWidget } from "./CalendarWidget"
+import { WindowName } from "../../constants"
+
+const windowName = WindowName.modulesCenter;
 
 let popup: any;
 
@@ -15,8 +18,8 @@ export function ModulesCenter() {
     const calendarWidget = CalendarWidget();
 
     const button = (
-        <button onClicked={() => popup.toggle()} cssName={"bar-datetime-component"}>
-            <box orientation={Gtk.Orientation.HORIZONTAL}>
+        <button onClicked={() => popup.toggle()}>
+            <box orientation={Gtk.Orientation.HORIZONTAL} valign={Gtk.Align.CENTER} cssName="date-time-container">
                 <label label={times[0].as(t => t.tz_time)} cssName={"bar-time"} />
                 <label label="" cssName={"bar-separator"} />
                 <label label={times[0].as(t => t.tz_date)} cssName={"bar-date"} />
@@ -25,8 +28,8 @@ export function ModulesCenter() {
     ) as any;
 
     popup = new PopupWindow({
-        name: "modules-center-container",
-        namespace: "js-shell-modules-center",
+        name: windowName,
+        namespace: windowName,
         anchor: Astal.WindowAnchor.TOP,
         margin: 8,
         child: (

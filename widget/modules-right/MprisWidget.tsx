@@ -68,8 +68,8 @@ export function MprisWidget() {
 
                 <button onClicked={() => mprisPlayer.play_pause()} visible={canControl} cssName="mpris-button">
                     <box>
-                        <image iconName="media-playback-start-symbolic" visible={playbackStatus} />
-                        <image iconName="media-playback-pause-symbolic" visible={playbackStatusNot} />
+                        <image iconName="media-playback-start-symbolic" visible={playbackStatusNot} />
+                        <image iconName="media-playback-pause-symbolic" visible={playbackStatus} />
                     </box>
                 </button>
 

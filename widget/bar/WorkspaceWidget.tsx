@@ -37,14 +37,13 @@ export function WorkspaceWidget() {
         </box>
       </box>
 
-      <box spacing={8} cssName="active-window-container" marginStart={5}>
+      <box spacing={10} cssName="active-window-container" marginStart={10}>
 
         {/* Application Icon */}
         <image visible={focused.as(win => !!win)} icon-name={focused.as(win => win?.app_id || "image-missing")} cssName="active-window-icon" />
 
         {/* Application Title */}
-        <label cssName={"active-window-name"}
-          label={focused.as(win => {
+        <label cssName={"active-window-name"} label={focused.as(win => {
             if (!win || !win.title) return "";
 
             const maxLength = 60;
@@ -52,8 +51,11 @@ export function WorkspaceWidget() {
               ? win.title.substring(0, maxLength) + "..."
               : win.title;
           })}
+          visible={focused.as(win => !!win && !!win.title)}
           tooltipText={focused.as(win => {
             if (!win || !win.title) return "";
+
+            // console.log("Focused window title:", win.title);
 
             return win.title;
           })}
