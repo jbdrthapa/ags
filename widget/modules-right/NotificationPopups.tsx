@@ -16,6 +16,8 @@ export default function NotificationPopups() {
     const notifiedHandler = notifd.connect("notified", (_, id, replaced) => {
         const notification = notifd.get_notification(id)
 
+        if (!notification) return
+
         if (replaced && notifications.peek().some((n) => n.id === id)) {
             setNotifications((ns) => ns.map((n) => (n.id === id ? notification : n)))
         } else {

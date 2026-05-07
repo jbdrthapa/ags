@@ -6,6 +6,10 @@ import AstalNotifd from "gi://AstalNotifd"
 import Pango from "gi://Pango"
 import { createState } from "ags"
 
+interface NotificationProps {
+    notification: AstalNotifd.Notification
+}
+
 function isIcon(icon?: string | null) {
     const iconTheme = Gtk.IconTheme.get_for_display(Gdk.Display.get_default()!)
     return icon && iconTheme.has_icon(icon)
