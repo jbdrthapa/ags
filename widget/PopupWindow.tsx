@@ -1,16 +1,24 @@
 import Gtk from "gi://Gtk?version=4.0";
 import Gdk from "gi://Gdk?version=4.0";
 import { Astal } from "ags/gtk4";
-import AstalNiri from "gi://AstalNiri"
+import AstalNiri from "gi://AstalNiri";
 import GObject from "gnim/gobject";
 
-// Explicitly register the class using GObject
 export default GObject.registerClass({
     GTypeName: "PopupWindow",
 }, class PopupWindow extends Astal.Window {
+    // Keep a reference to the revealer to toggle it
+    private revealer: Gtk.Revealer;
 
     constructor(props: any & { child: Gtk.Widget }) {
         const { name, child, ...rest } = props;
+
+        const revealer = new Gtk.Revealer({
+            child: child,
+            transition_type: Gtk.RevealerTransitionType.FADE_SLIDE_DOWN,
+            transition_duration: 200,
+            reveal_child: false,
+        });
 
         super({
             ...rest,
@@ -20,7 +28,8 @@ export default GObject.registerClass({
             keymode: Astal.Keymode.ON_DEMAND,
         });
 
-        this.set_child(child);
+        this.revealer = revealer;
+        this.set_child(revealer);
 
         const controller = new Gtk.EventControllerKey();
         controller.connect("key-pressed", (_, keyval) => {
@@ -32,28 +41,37 @@ export default GObject.registerClass({
         });
         this.add_controller(controller);
 
-        // Use the niri's window focus behavior to close the window
-        const niri = AstalNiri.get_default()
+        // Niri focus behavior
+        const niri = AstalNiri.get_default();
         niri.connect("notify::focused-window", (service) => {
-            const focused = service.focused_window
-
-            if (focused?.title) {
+            if (service.focused_window?.title) {
                 this.hide_all();
             }
-        })
+        });
 
-        // Use the niri's overview behavior to close the window
-        niri.connect("overview-opened-or-closed", (service) => {
+        niri.connect("overview-opened-or-closed", () => {
             this.hide_all();
-        })
+        });
     }
 
     hide_all() {
-        this.set_visible(false);
+        this.revealer.reveal_child = false;
+
+        setTimeout(() => {
+            if (!this.revealer.reveal_child) {
+                this.set_visible(false);
+            }
+        }, 200);
     }
 
     toggle() {
-        const isShowing = this.get_visible();
-        this.set_visible(!isShowing);
+        if (this.get_visible() && this.revealer.reveal_child) {
+            this.hide_all();
+        } else {
+            this.set_visible(true);
+            setTimeout(() => {
+                this.revealer.reveal_child = true;
+            }, 10);
+        }
     }
 });
