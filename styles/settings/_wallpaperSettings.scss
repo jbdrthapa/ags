@@ -1,0 +1,18 @@
+@use "theme" as *;
+
+wallpaper-container {
+    padding: 20px;
+}
+
+wallpaper-thumbnail {
+    background-color: $mantle-transparent;
+    border-radius: $border-radius;
+    border: 1px solid $overlay0;
+}
+
+wallpaper-thumbnail label {
+    font-size: 14px;
+    font-weight: 600;
+    color: $overlay0;
+    margin: 5px;
+}

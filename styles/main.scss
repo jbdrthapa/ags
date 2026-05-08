@@ -2,7 +2,8 @@
 @forward "shared";
 
 // settings
-@use "./settings";
+@use "./settings/settings";
+@use "./settings/wallpaperSettings";
 
 // bar
 @use "./bar/bar";

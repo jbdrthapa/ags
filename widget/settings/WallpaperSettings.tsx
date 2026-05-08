@@ -7,6 +7,7 @@ const WALLPAPER_DIR = `${GLib.get_home_dir()}/Pictures`;
 
 export function WallpaperSettings() {
     const flowbox = new Gtk.FlowBox({
+        cssName: "wallpaper-container",
         min_children_per_line: 4,
         max_children_per_line: 4,
         column_spacing: 10,
@@ -34,13 +35,19 @@ export function WallpaperSettings() {
         const filename = GLib.path_get_basename(path);
         const btn = (
             <button
+                cssName={"wallpaper-thumbnail"}
                 onClicked={() => execAsync(`awww img "${path}"`)}
             >
-                <label label={filename} wrap={true}
+                <label
+                    label={filename}
+                    tooltipText={filename}
+                    wrap={true}
                     wrap_mode={Pango.WrapMode.WORD_CHAR}
                     max_width_chars={20}
                     heightRequest={100}
-                    xalign={0} />
+                    xalign={2}
+                    yalign={1}
+                />
             </button>
         ) as Gtk.Widget;
 
