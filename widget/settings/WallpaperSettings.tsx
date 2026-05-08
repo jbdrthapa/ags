@@ -6,6 +6,12 @@ import Pango from "gi://Pango";
 const WALLPAPER_DIR = `${GLib.get_home_dir()}/Pictures`;
 const WALLPAPER_DIR_CACHE = `${WALLPAPER_DIR}/.cache/`;
 
+const thumbToOriginal = new Map<string, string>();
+
+function getOriginalFromThumb(thumbPath: string): string | undefined {
+    return thumbToOriginal.get(thumbPath);
+}
+
 function GetThumbnailFile(image_file: string) {
     const base_file_name = GLib.path_get_basename(image_file);
     const thumbnail_file = WALLPAPER_DIR_CACHE + base_file_name;
@@ -38,6 +44,7 @@ export function WallpaperSettings() {
 
     console.log("Wallpaper cache folder: ", WALLPAPER_DIR_CACHE);
 
+
     const files: string[] = [];
     try {
         const dir = GLib.Dir.open(WALLPAPER_DIR, 0);
@@ -46,6 +53,9 @@ export function WallpaperSettings() {
             if (name.match(/\.(jpg|jpeg|png|webp)$/i)) {
                 const image_file = `${WALLPAPER_DIR}/${name}`;
                 const thumbnail_file = GetThumbnailFile(image_file);
+
+                thumbToOriginal.set(thumbnail_file, image_file);
+
                 files.push(thumbnail_file);
             }
         }
@@ -58,10 +68,11 @@ export function WallpaperSettings() {
     for (let i = 0; i < files.length; i++) {
         const path = files[i];
         const filename = GLib.path_get_basename(path);
+        const image_file = getOriginalFromThumb(path);
         const btn = (
             <button
                 cssName={"wallpaper-thumbnail"}
-                onClicked={() => execAsync(`awww img "${path}"`)}
+                onClicked={() => execAsync(`awww img --transition-type random --transition-fps 120 --transition-duration 1 "${image_file}"`)}
                 heightRequest={200}
                 valign={Gtk.Align.CENTER}
                 halign={Gtk.Align.CENTER}
