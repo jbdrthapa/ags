@@ -89,7 +89,6 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
 
   const gesture = new Gtk.GestureClick();
   gesture.connect("pressed", () => {
-    console.log("hide others called");
     hide_others();
   });
 
