@@ -1,6 +1,7 @@
 import Gtk from "gi://Gtk?version=4.0";
 import GLib from "gi://GLib";
 import { exec, execAsync } from "ags/process"
+import Pango from "gi://Pango";
 
 const WALLPAPER_DIR = `${GLib.get_home_dir()}/Pictures`;
 
@@ -32,16 +33,16 @@ export function WallpaperSettings() {
         const addBatch = () => {
             for (let j = 0; j < 5 && i < files.length; j++, i++) {
                 const path = files[i];
+                const filename = GLib.path_get_basename(path);
                 const btn = (
                     <button
                         onClicked={() => execAsync(`awww img "${path}"`)}
                     >
-                        <box css={`
-                            background-image: url('file://${path}'); 
-                            background-size: cover;
-                            min-width: 120px;
-                            min-height: 80px;
-                        `} />
+                        <label label={filename} wrap={true}
+                            wrap_mode={Pango.WrapMode.WORD_CHAR}
+                            max_width_chars={20}
+                            heightRequest={100}
+                            xalign={0} />
                     </button>
                 ) as Gtk.Widget;
 

@@ -3,6 +3,7 @@ import Gdk from "gi://Gdk?version=4.0";
 import { Astal } from "ags/gtk4";
 import AstalNiri from "gi://AstalNiri";
 import GObject from "gnim/gobject";
+import app from "ags/gtk4/app"
 
 export default GObject.registerClass({
     GTypeName: "PopupWindow",
@@ -54,6 +55,14 @@ export default GObject.registerClass({
         });
     }
 
+    hide_others() {
+        app.get_windows().forEach(window => {
+            if (window !== this && window.name !== "bar-background") {
+                window.hide()
+            }
+        });
+    }
+
     hide_all() {
         this.revealer.reveal_child = false;
 
@@ -69,6 +78,7 @@ export default GObject.registerClass({
             this.hide_all();
         } else {
             this.set_visible(true);
+            this.hide_others();
             setTimeout(() => {
                 this.revealer.reveal_child = true;
             }, 10);
