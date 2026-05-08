@@ -53,17 +53,8 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
     </window>
   ) as Astal.Window;
 
-  console.debug("Bar rendered, registering backdrop and popups...");
+  const barWindow = (
 
-  app.add_window(backdrop);
-  app.add_window(modulesLeft.popup);
-  app.add_window(modulesCenter.popup);
-  app.add_window(modulesRight.popup);
-
-  console.debug("Current windows in app:");
-  app.windows.forEach(win => console.log(win.name));
-
-  return (
     <window
       visible
       name={windowName}
@@ -93,5 +84,35 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
         </box>
       </centerbox>
     </window>
-  )
+
+  ) as Astal.Window;
+
+  const gesture = new Gtk.GestureClick();
+  gesture.connect("pressed", () => {
+    console.log("hide others called");
+    hide_others();
+  });
+
+  barWindow.add_controller(gesture);
+
+  function hide_others() {
+    app.get_windows().forEach(window => {
+      if (window !== barWindow && window.name !== "bar-background") {
+        window.hide()
+      }
+    });
+  }
+
+  console.debug("Bar rendered, registering backdrop and popups...");
+
+  app.add_window(backdrop);
+  app.add_window(modulesLeft.popup);
+  app.add_window(modulesCenter.popup);
+  app.add_window(modulesRight.popup);
+
+  console.debug("Current windows in app:");
+  app.windows.forEach(win => console.log(win.name));
+
+  return barWindow;
+
 }
