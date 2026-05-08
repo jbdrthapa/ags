@@ -2,11 +2,11 @@
 
 settings-container {
   background-color: $base-transparent;
-  border: 2px solid $base;
-  min-width: 1400px;
-  min-height: 1000px;
+  border: 2px solid $surface1-transparent;
   border-top-left-radius: $border-radius;
   border-top-right-radius: $border-radius;
+  min-width: 1400px;
+  min-height: 1000px;
 }
 
 settings-titlebar {

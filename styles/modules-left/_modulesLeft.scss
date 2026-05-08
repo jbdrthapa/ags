@@ -2,11 +2,11 @@
 
 modules-left-container {
   background-color: $base-transparent;
-  border: 2px solid $base;
+  border: 2px solid $surface1-transparent;
+  border-radius: $border-radius;
   min-width: 500px;
   min-height: 840px;
   padding: 40px;
-  border-radius: $border-radius;
 }
 
 app-launcher-background-left {
