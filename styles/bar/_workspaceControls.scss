@@ -8,8 +8,8 @@ workspace-container {
     padding-right: 10px;
     padding-top: 2px;
     padding-bottom: 2px;
-    background-color: $surface1-transparent;
-    border:3px solid $white;
+    background-color: $base-transparent;
+    border:2px solid $overlay0;
     border-radius: $border-radius;
 }
 
@@ -42,11 +42,12 @@ active-window-icon {
 
 active-window-name {
     font-weight: 600;
-    color: $overlay0;
+    color: $white;
     padding-left: 20px;
     padding-right: 20px;
     background-color: $base-transparent;
     border-radius: $border-radius;
+    border:2px solid $overlay0;
 }
 
 active-window-name.empty {

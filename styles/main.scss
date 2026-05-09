@@ -2,7 +2,8 @@
 @forward "shared";
 
 // settings
-@use "./settings";
+@use "./settings/settings";
+@use "./settings/wallpaperSettings";
 
 // bar
 @use "./bar/bar";
@@ -18,6 +19,7 @@
 @use "./modules-center/modulesCenter";
 
 // modules-right
+@use "./modules-right/notifications";
 @use "./modules-right/modulesRight";
 @use "./modules-right/systeminfocontrols";
 @use "./modules-right/audiocontrols";

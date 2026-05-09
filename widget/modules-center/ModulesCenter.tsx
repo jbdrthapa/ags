@@ -20,9 +20,7 @@ export function ModulesCenter() {
     const button = (
         <button onClicked={() => popup.toggle()}>
             <box orientation={Gtk.Orientation.HORIZONTAL} valign={Gtk.Align.CENTER} cssName="date-time-container">
-                <label label={times[0].as(t => t.tz_time)} cssName={"bar-time"} />
-                <label label="" cssName={"bar-separator"} />
-                <label label={times[0].as(t => t.tz_date)} cssName={"bar-date"} />
+                <label label={times[0].as(t => `${t.tz_date}    󰇙    ${t.tz_time}`)} cssName={"bar-time"} />
             </box>
         </button>
     ) as any;
