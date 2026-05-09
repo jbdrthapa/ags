@@ -1,8 +1,8 @@
 js-shell, custom shell for Tiling Window Managers
  
-[./screenshots/Launcher.png](Launcher)
-[./screenshots/Menu.png](Menu)
-[./screenshots/Notification.png](Notification)
-[./screenshots/Screenshot.png](Screenshot)
-[./screenshots/Time-Calendar.png](Time Calendar)
-[./screenshots/Wallpaper.png](Wallpaper)
+ ![Application Launcher](screenshots/Launcher.png)
+ ![Menu](screenshots/Menu.png)
+ ![Notification](screenshots/Notification.png)
+ ![Screenshot](screenshots/Screenshot.png)
+ ![Time & Calendar](screenshots/Time-Calendar.png)
+ ![Wallpaper](screenshots/Wallpaper.png)
