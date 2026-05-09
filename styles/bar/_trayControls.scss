@@ -6,6 +6,8 @@ tray-container {
   margin-right: 6px;
   padding-left:4px;
   padding-right: 4px;
+  padding-top: 4px;
+  padding-bottom: 4px;
   background-color: $base-transparent;
   border:2px solid $overlay0;
   border-radius: $border-radius;
@@ -23,7 +25,7 @@ tray-module-button>button {
   color: $white;
   padding: 0px;
   margin: 0px;
-  min-height: 0;
+  min-height: 25px;
   min-width: 0;
 }
 

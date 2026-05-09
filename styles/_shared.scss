@@ -58,12 +58,12 @@ bar-module-button {
 
 bar-module-button-left {
   @extend bar-module-button;
-  margin-left: 3px;
+  margin-left: 2px;
 }
 
 bar-module-button-right {
   @extend bar-module-button;
-  margin-right: 3px;
+  margin-right: 2px;
 }
 
 bar-module-button:hover {
