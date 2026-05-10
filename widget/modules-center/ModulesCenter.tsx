@@ -18,10 +18,8 @@ export function ModulesCenter() {
     const calendarWidget = CalendarWidget();
 
     const button = (
-        <button onClicked={() => popup.toggle()}>
-            <box orientation={Gtk.Orientation.HORIZONTAL} valign={Gtk.Align.CENTER} cssName="date-time-container">
-                <label label={times[0].as(t => `${t.tz_date}    󰇙    ${t.tz_time}`)} cssName={"bar-time"} />
-            </box>
+        <button onClicked={() => popup.toggle()} cssName={"date-time-container"}>
+            <label label={times[0].as(t => `${t.tz_date}    󰇙    ${t.tz_time}`)} cssName={"bar-date-time"} />
         </button>
     ) as any;
 

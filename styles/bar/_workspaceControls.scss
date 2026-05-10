@@ -9,7 +9,7 @@ workspace-container {
     padding-top: 2px;
     padding-bottom: 2px;
     background-color: $base-transparent;
-    border:2px solid $overlay0;
+    // border:2px solid $overlay0;
     border-radius: $border-radius;
 }
 
@@ -47,7 +47,7 @@ active-window-name {
     padding-right: 20px;
     background-color: $base-transparent;
     border-radius: $border-radius;
-    border:2px solid $overlay0;
+    // border:2px solid $overlay0;
 }
 
 active-window-name.empty {
