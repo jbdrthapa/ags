@@ -19,7 +19,7 @@ window.NotificationPopups {
     background-color: $bg-color;
     margin: 8px 16px 8px 16px;
     box-shadow: 2px 3px 8px 0 gtkalpha(black, 0.4);
-    border: 1pt solid $overlay0;
+    // border: 1pt solid $overlay0;
 
     &.critical {
         border: 1pt solid gtkalpha($error, 0.4);
