@@ -1,7 +1,7 @@
 @use "theme" as *;
 
 modules-center-container {
-  background-color: $base-transparent;
+  background: $base-transparent;
   border: 2px solid $surface1-transparent;
   border-radius: $border-radius;
   min-width: 500px;
@@ -9,18 +9,12 @@ modules-center-container {
   padding: 40px;
 }
 
-/* Clock */
-
 date-time-container {
-  background: none;
-  background-color: transparent;
+  background-color: $base-transparent;
+  border-radius: $border-radius;
 }
 
-bar-time,
-bar-date {
-  background: $base-transparent;
-  // border: 1px solid $overlay0;
-  border-radius: $border-radius;
+bar-date-time {
   font-weight: 600;
   color: $white;
   padding-left: 15px;
@@ -29,14 +23,6 @@ bar-date {
   padding-bottom: 8px;
   margin-top: -8px;
   margin-bottom: -8px;
-}
-
-bar-separator {
-  color: $white;
-  background-color: transparent;
-  padding-left: 5px;
-  padding-right: 5px;
-  min-width: 10px;
 }
 
 time-container {

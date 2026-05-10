@@ -1,7 +1,7 @@
 import GLib from "gi://GLib"
 import { createPoll } from "ags/time"
 
-export function WorldClocks({ time_fmt = "%H:%M", date_fmt = "%a, %b %e" } = {}) {
+export function WorldClocks({ time_fmt = "%I:%M %p", date_fmt = "%a, %b %e" } = {}) {
 
     const worldClocks =
         [
