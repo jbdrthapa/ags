@@ -10,7 +10,7 @@ export function DisplaySettings() {
     return (
         <box orientation={Gtk.Orientation.VERTICAL} spacing={10}>
 
-            <label label="Display Properties" halign={Gtk.Align.START} cssName="section-heading" />
+            <label label="Properties" halign={Gtk.Align.START} cssName="section-heading" />
 
             <For each={monitors}>
                 {(monitor) => (

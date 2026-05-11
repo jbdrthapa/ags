@@ -6,9 +6,9 @@ function BindBluetoothAdapterProperty<prop_key extends keyof AstalBluetooth.Adap
     const binding = createBinding(object, property as any)
 
     return (
-        <box orientation={Gtk.Orientation.HORIZONTAL}>
-            <label label={caption} />
-            <label label={binding.as(val => String(val))} />
+        <box orientation={Gtk.Orientation.HORIZONTAL} spacing={10}>
+            <label label={caption} xalign={0} cssName="settings-param-caption" />
+            <label label={binding.as(val => String(val))} cssName="settings-param-value" halign={Gtk.Align.START} />
         </box>
     );
 }
@@ -23,16 +23,22 @@ export function BluetoothSettings() {
 
     return (
         <box orientation={Gtk.Orientation.VERTICAL} spacing={10}>
-            {BindBluetoothAdapterProperty("Name", adapter, "name")}
-            {BindBluetoothAdapterProperty("Address", adapter, "address")}
-            {BindBluetoothAdapterProperty("Powered", adapter, "powered")}
-            {BindBluetoothAdapterProperty("Pairable", adapter, "pairable")}
-            {BindBluetoothAdapterProperty("Discoverable", adapter, "discoverable")}
 
-            <Gtk.Separator />
+            <label label="Properties" halign={Gtk.Align.START} cssName="section-heading" />
 
-            <label label="Devices" halign={Gtk.Align.START} />
-            
+            <box spacing={10} orientation={Gtk.Orientation.VERTICAL} cssName="section-background">
+                {BindBluetoothAdapterProperty("Name", adapter, "name")}
+                {BindBluetoothAdapterProperty("Address", adapter, "address")}
+                {BindBluetoothAdapterProperty("Powered", adapter, "powered")}
+                {BindBluetoothAdapterProperty("Pairable", adapter, "pairable")}
+                {BindBluetoothAdapterProperty("Discoverable", adapter, "discoverable")}
+            </box>
+
+            <label label="Devices" halign={Gtk.Align.START} cssName="section-heading" />
+
+            <box spacing={10} orientation={Gtk.Orientation.VERTICAL} cssName="section-background">
+                
+            </box>
 
         </box>
     );
