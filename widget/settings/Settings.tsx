@@ -2,12 +2,14 @@ import Gtk from "gi://Gtk?version=4.0";
 import { Astal, Gdk } from "ags/gtk4"
 import app from "ags/gtk4/app"
 import { WindowName } from "../../constants";
+import { DisplaySettings } from "./DisplaySettings";
 import { WallpaperSettings } from "./WallpaperSettings";
 import { WiredNetworkSettings, WirelessNetworkSettings } from "./NetworkSettings";
 import { BluetoothSettings } from "./BluetoothSettings";
 
 export default function Settings(gdkmonitor: Gdk.Monitor) {
     const windowName = WindowName.settings;
+    const displaySettings = new DisplaySettings();
     const wallpaperSettings = new WallpaperSettings();
     const wiredNetworkSettings = new WiredNetworkSettings();
     const wirelessNetworkSettings = new WirelessNetworkSettings();
@@ -19,12 +21,12 @@ export default function Settings(gdkmonitor: Gdk.Monitor) {
         hexpand: true,
         vexpand: true,
     });
-
+    
+    notebook.append_page(displaySettings, new Gtk.Label({ label: "Display" }));
     notebook.append_page(wiredNetworkSettings, new Gtk.Label({ label: "Wired" }));
     notebook.append_page(wirelessNetworkSettings, new Gtk.Label({ label: "Wireless" }));
     notebook.append_page(bluetoothSettings, new Gtk.Label({ label: "Bluetooth" }));
     notebook.append_page(wallpaperSettings, new Gtk.Label({ label: "Wallpaper" }));
-    notebook.append_page(new Gtk.Label({ label: "Display Settings" }), new Gtk.Label({ label: "Display" }));
     notebook.append_page(new Gtk.Label({ label: "About the shell" }), new Gtk.Label({ label: "About" }));
 
     return (

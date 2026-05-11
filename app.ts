@@ -9,9 +9,9 @@ app.start({
   main() {
 
     for (const monitor of app.get_monitors()) {
-        Bar(monitor)
-        Settings(monitor)
-        NotificationPopups()
+      Bar(monitor)
+      Settings(monitor)
+      NotificationPopups(monitor)
     }
   },
 })

@@ -1,10 +1,11 @@
 import app from "ags/gtk4/app"
+import Gdk from "gi://Gdk?version=4.0"
 import { Astal, Gtk } from "ags/gtk4"
 import AstalNotifd from "gi://AstalNotifd"
 import Notification from "./Notification"
 import { createBinding, For, createState, onCleanup } from "ags"
 
-export default function NotificationPopups() {
+export default function NotificationPopups(monitor: Gdk.Monitor) {
     const monitors = createBinding(app, "monitors")
 
     const notifd = AstalNotifd.get_default()
@@ -35,17 +36,13 @@ export default function NotificationPopups() {
     })
 
     return (
-        <For each={monitors}>
-            {(monitor) => (
-                <window $={(self) => onCleanup(() => self.destroy())} class="NotificationPopups" gdkmonitor={monitor} visible={notifications((ns) => ns.length > 0)}
-                    anchor={Astal.WindowAnchor.TOP | Astal.WindowAnchor.RIGHT}>
-                    <box orientation={Gtk.Orientation.VERTICAL}>
-                        <For each={notifications}>
-                            {(notification) => <Notification notification={notification} />}
-                        </For>
-                    </box>
-                </window>
-            )}
-        </For>
+        <window $={(self) => onCleanup(() => self.destroy())} class="NotificationPopups" gdkmonitor={monitor} visible={notifications((ns) => ns.length > 0)}
+            anchor={Astal.WindowAnchor.TOP | Astal.WindowAnchor.RIGHT}>
+            <box orientation={Gtk.Orientation.VERTICAL}>
+                <For each={notifications}>
+                    {(notification) => <Notification notification={notification} />}
+                </For>
+            </box>
+        </window>
     )
 }
