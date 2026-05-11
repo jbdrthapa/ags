@@ -3,7 +3,7 @@ import { Astal, Gdk } from "ags/gtk4"
 import app from "ags/gtk4/app"
 import { WindowName } from "../../constants";
 import { WallpaperSettings } from "./WallpaperSettings";
-import { WiredNetworkSettings, WirelessNetworkSettings } from "./WiredNetworkSettings";
+import { WiredNetworkSettings, WirelessNetworkSettings } from "./NetworkSettings";
 
 export default function Settings(gdkmonitor: Gdk.Monitor) {
     const windowName = WindowName.settings;
