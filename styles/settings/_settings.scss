@@ -41,6 +41,21 @@ settings-close-button:hover {
   box-shadow: inset 0 -1px 0 0 $base, 0 4px 6px rgba(0, 0, 0, 0.5);
 }
 
+settings-param-caption {
+  color: $subtext0;
+  font-weight: 600;
+  padding: 10px;
+}
+
+settings-param-value {
+  background-color: $mantle-transparent;
+  color: $text;
+  padding: 10px;
+  border: 1px solid $surface0;
+  border-radius: $border-radius;
+}
+
+
 
 settings-notebook {
   background-color: $base-transparent;

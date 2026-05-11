@@ -20,37 +20,37 @@ export function DisplaySettings() {
                     <box spacing={6} orientation={Gtk.Orientation.VERTICAL}>
 
                         <box orientation={Gtk.Orientation.HORIZONTAL} spacing={10}>
-                            <label label="Connector" />
-                            <label label={createBinding(monitor, "connector")} halign={Gtk.Align.START} />
+                            <label label="Connector" cssName="settings-param-caption" />
+                            <label label={createBinding(monitor, "connector")} cssName="settings-param-value" halign={Gtk.Align.START} />
                         </box>
 
                         <box orientation={Gtk.Orientation.HORIZONTAL} spacing={10}>
-                            <label label="Description" />
-                            <label label={createBinding(monitor, "description")} halign={Gtk.Align.START} />
+                            <label label="Description" cssName="settings-param-caption"/>
+                            <label label={createBinding(monitor, "description")} cssName="settings-param-value" halign={Gtk.Align.START} />
                         </box>
 
                         <box orientation={Gtk.Orientation.HORIZONTAL} spacing={10}>
-                            <label label="Manufacturer" />
-                            <label label={createBinding(monitor, "manufacturer")} halign={Gtk.Align.START} />
+                            <label label="Manufacturer" cssName="settings-param-caption"/>
+                            <label label={createBinding(monitor, "manufacturer")} cssName="settings-param-value" halign={Gtk.Align.START} />
                         </box>
 
                         <box orientation={Gtk.Orientation.HORIZONTAL} spacing={10}>
-                            <label label="Model" />
-                            <label label={createBinding(monitor, "model")} halign={Gtk.Align.START} />
+                            <label label="Model" cssName="settings-param-caption"/>
+                            <label label={createBinding(monitor, "model")} cssName="settings-param-value" halign={Gtk.Align.START} />
                         </box>
 
                         <box orientation={Gtk.Orientation.HORIZONTAL} spacing={10}>
-                            <label label="Scale" />
-                            <label label={createBinding(monitor, "scale").as(val => String(val))} halign={Gtk.Align.START} />
+                            <label label="Scale" cssName="settings-param-caption"/>
+                            <label label={createBinding(monitor, "scale").as(val => String(val))} cssName="settings-param-value" halign={Gtk.Align.START} />
                         </box>
 
                         <box orientation={Gtk.Orientation.HORIZONTAL} spacing={10}>
-                            <label label="Refresh Rate" />
-                            <label label={createBinding(monitor, "refresh-rate").as(val => String(val))} halign={Gtk.Align.START} />
+                            <label label="Refresh Rate" cssName="settings-param-caption"/>
+                            <label label={createBinding(monitor, "refresh-rate").as(val => String(val))} cssName="settings-param-value" halign={Gtk.Align.START} />
                         </box>
 
                         <box orientation={Gtk.Orientation.HORIZONTAL} spacing={10}>
-                            <label label="geometry" />
+                            <label label="geometry" cssName="settings-param-caption"/>
                             <label
                                 label={createBinding(monitor, "geometry").as(geo => {
                                     const scale = monitor.get_scale();
@@ -61,6 +61,7 @@ export function DisplaySettings() {
 
                                     return `${width}x${height} @ ${left},${top}`;
                                 })}
+                                cssName="settings-param-value"
                                 halign={Gtk.Align.START}>
                             </label>
                         </box>
