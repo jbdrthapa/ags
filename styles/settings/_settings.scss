@@ -2,7 +2,10 @@
 
 settings-container {
   background-color: $base-transparent;
-  border: 2px solid $surface1-transparent;
+  border-top: 2px solid $surface1-transparent;
+  border-left: 2px solid $surface1-transparent;
+  border-right: 2px solid $surface1-transparent;
+
   border-top-left-radius: $border-radius;
   border-top-right-radius: $border-radius;
   min-width: 1400px;
@@ -44,11 +47,15 @@ settings-notebook {
   min-width: 1400px;
   min-height: 1000px;
 
+  & > stack {
+    background-color: $base-transparent;
+    padding: 20px;                          
+  }
+
   /* The container for the tabs on the left */
   & header.left {
     min-width: 200px;
     background-color: $base-transparent;
-    border-right: 1px solid $border;
   }
 
   /* Individual tab styling */
@@ -57,11 +64,9 @@ settings-notebook {
     transition: all 400ms cubic-bezier(0.4, 0, 0.2, 1);
     color: $overlay0;
     font-weight: 600;
-    min-height: 50px;
-    min-width: 50px;
+    min-height: 40px;
     padding: 8px 16px;
-    border-radius: 4px;
-    margin-bottom: 4px;
+    margin-top: 2px;
   }
 
   & tab:checked {
