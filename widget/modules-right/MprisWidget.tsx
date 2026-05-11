@@ -10,11 +10,18 @@ export function MprisWidget() {
     // function returns media cover art, if available, otherwise returns a default icon
 
     function MediaCoverArt({ mprisPlayer }: { mprisPlayer: AstalMpris.Player }) {
+        const playingClass = createBinding(mprisPlayer, "playbackStatus").as(s =>
+            s === AstalMpris.PlaybackStatus.PLAYING ? "playing" : ""
+        );
 
-        const coverArt = createBinding(mprisPlayer, "coverArt")
+        const coverArt = createBinding(mprisPlayer, "coverArt");
 
         return (
-            <box overflow={Gtk.Overflow.HIDDEN} cssName="mpris-cover-art">
+            <box
+                overflow={Gtk.Overflow.HIDDEN}
+                cssName="mpris-cover-art"
+                cssClasses={playingClass.as(cls => [cls])}
+            >
                 <image pixelSize={64} file={coverArt} />
             </box>
         );

@@ -11,13 +11,13 @@ mpris-media-info {
     margin-left: 15px;
 }
 
-mpris-title{
+mpris-title {
     font-size: 18px;
     font-weight: 600;
     color: $accent-background;
 }
 
-mpris-artist{
+mpris-artist {
     font-size: 16px;
     color: $text;
 }
@@ -25,7 +25,7 @@ mpris-artist{
 mpris-button {
     background-color: $base;
     padding: 10px;
-    border-radius: $border-radius;
+    border-radius: 99px;
     transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -35,6 +35,15 @@ mpris-button:hover {
 }
 
 mpris-cover-art {
-    border-radius: $border-radius;
+    border-radius: 99px;
     border: 2px solid $surface2;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+}
+
+mpris-cover-art.playing image {
+    animation: spin 15s linear infinite;
 }
