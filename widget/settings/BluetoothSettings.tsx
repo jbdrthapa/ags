@@ -33,31 +33,32 @@ export function BluetoothSettings() {
                 {BindBluetoothAdapterProperty("Discoverable", adapter, "discoverable", true, "Discover", () => { adapter?.set_discoverable(!adapter?.get_discoverable()); })}
             </box>
 
-            <box spacing={10}>
-                <label label="Discover" />
 
-                <button onClicked={() => {
-                    if (!adapter?.discovering) {
-                        console.log("Starting discovery");
-                        adapter?.start_discovery();
-                    }
-                    else {
-                        console.log("Stopping discovery");
-                        adapter?.stop_discovery();
-                    }
-                }
-                }
-                    cssName="settings-button">Toggle
-                </button>
-
-                <button onClicked={() => { console.log("Stopping discovery"); adapter?.stop_discovery() }} cssName="settings-button">Stop</button>
-            </box>
 
             <box orientation={Gtk.Orientation.HORIZONTAL} spacing={20}>
                 <box orientation={Gtk.Orientation.VERTICAL}>
                     <label label="Discovery" halign={Gtk.Align.START} cssName="section-heading" />
 
-                    <box spacing={10} orientation={Gtk.Orientation.VERTICAL} cssName="section-background">
+                    <box spacing={20} orientation={Gtk.Orientation.VERTICAL} cssName="section-background">
+                        
+                        <box spacing={10}>
+                            <label label="Discovery" />
+
+                            <button onClicked={() => {
+                                if (!adapter?.discovering) {
+                                    console.log("Starting discovery");
+                                    adapter?.start_discovery();
+                                }
+                                else {
+                                    console.log("Stopping discovery");
+                                    adapter?.stop_discovery();
+                                }
+                            }
+                            }
+                                cssName="settings-button">Toggle
+                            </button>
+                        </box>
+
                         <scrolledwindow
                             vexpand={true}
                             hexpand={false}
