@@ -53,26 +53,49 @@ section-background {
   padding: 40px;
   border-radius: $border-radius;
   border: 1px solid $surface0;
+  min-width: 500px;
+  min-height: 500px;
 }
 
-settings-param-caption {
+settings-param-caption,
+settings-param-caption-compact {
   color: $subtext0;
   font-weight: 600;
   min-width: 150px;
+}
+
+settings-param-caption {
   padding: 10px;
 }
 
-settings-param-value-box{
+settings-param-caption-compact {
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+
+settings-param-value-box {
   min-width: 300px;
 }
 
-settings-param-value {
+settings-param-value,
+settings-param-value-compact {
   background-color: $surface0-transparent;
   color: $text;
-  padding: 10px;
-  width: max-content;
   border: 1px solid $surface1;
   border-radius: $border-radius;
+}
+
+settings-param-value {
+  padding: 10px;
+}
+
+settings-param-value-compact {
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 2px;
+  padding-bottom: 2px;
 }
 
 settings-button {

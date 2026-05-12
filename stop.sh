@@ -1,3 +1,3 @@
 #!/bin/bash
 
-ags quit
+ags quit -i js-shell

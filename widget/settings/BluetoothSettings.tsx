@@ -1,6 +1,6 @@
 import Gtk from "gi://Gtk?version=4.0";
 import AstalBluetooth from "gi://AstalBluetooth"
-import { createBinding } from "gnim";
+import { For, createBinding } from "gnim";
 
 function BindBluetoothAdapterProperty<prop_key extends keyof AstalBluetooth.Adapter>(caption: string, object: AstalBluetooth.Adapter, property: prop_key, buttonVisible: boolean, buttonCaption: string, onButtonClick: () => void) {
     const binding = createBinding(object, property as any)
@@ -20,8 +20,6 @@ export function BluetoothSettings() {
 
     const adapter = bluetooth.adapter;
 
-    const devices_binding = createBinding(bluetooth, "devices");
-
     return (
         <box orientation={Gtk.Orientation.VERTICAL} spacing={10}>
 
@@ -35,11 +33,49 @@ export function BluetoothSettings() {
                 {BindBluetoothAdapterProperty("Discoverable", adapter, "discoverable", true, "Discover", () => { adapter?.set_discoverable(!adapter?.get_discoverable()); })}
             </box>
 
-            <label label="Devices" halign={Gtk.Align.START} cssName="section-heading" />
+            <box orientation={Gtk.Orientation.HORIZONTAL} spacing={20}>
+                <box orientation={Gtk.Orientation.VERTICAL}>
+                    <label label="Discovery" halign={Gtk.Align.START} cssName="section-heading" />
 
-            <box spacing={10} orientation={Gtk.Orientation.VERTICAL} cssName="section-background">
+                    <box spacing={10} orientation={Gtk.Orientation.VERTICAL} cssName="section-background">
+                        <scrolledwindow
+                            vexpand={true}
+                            hexpand={false}
+                            hscrollbarPolicy={Gtk.PolicyType.NEVER}
+                            vscrollbarPolicy={Gtk.PolicyType.AUTOMATIC}
+                        >
+                            <box spacing={10} orientation={Gtk.Orientation.VERTICAL}>
+                                <For each={createBinding(bluetooth, "devices")}>
+                                    {(device) => {
+                                        return (
+                                            <box spacing={10} orientation={Gtk.Orientation.VERTICAL}>
+                                                <box orientation={Gtk.Orientation.HORIZONTAL} spacing={10}>
+                                                    <label
+                                                        label={createBinding(device, "name").as(name => name || device.address || "Unknown Device")}
+                                                        cssName="settings-param-value-compact"
+                                                        halign={Gtk.Align.START}
+                                                    />
+                                                </box>
+                                            </box>
+                                        );
+                                    }}
+                                </For>
+                            </box>
+                        </scrolledwindow>
+
+                    </box>
+                </box>
+                <box orientation={Gtk.Orientation.VERTICAL}>
+                    <label label="Paired" halign={Gtk.Align.START} cssName="section-heading" />
+
+                    <box spacing={10} orientation={Gtk.Orientation.VERTICAL} cssName="section-background">
+
+                    </box>
+                </box>
 
             </box>
+
+
 
         </box>
     );
