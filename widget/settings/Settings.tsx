@@ -6,6 +6,7 @@ import { DisplaySettings } from "./DisplaySettings";
 import { WallpaperSettings } from "./WallpaperSettings";
 import { WiredNetworkSettings, WirelessNetworkSettings } from "./NetworkSettings";
 import { BluetoothSettings } from "./BluetoothSettings";
+import { AboutSettings } from "./AboutSettings";
 
 export default function Settings(gdkmonitor: Gdk.Monitor) {
     const windowName = WindowName.settings;
@@ -14,6 +15,7 @@ export default function Settings(gdkmonitor: Gdk.Monitor) {
     const wiredNetworkSettings = new WiredNetworkSettings();
     const wirelessNetworkSettings = new WirelessNetworkSettings();
     const bluetoothSettings = new BluetoothSettings();
+    const aboutSettings = new AboutSettings();
 
     let notebook = new Gtk.Notebook({
         tabPos: Gtk.PositionType.LEFT,
@@ -21,13 +23,13 @@ export default function Settings(gdkmonitor: Gdk.Monitor) {
         hexpand: true,
         vexpand: true,
     });
-    
+
     notebook.append_page(displaySettings, new Gtk.Label({ label: "Display" }));
     notebook.append_page(wiredNetworkSettings, new Gtk.Label({ label: "Wired" }));
     notebook.append_page(wirelessNetworkSettings, new Gtk.Label({ label: "Wireless" }));
     notebook.append_page(bluetoothSettings, new Gtk.Label({ label: "Bluetooth" }));
     notebook.append_page(wallpaperSettings, new Gtk.Label({ label: "Wallpaper" }));
-    notebook.append_page(new Gtk.Label({ label: "About the shell" }), new Gtk.Label({ label: "About" }));
+    notebook.append_page(aboutSettings, new Gtk.Label({ label: "About" }));
 
     return (
         <window
