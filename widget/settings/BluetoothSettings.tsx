@@ -40,7 +40,7 @@ export function BluetoothSettings() {
                     <label label="Discovery" halign={Gtk.Align.START} cssName="section-heading" />
 
                     <box spacing={20} orientation={Gtk.Orientation.VERTICAL} cssName="section-background">
-                        
+
                         <box spacing={10}>
                             <label label="Discovery" />
 
@@ -77,10 +77,36 @@ export function BluetoothSettings() {
                                                         halign={Gtk.Align.START}
                                                     />
                                                     <label
-                                                        label={createBinding(device, "name").as(name => name || device.address || "Unknown Device")}
+                                                        label={createBinding(device, "paired").as(p => String(p))}
                                                         cssName="settings-param-value-compact"
                                                         halign={Gtk.Align.START}
                                                     />
+
+                                                    <button
+                                                        onClicked={async () => { // 1. Mark the callback context as async
+                                                            if (!device) return;
+
+                                                            try {
+                                                                if (device.paired) {
+                                                                    // 2. Await the unpair routine asynchronously
+                                                                    await device.cancel_pairing();
+                                                                    console.log("Successfully unpaired!");
+                                                                } else {
+                                                                    // 2. Await the pairing handshake asynchronously
+                                                                    await device.pair();
+                                                                    console.log("Successfully paired!");
+                                                                }
+                                                            } catch (err) {
+                                                                // 3. Catches any rejections/timeouts without freezing Gjs
+                                                                console.error("Bluetooth action operation failed:", err);
+                                                            }
+                                                        }}
+                                                        cssName="settings-button"
+                                                    >
+                                                        <label label={createBinding(device, "paired").as(isPaired => isPaired ? "Unpair" : "Pair")} />
+                                                    </button>
+
+
                                                 </box>
                                             </box>
                                         );
