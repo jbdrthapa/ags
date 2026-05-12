@@ -36,28 +36,13 @@ export function BluetoothSettings() {
 
 
             <box orientation={Gtk.Orientation.HORIZONTAL} spacing={20}>
-                <box orientation={Gtk.Orientation.VERTICAL}>
-                    <label label="Discovery" halign={Gtk.Align.START} cssName="section-heading" />
+
+                {/* Devices */}
+                
+                <box orientation={Gtk.Orientation.VERTICAL} widthRequest={800}>
+                    <label label="Devices" halign={Gtk.Align.START} cssName="section-heading" />
 
                     <box spacing={20} orientation={Gtk.Orientation.VERTICAL} cssName="section-background">
-
-                        <box spacing={10}>
-                            <label label="Discovery" />
-
-                            <button onClicked={() => {
-                                if (!adapter?.discovering) {
-                                    console.log("Starting discovery");
-                                    adapter?.start_discovery();
-                                }
-                                else {
-                                    console.log("Stopping discovery");
-                                    adapter?.stop_discovery();
-                                }
-                            }
-                            }
-                                cssName="settings-button">Toggle
-                            </button>
-                        </box>
 
                         <scrolledwindow
                             vexpand={true}
@@ -117,10 +102,30 @@ export function BluetoothSettings() {
 
                     </box>
                 </box>
+
+                {/* Functions */}
+
                 <box orientation={Gtk.Orientation.VERTICAL}>
-                    <label label="Paired" halign={Gtk.Align.START} cssName="section-heading" />
+                    <label label="Functions" halign={Gtk.Align.START} cssName="section-heading" />
 
                     <box spacing={10} orientation={Gtk.Orientation.VERTICAL} cssName="section-background">
+                        <box spacing={10}>
+                            <label label="Discovery" />
+
+                            <button onClicked={() => {
+                                if (!adapter?.discovering) {
+                                    console.log("Starting discovery");
+                                    adapter?.start_discovery();
+                                }
+                                else {
+                                    console.log("Stopping discovery");
+                                    adapter?.stop_discovery();
+                                }
+                            }
+                            }
+                                cssName="settings-button">Toggle
+                            </button>
+                        </box>
 
                     </box>
                 </box>
