@@ -6,9 +6,9 @@ function BindWiredProperty<prop_key extends keyof Network.Wired>(caption: string
     const binding = createBinding(object, property as any)
 
     return (
-        <box orientation={Gtk.Orientation.HORIZONTAL}>
-            <label label={caption} />
-            <label label={binding.as(val => String(val))} />
+        <box orientation={Gtk.Orientation.HORIZONTAL} spacing={10}>
+            <label label={caption} xalign={0} cssName="settings-param-caption" />
+            <label label={binding.as(val => String(val))} cssName="settings-param-value" halign={Gtk.Align.START} />
         </box>
     );
 }
@@ -17,9 +17,9 @@ function BindWifiProperty<prop_key extends keyof Network.Wifi>(caption: string, 
     const binding = createBinding(object, property as any)
 
     return (
-        <box orientation={Gtk.Orientation.HORIZONTAL}>
-            <label label={caption} />
-            <label label={binding.as(val => String(val))} />
+        <box orientation={Gtk.Orientation.HORIZONTAL} spacing={10}>
+            <label label={caption} xalign={0} cssName="settings-param-caption" />
+            <label label={binding.as(val => String(val))} cssName="settings-param-value" halign={Gtk.Align.START} />
         </box>
     );
 }
@@ -36,7 +36,12 @@ export function WiredNetworkSettings() {
 
     return (
         <box orientation={Gtk.Orientation.VERTICAL} spacing={10}>
-            {BindWiredProperty("State", wired, "state")}
+
+            <label label="Properties" halign={Gtk.Align.START} cssName="section-heading" />
+
+            <box spacing={10} orientation={Gtk.Orientation.VERTICAL} cssName="section-background">
+                {BindWiredProperty("State", wired, "state")}
+            </box>
         </box>
     );
 }
@@ -49,9 +54,14 @@ export function WirelessNetworkSettings() {
 
     return (
         <box orientation={Gtk.Orientation.VERTICAL} spacing={10}>
-            {BindWifiProperty("SSID", wifi, "ssid")}
-            {BindWifiProperty("Strength", wifi, "strength")}
-            {BindWifiProperty("State", wifi, "state")}
+            
+            <label label="Properties" halign={Gtk.Align.START} cssName="section-heading" />
+
+            <box spacing={10} orientation={Gtk.Orientation.VERTICAL} cssName="section-background">
+                {BindWifiProperty("SSID", wifi, "ssid")}
+                {BindWifiProperty("Strength", wifi, "strength")}
+                {BindWifiProperty("State", wifi, "state")}
+            </box>
         </box>
     );
 }

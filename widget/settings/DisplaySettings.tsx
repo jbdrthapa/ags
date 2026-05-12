@@ -47,7 +47,7 @@ export function DisplaySettings() {
                         </box>
 
                         <box orientation={Gtk.Orientation.HORIZONTAL} spacing={10}>
-                            <label label="geometry" xalign={0} cssName="settings-param-caption" />
+                            <label label="Geometry" xalign={0} cssName="settings-param-caption" />
                             <label
                                 label={createBinding(monitor, "scale").as(scale => {
                                     const geo = monitor.get_geometry();

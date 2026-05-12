@@ -4,7 +4,11 @@ import Bar from "./widget/Bar"
 import Settings from "./widget/settings/Settings"
 import NotificationPopups from "./widget/modules-right/NotificationPopups"
 
+app.set_application_id("org.js-shell")
+app.version = "1.0"
+
 app.start({
+  instanceName:"js-shell",
   css: style,
   main() {
 
