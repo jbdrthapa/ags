@@ -20,6 +20,15 @@ export function BluetoothSettings() {
 
     const adapter = bluetooth.adapter;
 
+    if (!adapter)
+        return (
+            <box orientation={Gtk.Orientation.VERTICAL} spacing={10}>
+                <label label="Properties" halign={Gtk.Align.START} cssName="section-heading" />
+                <box spacing={10} orientation={Gtk.Orientation.VERTICAL} cssName="section-background">
+                    <label label="Unable to query the bluetooth adapter, make sure bluetooth is available on the system." xalign={0} cssName="settings-param-caption"/>
+                </box>
+            </box>);
+
     return (
         <box orientation={Gtk.Orientation.VERTICAL} spacing={10}>
 
@@ -38,7 +47,7 @@ export function BluetoothSettings() {
             <box orientation={Gtk.Orientation.HORIZONTAL} spacing={20}>
 
                 {/* Devices */}
-                
+
                 <box orientation={Gtk.Orientation.VERTICAL} widthRequest={800}>
                     <label label="Devices" halign={Gtk.Align.START} cssName="section-heading" />
 
