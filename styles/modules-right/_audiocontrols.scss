@@ -6,17 +6,18 @@ audio-controls-container {
 }
 
 audio-icon {
-    min-width: 64px;
-    min-height: 64px;
     color: $overlay0;
 }
 
 audio-percent {
     color: $overlay0;
+    font-size: 16px;
     font-weight: 600;
     background-color: $mantle-transparent;
     border: 1px solid $base;
     border-radius: $border-radius;
-    min-width: 65px;
-    min-height: 55px;
+    min-width: 40px;
+    min-height: 40px;
+    margin-left: 10px;
+    margin-right: 10px;
 }
