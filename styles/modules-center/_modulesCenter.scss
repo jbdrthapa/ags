@@ -4,9 +4,8 @@ modules-center-container {
   background: $base-transparent;
   border: 2px solid $surface1-transparent;
   border-radius: $border-radius;
-  min-width: 500px;
-  min-height: 840px;
-  padding: 40px;
+  min-height: 500px;
+  padding: 20px;
 }
 
 date-time-container {
@@ -27,7 +26,7 @@ bar-date-time {
 
 time-container {
   background-color: transparent;
-  margin-bottom: 40px;
+  margin-bottom: 10px;
 }
 
 local-clock-hours,
@@ -44,7 +43,7 @@ local-clock-hours {
   background-color: $mantle-transparent;
   border: 1px solid $surface0-transparent;
   color: $overlay0;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 }
 
 local-clock-minutes {
@@ -56,10 +55,10 @@ world-clock-panel {
   background-color: $crust-transparent;
   border: 2px solid $surface0-transparent;
   border-radius: $border-radius;
-  margin-left: 40px;
-  margin-right: -30px;
+  margin-left: 10px;
+  margin-right: -10px;
   padding: 10px;
-  min-width: 450px;
+  min-width: 300px;
 }
 
 world-clock-name,
@@ -91,7 +90,7 @@ detail-calendar {
 detail-calendar .day-name {
   color: $overlay0;
   font-weight: 600;
-  min-width: 50px;
+  min-width: 20px;
 }
 
 /* Style the current day */
@@ -111,20 +110,16 @@ detail-calendar .other-month {
 detail-calendar header {
   background-color: transparent;
   color: $overlay0;
-  padding-bottom: 20px;
+  padding-bottom: 10px;
   border-bottom: 1px solid $base;
 }
 
 /* Days */
 detail-calendar grid label {
   color: $overlay0;
-  font-size: 22px;
+  font-size: 18px;
   background-color: transparent;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  padding-left: 10px;
-  padding-right: 10px;
-
+  padding:10px;
   transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
