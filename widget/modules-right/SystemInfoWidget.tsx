@@ -9,7 +9,7 @@ const modulesRightWindowName = WindowName.modulesRight;
 export function SystemInfoWidget() {
 
     return (
-        <box orientation={Gtk.Orientation.HORIZONTAL} cssName="system-info-container">
+        <box orientation={Gtk.Orientation.HORIZONTAL} hexpand={false} halign={Gtk.Align.CENTER} cssName="system-info-container">
 
             <box hexpand={true} halign={Gtk.Align.START} cssName="user-avatar">
                 <image iconSize={Gtk.IconSize.LARGE} />

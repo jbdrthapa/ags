@@ -1,9 +1,8 @@
 @use "theme" as *;
 
 system-info-container{
-  margin-left : 10px;
-  margin-right: 10px;
-  margin-bottom: 20px;
+  padding : 10px;
+  background-color: transparent;
 }
 
 system-info-button {
@@ -23,9 +22,10 @@ system-info-button:hover {
 }
 
 user-avatar{
-  background-color: $base-transparent;
+  background-color: $surface0;
   min-width: 100px;
   min-height: 100px;
+  margin-right: 25px;
   border-radius: 99px;
   border: 1px solid $surface2;
 }

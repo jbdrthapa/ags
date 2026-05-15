@@ -71,15 +71,14 @@ bar-module-button:hover {
 
 /* The main slider container */
 .slider-control {
-  margin: 10px;
+  margin: 0px;
 }
 
 // /* The track background */
 .slider-control trough {
-  background-color: $overlay0;
+  background-color: $surface0;
   border-radius: $border-radius;
-  box-shadow: inset 0 -1px 0 0 $base, 0 4px 6px rgba(0, 0, 0, 0.5);
-  min-height: 20px;
+  min-height: 5px;
 }
 
 // /* The part showing current progress */
@@ -90,10 +89,9 @@ bar-module-button:hover {
 
 // /* The draggable handle */
 .slider-control slider {
-  background-color: $mantle;
-  border: 2px solid $overlay0;
-  box-shadow: inset 0 -1px 0 0 $base, 0 4px 6px rgba(0, 0, 0, 0.5);
-  min-width: 30px;
-  min-height: 30px;
+  background-color: $surface0;
+  border: 1px solid $surface2;
+  min-width: 20px;
+  min-height: 20px;
   border-radius: 100%;
 }
