@@ -1,12 +1,21 @@
 @use "theme" as *;
 
 osd-window {
-    background-color: $base-transparent;
-    border-radius: 99px;
+    background-color: transparent;
     margin-bottom: 50px;
 }
 
+osd-name {
+    color: $crust;
+    text-shadow: 0 0 1px $overlay0, 0 0 2px $white, 0 0 2px $white;
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
 osd-box {
+    background-color: $base-transparent;
+    border-radius: 99px;
     padding: 20px;
 }
 
