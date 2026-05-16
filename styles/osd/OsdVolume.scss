@@ -1,32 +1,56 @@
 @use "theme" as *;
 
 osd-window {
-    background-color: transparent;
+    background-color: $base-transparent;
+    border-radius: 99px;
+    margin-bottom: 50px;
 }
 
 osd-box {
-    background-color: rgba(30, 30, 46, 0.9); /* Dark theme */
-    border-radius: 16px;
-    padding: 24px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 20px;
 }
 
-osd-box {
-    background-color: #1e1e2e;
-    border-radius: 16px;
-    padding: 24px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    margin-top: 50px;
+osd-box image {
+    color: $overlay0;
 }
 
-/* Colors the background trough channel track */
-osd-bar trough {
-    background-color: #313244;
-    border-radius: 6px;
+osd-box label {
+    background-color: $crust;
+    padding: 2px;
+    border-radius: $border-radius;
+    min-width: 60px;
+    color: $overlay0;
+    font-weight: 600;
 }
 
-/* Colors the filled visual indicator blocks */
-osd-bar trough block {
-    background-color: #cba6f7;
-    border-radius: 4px;
+osd-box levelbar {
+    min-width: 200px;
+
+    >trough {
+        background-color: $crust;
+        border-radius: $border-radius;
+    }
+
+    >trough block {
+        background-color: $accent-background-transparent;
+        border-radius: $border-radius;
+        border: 2px solid $base;
+    }
+
+    >trough block.low {
+        background-color: $green;
+    }
+
+    >trough block.high {
+        background-color: $yellow;
+    }
+
+    >trough block.full {
+        background-color: $red;
+    }
+
+    >trough block.empty {
+        background-color: transparent;
+    }
+
 }

@@ -47,20 +47,15 @@ export default function OsdVolume(gdkmonitor: Gdk.Monitor) {
     const osdWindow = (<window
         name="volume-osd"
         gdkmonitor={gdkmonitor}
-        cssClasses={["osd-window"]}
+        cssName={"osd-window"}
         namespace="volume-osd"
         anchor={Astal.WindowAnchor.BOTTOM}
         layer={Astal.Layer.OVERLAY}
         visible={visible} // Pass the read-only accessor object here
     >
-        <box cssClasses={["osd-box"]} orientation={Gtk.Orientation.VERTICAL} spacing={8}>
-            <image
-                iconName={iconBinding}
-                pixelSize={48}
-            />
-            <label
-                label={volumeBinding.as(v => `${Math.round(v * 100)}%`)}
-            />
+        <box cssName={"osd-box"} orientation={Gtk.Orientation.HORIZONTAL} spacing={8}>
+            <image iconName={iconBinding} pixelSize={32} />
+            <label label={volumeBinding.as(v => `${Math.round(v * 100)}`)} />
             <levelbar
                 widthRequest={100}
                 heightRequest={25}
