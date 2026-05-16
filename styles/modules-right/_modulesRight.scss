@@ -2,11 +2,11 @@
 
 modules-right-container {
   background-color: $base-transparent;
-  border: 2px solid $surface1-transparent;
+  border: 2px solid $base;
   border-radius: $border-radius;
-  min-width: 500px;
-  min-height: 840px;
-  padding: 40px;
+  min-height: 500px;
+  padding: 20px;
+  margin: 10px;
 }
 
 app-launcher-background-right {
@@ -16,10 +16,8 @@ app-launcher-background-right {
 
 
 system-info-pill-container {
-  background-color: $mantle-transparent;
-  border: 1px solid $surface0-transparent;
+  background-color: $crust-transparent;
+  border: 1px solid $surface0;
   border-radius: $border-radius;
-  margin: 0px;
-  margin-bottom: 0px;
-  padding: 20px;
+  padding: 10px;
 }

@@ -29,7 +29,7 @@ export function ModulesCenter() {
         anchor: Astal.WindowAnchor.TOP,
         margin: 8,
         child: (
-            <box cssName="modules-center-container" orientation={Gtk.Orientation.VERTICAL}>
+            <box cssName="modules-center-container" orientation={Gtk.Orientation.HORIZONTAL} spacing={20}>
                 {clockWidget}
                 {calendarWidget}
             </box>

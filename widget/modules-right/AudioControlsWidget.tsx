@@ -17,14 +17,14 @@ export function AudioControlsWidget() {
         return (
             <box orientation={Gtk.Orientation.HORIZONTAL}>
                 <image
-                    iconSize={Gtk.IconSize.LARGE}
+                    iconSize={Gtk.IconSize.NORMAL}
                     iconName={volumeIcon} cssName={"audio-icon"} />
                 <label valign={Gtk.Align.CENTER} label={volumeText} cssName={"audio-percent"} />
                 <slider
                     cssClasses={["slider-control"]}
                     tooltipText={volumeText}
-                    widthRequest={360}
-                    heightRequest={40}
+                    widthRequest={220}
+                    heightRequest={20}
                     onChangeValue={({ value }) => endpoint.set_volume(value)}
                     value={createBinding(endpoint, "volume")} />
             </box>
