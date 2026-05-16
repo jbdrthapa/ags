@@ -8,8 +8,8 @@ settings-container {
 
   border-top-left-radius: $border-radius;
   border-top-right-radius: $border-radius;
-  min-width: 1400px;
-  min-height: 1000px;
+  min-width: 800px;
+  min-height: 800px;
 }
 
 settings-titlebar {
@@ -49,8 +49,8 @@ section-heading {
 }
 
 section-background {
-  background-color: $base-transparent;
-  padding: 40px;
+  background-color: $crust-transparent;
+  padding: 20px;
   border-radius: $border-radius;
   border: 1px solid $surface0;
   min-width: 500px;
@@ -121,14 +121,14 @@ settings-button:hover {
 
 settings-notebook {
   background-color: $base-transparent;
-  min-width: 1400px;
-  min-height: 1000px;
+  min-width: 800px;
+  min-height: 800px;
 
   &>stack {
     background-color: $base-transparent;
-    padding-top: 20px;
-    padding-left: 60px;
-    padding-right: 60px;
+    padding-top: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
   }
 
   /* The container for the tabs on the left */
