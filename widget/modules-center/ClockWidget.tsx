@@ -7,8 +7,8 @@ export function ClockWidget({ time_fmt = "%H:%M", date_fmt = "%a, %b %e" } = {})
 
     return (
 
-        <box orientation={Gtk.Orientation.HORIZONTAL} cssName="time-container">
-            <box orientation={Gtk.Orientation.VERTICAL}>
+        <box orientation={Gtk.Orientation.VERTICAL} cssName="time-container" spacing={10}>
+            <box orientation={Gtk.Orientation.HORIZONTAL} spacing={10}>
                 <label cssName="local-clock-hours" label={worldClocks[0].as(t => t.hours)} />
                 <label cssName="local-clock-minutes" label={worldClocks[0].as(t => t.minutes)} />
             </box>
@@ -18,7 +18,6 @@ export function ClockWidget({ time_fmt = "%H:%M", date_fmt = "%a, %b %e" } = {})
                         <box orientation={Gtk.Orientation.HORIZONTAL}>
                             <label xalign={0} cssName="world-clock-name" label={worldClock.as(t => t.name)} />
                             <label xalign={0} cssName="world-clock-time" label={worldClock.as(t => t.tz_time)} />
-                            <label xalign={0} cssName="world-clock-time" label={worldClock.as(t => t.tz_date)} />
                         </box>
                     ))}
                 </box>
