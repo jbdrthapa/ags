@@ -38,7 +38,7 @@ export function ModulesRight() {
         anchor: Astal.WindowAnchor.TOP | Astal.WindowAnchor.RIGHT,
         margin: 0,
         child: (
-            <box cssName="modules-right-container" orientation={Gtk.Orientation.VERTICAL} spacing={10}>
+            <box cssName="modules-right-container" orientation={Gtk.Orientation.VERTICAL} spacing={20}>
                 <box orientation={Gtk.Orientation.VERTICAL} hexpand={false} halign={Gtk.Align.CENTER} cssName="system-info-pill-container">
                     {systemInfoWidget}
                     {pillWidgets}
