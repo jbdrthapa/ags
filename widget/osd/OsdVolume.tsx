@@ -1,12 +1,16 @@
 import { Astal, Gtk, Gdk } from "ags/gtk4"
 import { createBinding, createState } from "ags"
 import Wp from "gi://AstalWp"
+import { WindowName } from "../../constants"
 
 const ANIMATION_TIME = 2000
 let delayId: any = null
 let initCount = 2
 
 export default function OsdVolume(gdkmonitor: Gdk.Monitor) {
+
+    const windowName = WindowName.osdvolume;
+
     const speaker = Wp.get_default()?.get_audio().defaultSpeaker
     if (!speaker) return <box />
 
@@ -45,28 +49,26 @@ export default function OsdVolume(gdkmonitor: Gdk.Monitor) {
     speaker.connect("notify::mute", () => showOsd())
 
     const osdWindow = (<window
-        name="volume-osd"
+        name={windowName}
+        namespace={windowName}
         gdkmonitor={gdkmonitor}
         cssName={"osd-window"}
-        namespace="volume-osd"
         anchor={Astal.WindowAnchor.BOTTOM}
         layer={Astal.Layer.OVERLAY}
         visible={visible} // Pass the read-only accessor object here
     >
-        <box orientation={Gtk.Orientation.VERTICAL}>
-            <label label={"Speaker"} cssName={"osd-name"} />
-            <box cssName={"osd-box"} orientation={Gtk.Orientation.HORIZONTAL} spacing={8}>
-                <image iconName={iconBinding} pixelSize={32} />
-                <label label={volumeBinding.as(v => `${Math.round(v * 100)}`)} />
-                <levelbar
-                    widthRequest={100}
-                    heightRequest={25}
-                    cssClasses={["osd-bar"]}
-                    value={volumeBinding.as(v => v)}
-                    valign={Gtk.Align.CENTER}
-                    hexpand={true}
-                />
-            </box>
+        <box cssName={"osd-box"} orientation={Gtk.Orientation.HORIZONTAL} spacing={8}>
+            <label label={"Speaker"} hexpand={false} halign={Gtk.Align.CENTER} cssName="osd-device-name" />
+            <image iconName={iconBinding} pixelSize={32} />
+            <label label={volumeBinding.as(v => `${Math.round(v * 100)}`)} />
+            <levelbar
+                widthRequest={100}
+                heightRequest={25}
+                cssClasses={["osd-bar"]}
+                value={volumeBinding.as(v => v)}
+                valign={Gtk.Align.CENTER}
+                hexpand={true}
+            />
         </box>
     </window>
     ) as Gtk.Window;

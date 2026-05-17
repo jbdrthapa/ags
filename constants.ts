@@ -4,4 +4,5 @@ export const WindowName = {
     modulesRight: "js-shell-modules-right",
     bar: "bar-background",
     settings: "js-shell-settings",
+    osdvolume: "js-shell-osd-volume"
 } as const;
