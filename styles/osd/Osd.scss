@@ -6,8 +6,8 @@ osd-window {
 }
 
 osd-name {
-    color: $crust;
-    text-shadow: 0 0 1px $overlay0, 0 0 2px $white, 0 0 2px $white;
+    color: $overlay0;
+    text-shadow: 0 0 1px $crust, 0 0 2px $crust, 0 0 2px $crust;
     font-size: 28px;
     font-weight: 600;
     margin-bottom: 10px;
@@ -17,6 +17,7 @@ osd-box {
     background-color: $base-transparent;
     border-radius: 99px;
     padding: 20px;
+    border: 2px solid $overlay0;
 }
 
 osd-box image {
