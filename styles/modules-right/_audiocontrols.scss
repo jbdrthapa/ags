@@ -1,8 +1,8 @@
 @use "theme" as *;
 
 audio-controls-container {
-    margin-left: 20px;
-    margin-right: 20px;
+    margin-left: 0px;
+    margin-right: 0px;
 }
 
 audio-icon {
@@ -11,7 +11,7 @@ audio-icon {
 
 audio-percent {
     color: $overlay0;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 600;
     background-color: $mantle-transparent;
     border: 1px solid $base;
