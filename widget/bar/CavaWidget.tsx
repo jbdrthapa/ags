@@ -12,10 +12,12 @@ const blocks = [
   "\u2588",
 ];
 
-const CAVA_BARS = 8;
+const CAVA_BARS = 20;
+const FPS = 120;
 
 export const CavaWidget = () => {
   const cava = AstalCava.get_default()!;
+  cava.set_framerate(FPS);
   cava.set_bars(CAVA_BARS);
 
   const [visible, setVisible] = createState(false);
@@ -38,7 +40,7 @@ export const CavaWidget = () => {
   });
 
   return (
-    <box cssClasses={["pill", "cava"]} visible={visible}>
+    <box cssName={"cava"} visible={visible}>
       <label label={visuals} />
     </box>
   );
