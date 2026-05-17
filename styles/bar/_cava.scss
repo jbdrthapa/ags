@@ -1,0 +1,10 @@
+@use "theme" as *;
+
+cava {
+    color: $sky;
+    background-color: $base-transparent;
+    padding-left : 20px;
+    padding-right : 20px;
+    border-radius: $border-radius;
+    font-size: 6px;
+}

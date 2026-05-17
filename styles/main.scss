@@ -11,6 +11,7 @@
 @use "./bar/trayControls";
 @use "./bar/powerProfileControls";
 @use "./bar/batteryControls";
+@use "./bar/cava";
 
 // modules-left
 @use "./modules-left/modulesLeft";
@@ -26,3 +27,6 @@
 @use "./modules-right/displaycontrols";
 @use "./modules-right/mpriscontrols";
 @use "./modules-right/pillWidgets";
+
+// OSD
+@use "./osd/Osd";

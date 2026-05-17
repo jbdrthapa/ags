@@ -1,0 +1,66 @@
+@use "theme" as *;
+
+osd-window {
+    background-color: transparent;
+    margin-bottom: 50px;
+}
+
+osd-name {
+    color: $overlay0;
+    text-shadow: 0 0 1px $crust, 0 0 2px $crust, 0 0 2px $crust;
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+osd-box {
+    background-color: $base-transparent;
+    border-radius: 99px;
+    padding: 20px;
+    border: 2px solid $overlay0;
+}
+
+osd-box image {
+    color: $overlay0;
+}
+
+osd-box label {
+    background-color: $crust;
+    padding: 2px;
+    border-radius: $border-radius;
+    min-width: 60px;
+    color: $overlay0;
+    font-weight: 600;
+}
+
+osd-box levelbar {
+    min-width: 200px;
+
+    >trough {
+        background-color: $crust;
+        border-radius: $border-radius;
+    }
+
+    >trough block {
+        background-color: $accent-background-transparent;
+        border-radius: $border-radius;
+        border: 2px solid $base;
+    }
+
+    >trough block.low {
+        background-color: $green;
+    }
+
+    >trough block.high {
+        background-color: $peach;
+    }
+
+    >trough block.full {
+        background-color: $red;
+    }
+
+    >trough block.empty {
+        background-color: transparent;
+    }
+
+}

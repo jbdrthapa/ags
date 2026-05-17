@@ -3,6 +3,7 @@ import style from "./styles/main.scss"
 import Bar from "./widget/Bar"
 import Settings from "./widget/settings/Settings"
 import NotificationPopups from "./widget/modules-right/NotificationPopups"
+import Osd from "./widget/osd/Osd"
 
 app.set_application_id("org.js-shell")
 app.version = "1.0"
@@ -16,6 +17,7 @@ app.start({
       Bar(monitor)
       Settings(monitor)
       NotificationPopups(monitor)
+      Osd(monitor)
     }
   },
 })
