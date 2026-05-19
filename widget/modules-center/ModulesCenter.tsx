@@ -5,7 +5,7 @@ import { Astal } from "ags/gtk4"
 import { WorldClocks } from "../../services/WorldClocks"
 import { ClockWidget } from "./ClockWidget"
 import { CalendarWidget } from "./CalendarWidget"
-import { WeatherBarWidget } from "./WeatherWidget"
+import { WeatherBarWidget, WeatherDetailWidget } from "./WeatherWidget"
 import { WindowName } from "../../constants"
 
 const windowName = WindowName.modulesCenter;
@@ -18,6 +18,7 @@ export function ModulesCenter() {
     const clockWidget = ClockWidget();
     const calendarWidget = CalendarWidget();
     const weatherBarWidget = WeatherBarWidget();
+    const weatherDetailWidget = WeatherDetailWidget();
 
     const button = (
         <box>
@@ -37,7 +38,10 @@ export function ModulesCenter() {
         margin: 8,
         child: (
             <box cssName="modules-center-container" orientation={Gtk.Orientation.HORIZONTAL} spacing={20}>
-                {clockWidget}
+                <box orientation={Gtk.Orientation.VERTICAL}>
+                    {clockWidget}
+                    {weatherDetailWidget}
+                </box>
                 {calendarWidget}
             </box>
         )

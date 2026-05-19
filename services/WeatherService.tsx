@@ -8,7 +8,42 @@ const WeatherServiceProperties = {
         'Temperature',
         'Temperature',
         GObject.ParamFlags.READWRITE,
-        ' '
+        '?'
+    ),
+    'temperature-low': GObject.ParamSpec.string(
+        'temperature-low',
+        'Temperature-Low',
+        'Temperature-Low',
+        GObject.ParamFlags.READWRITE,
+        '?'
+    ),
+    'temperature-high': GObject.ParamSpec.string(
+        'temperature-high',
+        'Temperature-High',
+        'Temperature-High',
+        GObject.ParamFlags.READWRITE,
+        '?'
+    ),
+    'humidity': GObject.ParamSpec.string(
+        'humidity',
+        'humidity',
+        'humidity',
+        GObject.ParamFlags.READWRITE,
+        '?'
+    ),
+    'wind-speed': GObject.ParamSpec.string(
+        'wind-speed',
+        'Wind-Speed',
+        'Wind-Speed',
+        GObject.ParamFlags.READWRITE,
+        '?'
+    ),
+    'wind-direction': GObject.ParamSpec.string(
+        'wind-direction',
+        'Wind-Direction',
+        'Wind-Direction',
+        GObject.ParamFlags.READWRITE,
+        '?'
     ),
     'description': GObject.ParamSpec.string(
         'description',
@@ -24,6 +59,13 @@ const WeatherServiceProperties = {
         GObject.ParamFlags.READWRITE,
         '?'
     ),
+    'city': GObject.ParamSpec.string(
+        'city',
+        'city',
+        'city',
+        GObject.ParamFlags.READWRITE,
+        '?'
+    )
 };
 
 const updateTimer = 15 * 60 * 1000; // 15 minutes
@@ -39,9 +81,15 @@ class InternalWeatherService extends GObject.Object {
     city_id = '5350734';
     units = 'imperial'; // metric | imperial
 
-    temperature = '';
-    description = '';
+    temperature = '?';
+    temperature_low = '?';
+    temperature_high = '?';
+    humidity = '?';
+    wind_speed = '?';
+    wind_direction = '?';
+    description = '?';
     icon = '?';
+    city = '?'
 
 
     constructor() {
@@ -72,28 +120,54 @@ class InternalWeatherService extends GObject.Object {
                 throw new Error(data.message || "API Error");
             }
 
-            // Extract values using OpenWeather's JSON schema
-            const unitSymbol = this.units === "metric" ? "°C" : "°F";
+            console.log(data);
+
+            const unitSymbol = this.units === "metric" ? " °C" : " °F";
+            const speedSymbol = " mph";
+            const percentSymbol = " %";
+            const degreesSymbol = "°";
+
             this.temperature = `${Math.round(data.main.temp)}${unitSymbol}`;
 
-            // Format description to Capital Case (e.g. "scattered clouds")
+            this.temperature_low = `${Math.round(data.main.temp_min)}${unitSymbol}`;
+
+            this.temperature_high = `${Math.round(data.main.temp_max)}${unitSymbol}`;
+
+            this.humidity = `${Math.round(data.main.humidity)}${percentSymbol}`;
+
+            this.wind_speed = data.wind.speed + `${speedSymbol}`;
+
+            this.wind_direction = data.wind.deg + `${degreesSymbol}`;
+
             const desc = data.weather[0].description;
             this.description = desc.charAt(0).toUpperCase() + desc.slice(1);
 
-            // Map the OpenWeather icon code to custom emojis/glyphs
             this.icon = this.mapOpenWeatherIcon(data.weather[0].icon);
 
-            // Notify GObject that properties changed to rebuild dependencies
-            this.notify("temperature");
-            this.notify("description");
-            this.notify("icon");
+            this.city = data.name;
 
         } catch (error) {
             console.error(`[OpenWeatherService] Error: ${error}`);
-            this.temperature = "ERR";
-            this.description = "Failed to update";
+            this.temperature = "?";
+            this.temperature_low = "?";
+            this.temperature_high = "?";
+            this.humidity = "?";
+            this.wind_speed = "?";
+            this.wind_direction = "?";
+            this.description = "?";
+            this.icon = "?";
+            this.city = "?";
+        } finally {
+            // Notify GObject that properties changed to rebuild dependencies
             this.notify("temperature");
+            this.notify("temperature-low");
+            this.notify("temperature-high");
+            this.notify("humidity");
+            this.notify("wind-speed");
+            this.notify("wind-direction");
             this.notify("description");
+            this.notify("icon");
+            this.notify("city");
         }
     }
 
