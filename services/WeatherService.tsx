@@ -120,7 +120,7 @@ class InternalWeatherService extends GObject.Object {
                 throw new Error(data.message || "API Error");
             }
 
-            console.log(data);
+            // console.log(data);
 
             const unitSymbol = this.units === "metric" ? " °C" : " °F";
             const speedSymbol = " mph";
