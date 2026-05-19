@@ -15,7 +15,7 @@ export function AudioControlsWidget() {
         const volumeText = volume.as((value) => String(Math.trunc(value * 100)));
 
         return (
-            <box orientation={Gtk.Orientation.HORIZONTAL}>
+            <box orientation={Gtk.Orientation.HORIZONTAL}  heightRequest={60}>
                 <image
                     pixelSize={28}
                     iconName={volumeIcon} cssName={"audio-icon"} />
@@ -24,7 +24,6 @@ export function AudioControlsWidget() {
                     cssClasses={["slider-control"]}
                     tooltipText={volumeText}
                     widthRequest={280}
-                    heightRequest={40}
                     onChangeValue={({ value }) => endpoint.set_volume(value)}
                     value={createBinding(endpoint, "volume")} />
             </box>

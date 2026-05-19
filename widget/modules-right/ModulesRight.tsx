@@ -43,7 +43,7 @@ export function ModulesRight() {
         margin: 0,
         child: (
             <box cssName="modules-right-container" vexpand={true} orientation={Gtk.Orientation.VERTICAL}>
-                <box orientation={Gtk.Orientation.VERTICAL} vexpand={true}  valign={Gtk.Align.START} spacing={20}>
+                <box orientation={Gtk.Orientation.VERTICAL} vexpand={true}  valign={Gtk.Align.START} spacing={10}>
                     <box orientation={Gtk.Orientation.VERTICAL} hexpand={false} halign={Gtk.Align.CENTER} cssName="system-info-pill-container">
                         {systemInfoWidget}
                         {pillWidgets}
