@@ -2,7 +2,6 @@ import GObject from "gi://GObject";
 import { execAsync } from "ags/process";
 import GLib from "gi://GLib";
 
-// Define the property standard GObject way
 const DisplayServiceProperties = {
     'brightness-percent': GObject.ParamSpec.int(
         'brightness-percent',
@@ -29,7 +28,6 @@ class InternalDisplayService extends GObject.Object {
         return this.instance;
     }
 
-    // This holds the actual current number
     brightness_percent = 0;
     brightness_icon = "\u{f0cb5}";
 
@@ -38,14 +36,12 @@ class InternalDisplayService extends GObject.Object {
 
         this.updateBrightnessPercent();
 
-        // 1. Run the loop to check your hardware brightness
-        GLib.timeout_add(GLib.PRIORITY_DEFAULT, 1000, () => {
+        GLib.timeout_add(GLib.PRIORITY_DEFAULT, 3000, () => {
             this.updateBrightnessPercent();
             return GLib.SOURCE_CONTINUE;
         });
     }
 
-    // Check system brightness and update the variable
     updateBrightnessPercent() {
         execAsync(['brightnessctl', '-d', 'amdgpu_bl2', 'g']).then((brightness) => {
             const current = Number(brightness.trim());
@@ -54,7 +50,6 @@ class InternalDisplayService extends GObject.Object {
                 const maxBrightness = Number(max.trim());
                 if (maxBrightness > 0) {
 
-                    // Force it into a simple whole integer
                     this.brightness_percent = Math.round((current / maxBrightness) * 100);
 
                     this.notify("brightness-percent");
@@ -106,7 +101,6 @@ class InternalDisplayService extends GObject.Object {
         this.notify("brightness-icon");
     }
 
-    // Add this inside your class alongside incBrightnessValue/decBrightnessValue
     setBrightnessValue(value: number) {
         const target = Math.round(value);
 
@@ -116,7 +110,6 @@ class InternalDisplayService extends GObject.Object {
 
 }
 
-// Wrap it so GObject registers it cleanly without decorators crashing
 const DisplayService = GObject.registerClass({
     Properties: DisplayServiceProperties,
 }, InternalDisplayService);
