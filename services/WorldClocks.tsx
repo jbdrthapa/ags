@@ -3,6 +3,8 @@ import { createPoll } from "ags/time"
 
 export function WorldClocks({ time_fmt = "%I:%M %p", date_fmt = "%a, %b %e" } = {}) {
 
+    const checkTimer = 60 * 1000;
+
     const worldClocks =
         [
             "America/Los_Angeles",
@@ -13,7 +15,7 @@ export function WorldClocks({ time_fmt = "%I:%M %p", date_fmt = "%a, %b %e" } = 
     const tzObjects = worldClocks.map(zone => GLib.TimeZone.new(zone));
 
     const times = tzObjects.map(tz => {
-        return createPoll({ tz_time: "", tz_date: "", hours: "", minutes: "", name: "" }, 1000, () => {
+        return createPoll({ tz_time: "", tz_date: "", hours: "", minutes: "", name: "" }, checkTimer, () => {
             const now = GLib.DateTime.new_now(tz);
             return {
                 tz_time: now.format(time_fmt) || "",

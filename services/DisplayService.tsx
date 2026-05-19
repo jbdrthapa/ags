@@ -21,12 +21,16 @@ const DisplayServiceProperties = {
     )
 };
 
+const checkTimer=5 * 1000;
+
 class InternalDisplayService extends GObject.Object {
     static instance: InternalDisplayService;
     static get_default() {
         if (!this.instance) this.instance = new InternalDisplayService();
         return this.instance;
     }
+
+    
 
     brightness_percent = 0;
     brightness_icon = "\u{f0cb5}";
@@ -36,7 +40,7 @@ class InternalDisplayService extends GObject.Object {
 
         this.updateBrightnessPercent();
 
-        GLib.timeout_add(GLib.PRIORITY_DEFAULT, 3000, () => {
+        GLib.timeout_add(GLib.PRIORITY_DEFAULT, checkTimer, () => {
             this.updateBrightnessPercent();
             return GLib.SOURCE_CONTINUE;
         });
