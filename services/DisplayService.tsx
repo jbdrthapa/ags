@@ -13,6 +13,13 @@ const DisplayServiceProperties = {
         100,
         0
     ),
+    'brightness-icon': GObject.ParamSpec.string(
+        'brightness-icon',
+        'Brightness Icon',
+        'The Nerd Font character string for the icon',
+        GObject.ParamFlags.READWRITE,
+        '\u{f0cb5}'
+    )
 };
 
 class InternalDisplayService extends GObject.Object {
@@ -24,6 +31,7 @@ class InternalDisplayService extends GObject.Object {
 
     // This holds the actual current number
     brightness_percent = 0;
+    brightness_icon = "\u{f0cb5}";
 
     constructor() {
         super();
@@ -49,25 +57,60 @@ class InternalDisplayService extends GObject.Object {
                     // Force it into a simple whole integer
                     this.brightness_percent = Math.round((current / maxBrightness) * 100);
 
-                    // Tell AGS/GObject that the value changed
                     this.notify("brightness-percent");
+
+                    this.updateBrightnessIcon();
+
                 }
             }).catch(print);
         }).catch(print);
+    }
+
+    updateBrightnessIcon() {
+
+        let icon;
+
+        if (this.brightness_percent < 11) {
+            icon = "󰛩";
+        }
+        else if (this.brightness_percent < 21) {
+            icon = "󱩎";
+        }
+        else if (this.brightness_percent < 31) {
+            icon = "󱩏";
+        }
+        else if (this.brightness_percent < 41) {
+            icon = "󱩐";
+        }
+        else if (this.brightness_percent < 51) {
+            icon = "󱩑";
+        }
+        else if (this.brightness_percent < 61) {
+            icon = "󱩒";
+        }
+        else if (this.brightness_percent < 71) {
+            icon = "󱩓";
+        }
+        else if (this.brightness_percent < 81) {
+            icon = "󱩔";
+        }
+        else if (this.brightness_percent < 91) {
+            icon = "󱩖";
+        }
+        else {
+            icon = "󰛨";
+        }
+
+        this.brightness_icon = icon;
+
+        this.notify("brightness-icon");
     }
 
     // Add this inside your class alongside incBrightnessValue/decBrightnessValue
     setBrightnessValue(value: number) {
         const target = Math.round(value);
 
-        // Tell the hardware to change to this exact percentage
         execAsync(['brightnessctl', '-d', 'amdgpu_bl2', 's', `${target}%`])
-            .then(() => {
-                // Instantly update the local state and notify the UI
-                // this.updateBrightnessPercent();
-                // this.brightness_percent = target;
-                // this.notify("brightness-percent");
-            })
             .catch(print);
     }
 
