@@ -43,7 +43,7 @@ export function ModulesRight() {
                     {systemInfoWidget}
                     {pillWidgets}
                 </box>
-                {/* {displayControlsWidget} */}
+                {displayControlsWidget}
                 {audioControlsWidget}
                 {mprisWidget}
             </box>
