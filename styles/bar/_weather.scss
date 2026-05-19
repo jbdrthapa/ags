@@ -1,0 +1,25 @@
+@use "theme" as *;
+
+weather-container {
+  background-color: $base-transparent;
+  border-radius: $border-radius;
+}
+
+bar-weather {
+  font-weight: 600;
+  color: $white;
+  padding-left: 0px;
+  padding-right: 15px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  margin-top: -8px;
+  margin-bottom: -8px;
+}
+
+bar-weather-icon {
+color: $white;
+}
+
+bar-weather-temperature {
+color: $white;
+}

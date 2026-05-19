@@ -21,7 +21,7 @@ const DisplayServiceProperties = {
     )
 };
 
-const checkTimer=5 * 1000;
+const checkTimer = 5 * 1000;
 
 class InternalDisplayService extends GObject.Object {
     static instance: InternalDisplayService;
@@ -30,7 +30,7 @@ class InternalDisplayService extends GObject.Object {
         return this.instance;
     }
 
-    
+
 
     brightness_percent = 0;
     brightness_icon = "\u{f0cb5}";
@@ -114,8 +114,6 @@ class InternalDisplayService extends GObject.Object {
 
 }
 
-const DisplayService = GObject.registerClass({
-    Properties: DisplayServiceProperties,
-}, InternalDisplayService);
+const DisplayService = GObject.registerClass({ Properties: DisplayServiceProperties, }, InternalDisplayService);
 
 export default DisplayService;

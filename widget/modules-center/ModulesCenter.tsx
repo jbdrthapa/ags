@@ -5,6 +5,7 @@ import { Astal } from "ags/gtk4"
 import { WorldClocks } from "../../services/WorldClocks"
 import { ClockWidget } from "./ClockWidget"
 import { CalendarWidget } from "./CalendarWidget"
+import { WeatherBarWidget } from "./WeatherWidget"
 import { WindowName } from "../../constants"
 
 const windowName = WindowName.modulesCenter;
@@ -16,11 +17,17 @@ export function ModulesCenter() {
     const times = WorldClocks();
     const clockWidget = ClockWidget();
     const calendarWidget = CalendarWidget();
+    const weatherBarWidget = WeatherBarWidget();
 
     const button = (
-        <button onClicked={() => popup.toggle()} cssName={"date-time-container"}>
-            <label label={times[0].as(t => `${t.tz_date}    󰇙    ${t.tz_time}`)} cssName={"bar-date-time"} />
-        </button>
+        <box>
+            <button onClicked={() => popup.toggle()} cssName={"date-time-container"}>
+                <box>
+                    <label label={times[0].as(t => `${t.tz_date}    󰇙    ${t.tz_time}`)} cssName={"bar-date-time"} />
+                    {weatherBarWidget}
+                </box>
+            </button>
+        </box>
     ) as any;
 
     popup = new PopupWindow({

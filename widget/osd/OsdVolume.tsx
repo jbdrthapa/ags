@@ -27,7 +27,6 @@ export default function OsdVolume(gdkmonitor: Gdk.Monitor) {
 
         if (initCount > 0) {
             initCount--;
-            console.log("osd window is not created, returning");
 
             return;
         }

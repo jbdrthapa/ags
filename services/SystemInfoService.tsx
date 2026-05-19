@@ -64,8 +64,6 @@ class InternalSystemInfoService extends GObject.Object {
 
 }
 
-const SystemInfoService = GObject.registerClass({
-    Properties: SystemInfoServiceProperties,
-}, InternalSystemInfoService);
+const SystemInfoService = GObject.registerClass({ Properties: SystemInfoServiceProperties, }, InternalSystemInfoService);
 
 export default SystemInfoService;
