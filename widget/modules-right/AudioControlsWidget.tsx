@@ -15,16 +15,15 @@ export function AudioControlsWidget() {
         const volumeText = volume.as((value) => String(Math.trunc(value * 100)));
 
         return (
-            <box orientation={Gtk.Orientation.HORIZONTAL}>
+            <box orientation={Gtk.Orientation.HORIZONTAL}  heightRequest={60}>
                 <image
-                    iconSize={Gtk.IconSize.NORMAL}
+                    pixelSize={28}
                     iconName={volumeIcon} cssName={"audio-icon"} />
                 <label valign={Gtk.Align.CENTER} label={volumeText} cssName={"audio-percent"} />
                 <slider
                     cssClasses={["slider-control"]}
                     tooltipText={volumeText}
-                    widthRequest={220}
-                    heightRequest={20}
+                    widthRequest={280}
                     onChangeValue={({ value }) => endpoint.set_volume(value)}
                     value={createBinding(endpoint, "volume")} />
             </box>

@@ -6,7 +6,9 @@ import { PillWidgets } from "./PillWidgets"
 import { DisplayControlsWidget } from "./DisplayControlsWidget"
 import { AudioControlsWidget } from "./AudioControlsWidget"
 import { MprisWidget } from "./MprisWidget"
+import { PowerButtonsWidget } from "./PowerButtons"
 import { WindowName } from "../../constants"
+import { PowerProfileWidget } from "../bar/PowerProfileWidget"
 
 const windowName = WindowName.modulesRight;
 
@@ -24,6 +26,8 @@ export function ModulesRight() {
 
     const mprisWidget = MprisWidget();
 
+    const powerButtonsWidget = PowerButtonsWidget();
+
     const button = (
         <box cssName={"app-launcher-background-right"}>
             <button onClicked={() => ModulesRightPopup.toggle()} cssName={"bar-module-button-right"}>
@@ -38,15 +42,22 @@ export function ModulesRight() {
         anchor: Astal.WindowAnchor.TOP | Astal.WindowAnchor.RIGHT,
         margin: 0,
         child: (
-            <box cssName="modules-right-container" orientation={Gtk.Orientation.VERTICAL} spacing={10}>
-                <box orientation={Gtk.Orientation.VERTICAL} hexpand={false} halign={Gtk.Align.CENTER} cssName="system-info-pill-container">
-                    {systemInfoWidget}
-                    {pillWidgets}
+            <box cssName="modules-right-container" vexpand={true} orientation={Gtk.Orientation.VERTICAL}>
+                <box orientation={Gtk.Orientation.VERTICAL} vexpand={true}  valign={Gtk.Align.START} spacing={10}>
+                    <box orientation={Gtk.Orientation.VERTICAL} hexpand={false} halign={Gtk.Align.CENTER} cssName="system-info-pill-container">
+                        {systemInfoWidget}
+                        {pillWidgets}
+                    </box>
+                    {displayControlsWidget}
+                    {audioControlsWidget}
+                    {mprisWidget}
+
                 </box>
-                {/* {displayControlsWidget} */}
-                {audioControlsWidget}
-                {mprisWidget}
+                <box vexpand={false}  valign={Gtk.Align.END} halign={Gtk.Align.CENTER} cssName="power-button-container">
+                    {powerButtonsWidget}
+                </box>
             </box>
+
         )
     });
 

@@ -31,7 +31,7 @@ export function MprisWidget() {
 
     function MediaInfo({ mprisPlayer }: { mprisPlayer: AstalMpris.Player }) {
 
-        const textWidth = 30;
+        const textWidth = 16;
 
         const title = createBinding(mprisPlayer, "title")
 

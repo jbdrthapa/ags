@@ -4,20 +4,8 @@
 
 $border-radius: 15px;
 
-$base-transparent: rgba(26, 27, 38, 0.98);
-$base: #1e1e2e;
-
-$mantle-transparent: rgba(24, 24, 37, 0.98);
-$mantle: #181825;
-
-$crust-transparent: rgba(17, 17, 27, 0.5);
-$crust: #11111b;
-
-$accent-background: #40a02b;
-$accent-background-transparent: rgba(64, 160, 43, 0.98);
-$accent-foreground: #11111b;
-
 $border: #414868;
+
 $hover-background: #9aa5ce;
 $hover-foreground: #1a1b26;
 
@@ -25,19 +13,37 @@ $text: #cdd6f4;
 $subtext0: #a6adc8;
 $subtext1: #bac2de;
 
+$accent-background: #04a5e5;
+$accent-background-transparent: #04a5e5fa;
+
+$accent-foreground: #11111b;
+
+$base: #1e1e2e;
+$base-transparent: #1e1e2ef2;
+
+$mantle: #181825;
+$mantle-transparent: #181825f2;
+
+$crust: #11111b;
+$crust-transparent: #11111bf2;
+
 $surface0: #313244;
-$surface0-transparent: rgba(49, 50, 68, 0.98);
+$surface0-transparent: #313244fa;
+
 $surface1: #45475a;
-$surface1-transparent: rgba(69, 71, 90, 0.98);
+$surface1-transparent: #45475afa;
+
 $surface2: #585b70;
-$surface2-transparent: rgba(88, 91, 112, 0.98);
+$surface2-transparent: #585b70fa;
 
 $overlay0: #6c7086;
-$overlay0-transparent: rgba(108, 112, 134, 0.98);
+$overlay0-transparent: #6c7086fa;
+
 $overlay1: #7f849c;
-$overlay1-transparent: rgba(127, 132, 156, 0.98);
+$overlay1-transparent: #7f849cfa;
+
 $overlay2: #9399b2;
-$overlay2-transparent: rgba(147, 153, 178, 0.98);
+$overlay2-transparent: #9399b2fa;
 
 $blue: #1e66f5;
 $lavender: #7287fd;

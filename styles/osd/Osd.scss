@@ -2,35 +2,36 @@
 
 osd-window {
     background-color: transparent;
-    margin-bottom: 50px;
+    background: none;
+    margin-bottom: 30px;
 }
 
-osd-name {
-    color: $overlay0;
-    text-shadow: 0 0 1px $crust, 0 0 2px $crust, 0 0 2px $crust;
-    font-size: 28px;
-    font-weight: 600;
-    margin-bottom: 10px;
+osd-device-name {
+    color: $overlay1;
+    font-size: 22px;
+    font-weight: 800;
+    margin-right: 10px;
 }
 
 osd-box {
     background-color: $base-transparent;
     border-radius: 99px;
     padding: 20px;
-    border: 2px solid $overlay0;
 }
 
 osd-box image {
     color: $overlay0;
+    margin-right: 10px;
 }
 
 osd-box label {
     background-color: $crust;
-    padding: 2px;
+    padding: 4px;
     border-radius: $border-radius;
     min-width: 60px;
     color: $overlay0;
     font-weight: 600;
+    margin-right: 10px;
 }
 
 osd-box levelbar {

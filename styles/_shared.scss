@@ -78,7 +78,7 @@ bar-module-button:hover {
 .slider-control trough {
   background-color: $surface0;
   border-radius: $border-radius;
-  min-height: 5px;
+  min-height: 10px;
 }
 
 // /* The part showing current progress */
@@ -91,7 +91,7 @@ bar-module-button:hover {
 .slider-control slider {
   background-color: $base;
   border: 1px solid $surface1;
-  min-width: 20px;
-  min-height: 20px;
+  min-width: 25px;
+  min-height: 25px;
   border-radius: 100%;
 }

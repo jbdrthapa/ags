@@ -12,7 +12,7 @@ const blocks = [
   "\u2588",
 ];
 
-const CAVA_BARS = 20;
+const CAVA_BARS = 30;
 const FPS = 120;
 
 export const CavaWidget = () => {
@@ -30,7 +30,7 @@ export const CavaWidget = () => {
       setVisuals(
         values
           .map(
-            (val) => blocks[Math.min(Math.floor(val * 8), blocks.length - 1)],
+            (val) => blocks[Math.min(Math.floor(val * 32), blocks.length - 1)],
           )
           .join(""),
       );
