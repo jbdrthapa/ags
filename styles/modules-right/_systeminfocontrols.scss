@@ -34,8 +34,9 @@ system-info-button:hover {
 
 user-avatar{
   background-color: $base;
-  min-width: 100px;
-  min-height: 100px;
-  border-radius: 99px;
-  border: 1px solid $surface2;
+  min-width: 96px;
+  min-height: 96px;
+  border-radius: 9999px;
+  overflow: hidden;
+  border: 2px solid $surface0;
 }
