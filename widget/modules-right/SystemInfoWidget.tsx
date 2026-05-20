@@ -12,11 +12,34 @@ export function SystemInfoWidget() {
 
     const systemInfoService = SystemInfoService.get_default();
 
+    const avatarImg = createBinding(systemInfoService, "avatar");
+
+    const avatar = avatarImg.peek();
+
+    console.log("avatar : ", avatar);
+
     return (
         <box orientation={Gtk.Orientation.HORIZONTAL} cssName="system-info-container" spacing={0}>
 
-            <box hexpand={true} halign={Gtk.Align.START} cssName="user-avatar">
-                <image iconSize={Gtk.IconSize.LARGE} />
+            {/* <box hexpand={true} halign={Gtk.Align.START} cssName="user-avatar">
+
+                <image iconName={} />
+            </box> */}
+            <box>
+                {(avatar.startsWith("/")) ? (
+                    // Displays local image if found
+                    <box css={`
+                    background-image: url('${avatar}');
+                    background-size: cover;
+                    background-position: center;
+                    border-radius: 50%;
+                    min-width: 48px;
+                    min-height: 48px;
+                `} />
+                ) : (
+                    // Displays default theme system icon icon if no file exists
+                    <image iconName="avatar-default" pixelSize={48} />
+                )}
             </box>
             <box hexpand={true} halign={Gtk.Align.START}>
                 <box orientation={Gtk.Orientation.VERTICAL} vexpand={false} valign={Gtk.Align.CENTER}>
