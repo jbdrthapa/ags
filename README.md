@@ -17,3 +17,6 @@ js-shell, custom shell for Tiling Window Managers
 
 ## Settings [Wallpaper picker] 
 ![Wallpaper](screenshots/Wallpaper.png?v=2)
+
+## Profile the application
+GJS_ENABLE_PROFILER=1 ags run
