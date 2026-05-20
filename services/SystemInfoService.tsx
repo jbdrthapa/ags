@@ -19,8 +19,8 @@ const SystemInfoServiceProperties = {
     )
 };
 
-const hostnameTimer = 15 * 60 * 1000; // 15 minutes
-const uptimeTimer = 60 * 1000; // minute
+const hostnameTimer = 15 * 60 * 1000;   // 15 minutes
+const uptimeTimer = 1 * 60 * 1000;      // 1 minute
 
 class InternalSystemInfoService extends GObject.Object {
     static instance: InternalSystemInfoService;

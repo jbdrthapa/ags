@@ -68,7 +68,7 @@ const WeatherServiceProperties = {
     )
 };
 
-const updateTimer = 15 * 60 * 1000; // 15 minutes
+const updateTimer = 20 * 60 * 1000; // 20 minutes
 
 class InternalWeatherService extends GObject.Object {
     static instance: InternalWeatherService;

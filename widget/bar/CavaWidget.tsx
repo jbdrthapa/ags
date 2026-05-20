@@ -13,7 +13,7 @@ const blocks = [
   "\u2588",
 ];
 
-const checkTimer = 7 * 1000;
+const checkTimer = 10 * 1000;
 const CAVA_BARS = 30;
 const FPS = 120;
 let isMusicPlaying = false;

@@ -21,7 +21,7 @@ const DisplayServiceProperties = {
     )
 };
 
-const checkTimer = 5 * 1000;
+const checkTimer = 10 * 1000;
 
 class InternalDisplayService extends GObject.Object {
     static instance: InternalDisplayService;
