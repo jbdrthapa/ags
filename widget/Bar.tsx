@@ -9,7 +9,7 @@ import { TrayWidget } from "./bar/TrayWidget"
 import { PowerProfileWidget } from "./bar/PowerProfileWidget"
 import { BatteryWidget } from "./bar/BatteryWidget"
 import { WindowName } from "../constants";
-import { CavaWidget } from "./bar/CavaWidget"
+// import { CavaWidget } from "./bar/CavaWidget"
 
 let modulesLeft: any;
 let modulesCenter: any;
@@ -34,7 +34,7 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
   const trayWidget = TrayWidget();
   const powerProfileWidget = PowerProfileWidget();
   const batteryWidget = BatteryWidget();
-  const cavaWidget = CavaWidget();
+  // const cavaWidget = CavaWidget();
 
   const backdrop = (
     <window
@@ -78,7 +78,7 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
         </box>
         <box $type="end">
           <box orientation={Gtk.Orientation.HORIZONTAL} spacing={10}>
-            {cavaWidget}
+            {/*{cavaWidget}*/}
             {trayWidget}
             {powerProfileWidget}
             {batteryWidget}
