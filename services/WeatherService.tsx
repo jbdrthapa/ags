@@ -137,7 +137,9 @@ class InternalWeatherService extends GObject.Object {
 
             this.wind_speed = data.wind.speed + `${speedSymbol}`;
 
-            this.wind_direction = data.wind.deg + `${degreesSymbol}`;
+            const compassDirection = this.getCompassDirection(data.wind.deg);
+
+            this.wind_direction = `${compassDirection}`;
 
             const desc = data.weather[0].description;
             this.description = desc.charAt(0).toUpperCase() + desc.slice(1);
@@ -170,6 +172,23 @@ class InternalWeatherService extends GObject.Object {
             this.notify("city");
         }
     }
+
+    private getCompassDirection(degrees: number): string {
+    const directions = [
+        "N", "NNE", "NE", "ENE", 
+        "E", "ESE", "SE", "SSE", 
+        "S", "SSW", "SW", "WSW", 
+        "W", "WNW", "NW", "NNW"
+    ];
+    
+    // Normalize degrees to 0-359
+    const normalizedDegrees = ((degrees % 360) + 360) % 360;
+    
+    // Split the circle into 16 sectors (22.5 degrees each)
+    const index = Math.round(normalizedDegrees / 22.5) % 16;
+    
+    return directions[index];
+}
 
     // Maps OpenWeather's explicit icon string codes to emojis or Nerd Font glyphs
     private mapOpenWeatherIcon(iconCode: string): string {
