@@ -20,3 +20,6 @@ js-shell, custom shell for Tiling Window Managers
 
 ## Profile the application
 GJS_ENABLE_PROFILER=1 ags run
+
+## Bundle the package
+ags bundle app.ts $HOME/.local/bin/js-shell
