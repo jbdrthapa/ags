@@ -1,9 +1,7 @@
 import Gtk from "gi://Gtk?version=4.0";
-import GLib from 'gi://GLib';
 import AstalNetwork from "gi://AstalNetwork"
 import { For, With, createBinding } from "ags"
-import { exec, execAsync } from "ags/process"
-import { createPoll } from "ags/time";
+import { execAsync } from "ags/process"
 
 export function WirelessPillWidget() {
     const wifi_network_device_name = "wlp99s0"

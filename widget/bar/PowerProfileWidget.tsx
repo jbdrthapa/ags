@@ -1,4 +1,3 @@
-import Gtk from "gi://Gtk?version=4.0"
 import AstalPowerProfiles from "gi://AstalPowerProfiles"
 import { createBinding } from "ags"
 
