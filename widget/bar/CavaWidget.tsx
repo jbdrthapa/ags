@@ -17,7 +17,8 @@ const FPS = 120;
 
 export const CavaWidget = () => {
   const cava = AstalCava.get_default()!;
-  cava.set_framerate(FPS);
+
+  //cava.set_framerate(FPS); // high cpu usage reported by profiler.
   cava.set_bars(CAVA_BARS);
 
   const [visible, setVisible] = createState(false);
