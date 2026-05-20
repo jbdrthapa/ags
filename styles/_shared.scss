@@ -3,13 +3,10 @@
 #js-shell-modules-left,
 #js-shell-modules-center,
 #js-shell-modules-right {
-  background-color: transparent;
-  background: none;
+  background-color: $base-transparent;
   border-radius: $border-radius;
-  border: 2px solid $surface0;
-  box-shadow: none;
+  border: 2px solid $accent-background;
   padding: 0px;
-  margin: 0px;
 }
 
 tooltip {
@@ -34,7 +31,7 @@ invisible-backdrop {
   border-radius: 0px;
 }
 
-bar-button-background{
+bar-button-background {
   background-color: $surface2;
   border-radius: $border-radius;
 }
