@@ -87,7 +87,7 @@ class InternalTimeService extends GObject.Object {
                 attempt++;
                 console.log("Timezone data retrieve failed, retry attempt: ", attempt);
                 await delay(retryDelay);
-                retryDelay *=2;
+                retryDelay *= 2;
             }
         }
 
@@ -95,7 +95,7 @@ class InternalTimeService extends GObject.Object {
 
             this.setTimezone(timezoneData?.timezone);
 
-            this.timezone = await this.getLocalTimezone();
+            this.timezone = await this.getLocalTimezone() ?? "?";
 
             this.notify("timezone");
 
@@ -132,7 +132,12 @@ class InternalTimeService extends GObject.Object {
 
             const result = await execAsync(`sudo timedatectl set-timezone ${timezone}`);
 
-            console.log(`Successfully changed the timezone from : ${localTimezone} to : ${timezone}`);
+            const icon = "󰾩";
+            const heading = `${icon}   Timezone Changed`;
+            const message = `Timezone : ${timezone}`;
+            await execAsync(`notify-send "${heading}" "${message}" --hint=string:transient:true`);
+
+            console.log(`Timezone changed from : ${localTimezone} to : ${timezone}`);
         }
         catch {
             console.log("Unable to set timezone");
