@@ -7,6 +7,8 @@ import { ClockWidget } from "./ClockWidget"
 import { CalendarWidget } from "./CalendarWidget"
 import { WeatherBarWidget, WeatherDetailWidget } from "./WeatherWidget"
 import { WindowName } from "../../constants"
+import TimeService from "../../services/TimeService"
+import { createBinding } from "gnim"
 
 const windowName = WindowName.modulesCenter;
 
@@ -19,12 +21,18 @@ export function ModulesCenter() {
     const calendarWidget = CalendarWidget();
     const weatherBarWidget = WeatherBarWidget();
     const weatherDetailWidget = WeatherDetailWidget();
+    const timeService = TimeService.get_default();
 
     const button = (
         <box>
             <button onClicked={() => popup.toggle()} cssName={"date-time-container"}>
-                <box>
-                    <label label={times[0].as(t => `${t.tz_date}    󰇙    ${t.tz_time}`)} cssName={"bar-date-time"} />
+                <box marginStart={10} marginEnd={10}>
+                    <box>
+                        <label label={createBinding(timeService, "hour")} cssName={"bar-date-time"}/>
+                        <label label="󰇙" cssName={"bar-date-time"}/>
+                        <label label={createBinding(timeService, "minute")} cssName={"bar-date-time"}/>
+                    </box>
+
                     {weatherBarWidget}
                 </box>
             </button>
