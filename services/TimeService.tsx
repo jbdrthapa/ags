@@ -25,7 +25,9 @@ const TimeServiceProperties = {
         '?'
     )
 };
-
+const delay = (ms: number) => new Promise(resolve => GLib.timeout_add(GLib.PRIORITY_DEFAULT, ms, () => { resolve(null); return GLib.SOURCE_REMOVE; }));
+let retryDelay = 1000; // 2 seconds
+const retryAttempts = 5; // 5 attempts
 const updateTimeTimer = 1 * 60 * 1000; // 1 minute
 const updateTimezoneTimer = 20 * 60 * 1000; // 20 minutes
 
@@ -76,15 +78,29 @@ class InternalTimeService extends GObject.Object {
 
 
     private async UpdateTimezone() {
-        let timezoneData = await this.getTimezone();
 
-        this.setTimezone(timezoneData?.timezone);
+        let timezoneData = null;
+        let attempt = 0;
+        while (!timezoneData && attempt < retryAttempts) {
+            timezoneData = await this.getTimezone();
+            if (!timezoneData) {
+                attempt++;
+                console.log("Timezone data retrieve failed, retry attempt: ", attempt);
+                await delay(retryDelay);
+                retryDelay *=2;
+            }
+        }
 
-        this.timezone = await this.getLocalTimezone();
+        if (timezoneData) {
 
-        this.notify("timezone");
+            this.setTimezone(timezoneData?.timezone);
 
-        this.RefreshTime();
+            this.timezone = await this.getLocalTimezone();
+
+            this.notify("timezone");
+
+            this.RefreshTime();
+        }
     }
 
     private async getLocalTimezone() {
