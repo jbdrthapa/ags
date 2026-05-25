@@ -1,3 +1,4 @@
+import { Gtk } from "ags/gtk4"
 import AstalBattery from "gi://AstalBattery"
 import { createBinding } from "ags"
 
@@ -6,6 +7,8 @@ export function BatteryWidget() {
     const battery = AstalBattery.get_default()
 
     const percent = createBinding(battery, "percentage",)((p) => `${Math.floor(p * 100)}%`)
+
+    const percentBinding = createBinding(battery, "percentage",)
 
     const timeToEmpty = createBinding(battery, "time_to_empty",)((t) => {
         if (t === -1) {
@@ -27,63 +30,6 @@ export function BatteryWidget() {
 
     const energyRate = createBinding(battery, "energyRate",)((w) => `${Math.floor(w)}W`);
 
-    const batteryBorderClass = createBinding(battery, "state")((s): string[] => {
-        switch (s) {
-            case AstalBattery.State.CHARGING:
-                return ["battery-launcher-background-charging"]
-            case AstalBattery.State.DISCHARGING:
-                return ["battery-launcher-background-discharging"]
-            case AstalBattery.State.EMPTY:
-                return ["battery-launcher-background-empty"]
-            case AstalBattery.State.FULLY_CHARGED:
-                return ["battery-launcher-background-full"]
-            case AstalBattery.State.PENDING_CHARGE:
-                return ["battery-launcher-background-pending-charge"]
-            case AstalBattery.State.PENDING_DISCHARGE:
-                return ["battery-launcher-background-pending-discharge"]
-            default:
-                return ["battery-launcher-background-unknown"]
-        }
-    })
-
-
-    const batteryClass = createBinding(battery, "state")((s): string[] => {
-        switch (s) {
-            case AstalBattery.State.CHARGING:
-                return ["battery-charging"]
-            case AstalBattery.State.DISCHARGING:
-                return ["battery-discharging"]
-            case AstalBattery.State.EMPTY:
-                return ["battery-empty"]
-            case AstalBattery.State.FULLY_CHARGED:
-                return ["battery-full"]
-            case AstalBattery.State.PENDING_CHARGE:
-                return ["battery-pending-charge"]
-            case AstalBattery.State.PENDING_DISCHARGE:
-                return ["battery-pending-discharge"]
-            default:
-                return ["battery-unknown"]
-        }
-    })
-
-    const stateIcon = createBinding(battery, "state",)((s) => {
-        switch (s) {
-            case AstalBattery.State.CHARGING:
-                return "󰂅"
-            case AstalBattery.State.DISCHARGING:
-                return "󱟟"
-            case AstalBattery.State.EMPTY:
-                return "󰂎"
-            case AstalBattery.State.FULLY_CHARGED:
-                return "󱟢"
-            case AstalBattery.State.PENDING_CHARGE:
-                return "󱈏"
-            case AstalBattery.State.PENDING_DISCHARGE:
-                return "󱈐"
-            default:
-                return "󱃍"
-        }
-    })
 
     const batteryTooltip = createBinding(battery, "state",)((s) => {
         let tooltip = "";
@@ -119,10 +65,14 @@ export function BatteryWidget() {
     })
 
     return (
-        <box cssClasses={batteryBorderClass}>
-            <button cssName="bar-module-button" tooltipText={batteryTooltip}>
-                <label label={stateIcon} cssClasses={batteryClass} />
-            </button>
-        </box>
+        <levelbar
+            widthRequest={75}
+            heightRequest={25}
+            cssName={"battery-bar"}
+            value={percentBinding.as(v => v)}
+            valign={Gtk.Align.CENTER}
+            hexpand={false}
+            tooltipText={batteryTooltip}
+        />
     )
 }

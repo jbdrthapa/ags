@@ -1,57 +1,12 @@
 @use "theme" as *;
 
-
-.battery-charging {
-    //color: $green;
+battery-bar trough {
+    border-radius: $border-radius;
+    padding: 2px;
+    background-color: #202020;
 }
 
-
-.battery-full {
-    //color: $green;
-}
-
-
-.battery-discharging {
-    //color: $red;
-}
-
-
-.battery-empty {
-    //color: $red;
-}
-
-
-.battery-pending-charge {
-    //color: $overlay0;
-}
-
-
-.battery-pending-discharge {
-    //color: $overlay0;
-}
-
-
-.battery-unknown {
-    //color: $red;
-}
-
-
-.battery-launcher-background-full,
-.battery-launcher-background-charging {
+battery-bar trough block.filled {
+    border-radius: $border-radius;
     background-color: $green;
-    border-radius: $border-radius;
-}
-
-.battery-launcher-background-empty,
-.battery-launcher-background-discharging,
-.battery-launcher-background-unknown {
-    background-color: $red;
-    border-radius: $border-radius;
-}
-
-.battery-launcher-background-charge,
-.battery-launcher-background-pending-charge,
-.battery-launcher-background-pending-discharge {
-    background-color: $white;
-    border-radius: $border-radius;
 }

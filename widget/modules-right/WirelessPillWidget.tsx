@@ -46,24 +46,34 @@ export function WirelessPillWidget() {
         )
     }
 
-    function PillInfo(icon: any, name: string, detail: any) {
+    function PillInfo(icon: any, name: string, ssidLabel: any, ssidFullLabel: any) {
         return (
             <box orientation={Gtk.Orientation.HORIZONTAL}>
                 <image iconName={icon} cssName="pill-button-image" />
                 <box orientation={Gtk.Orientation.VERTICAL}>
                     {/* Remove quotes to use the variable, not the string "name" */}
                     <label xalign={0} label={name} cssName="pill-button-name" />
-                    <label xalign={0} label={detail} cssName="pill-button-detail" />
+                    <label xalign={0} label={ssidLabel} tooltipText={ssidFullLabel} cssName="pill-button-detail" />
                 </box>
             </box>
         )
     }
 
     function WiFiPillInfo() {
+        let ssidLabelFull;
+        const maxSsidWidth = 15;
         const iconName = wifi.as(w => w?.iconName || "")
-        const ssidLabel = wifi.as(w => w?.ssid || "Disconnected")
 
-        return PillInfo(iconName, "Wireless", ssidLabel);
+        const ssidLabel = wifi.as(w => {
+            ssidLabelFull = w?.ssid || "Disconnected";
+            return ssidLabelFull.length > maxSsidWidth
+                ? ssidLabelFull.slice(0, maxSsidWidth) + "…"
+                : ssidLabelFull;
+        });
+
+        console.log(ssidLabelFull);
+
+        return PillInfo(iconName, "Wireless", ssidLabel, ssidLabelFull);
     }
 
     return (
