@@ -1,17 +1,36 @@
 @use "theme" as *;
 
+power-profile-button {
+    background-color: transparent;
+    background: none;
+    margin-top: -5px;
+    text-shadow:
+        2px 2px 0 $base,
+        -2px -2px 0 $base,
+        2px -2px 0 $base,
+        -2px 2px 0 $base;
+}
+
 .power-profile-power-saver {
+    font-size: 32px;
+    font-weight: 600;
     color: $green;
 }
 
 .power-profile-balanced {
-    color: $overlay0;
+    font-size: 32px;
+    font-weight: 600;
+    color: $text;
 }
 
 .power-profile-performance {
+    font-size: 32px;
+    font-weight: 600;
     color: $red;
 }
 
 .power-profile-unknown {
+    font-size: 32px;
+    font-weight: 600;
     color: $red;
 }

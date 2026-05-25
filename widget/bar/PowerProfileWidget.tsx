@@ -1,3 +1,4 @@
+import { Gtk } from "ags/gtk4"
 import AstalPowerProfiles from "gi://AstalPowerProfiles"
 import { createBinding } from "ags"
 
@@ -7,7 +8,7 @@ export function PowerProfileWidget() {
 
   const activeProfile = createBinding(powerprofiles, "active_profile")
 
-  const batteryClass = createBinding(powerprofiles, "active_profile")((p): string[] => {
+  const powerProfileClass = createBinding(powerprofiles, "active_profile")((p): string[] => {
     switch (p) {
       case "power-saver":
         return ["power-profile-power-saver"]
@@ -23,11 +24,11 @@ export function PowerProfileWidget() {
   const getIcon = (profile: string) => {
     switch (profile) {
       case "power-saver":
-        return "󰌪"
+        return "󰾆"
       case "balanced":
-        return ""
+        return "󰾅"
       case "performance":
-        return "󱐋"
+        return "󰓅"
       default:
         return "dialog-question-symbolic"
     }
@@ -44,10 +45,8 @@ export function PowerProfileWidget() {
   }
 
   return (
-    <box cssName="bar-button-background">
-      <button onClicked={cycleProfile} tooltipText={activeProfile} cssName="bar-module-button">
-        <label label={activeProfile.as(getIcon)} cssClasses={batteryClass} />
-      </button>
-    </box>
+    <button vexpand={false} valign={Gtk.Align.START} onClicked={cycleProfile} tooltipText={activeProfile} cssName="power-profile-button">
+      <label vexpand={true} valign={Gtk.Align.START} label={activeProfile.as(getIcon)} cssClasses={powerProfileClass} />
+    </button>
   )
 }
