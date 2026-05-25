@@ -1,9 +1,16 @@
 @use "theme" as *;
 
+battery-percent {
+    background: none;
+    color: $overlay0;
+    font-size: 14px;
+    font-weight: 600;
+}
+
 battery-bar trough {
     border-radius: $border-radius;
     padding: 2px;
-    background-color: #202020;
+    background-color: $base-transparent;
 }
 
 battery-bar trough block.filled {
