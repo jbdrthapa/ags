@@ -18,18 +18,37 @@ export function BatteryWidget() {
         const minutes = Math.floor((t % 3600) / 60)
         return `${hours}h ${minutes}m`
     })
-
-    const timeToFull = createBinding(battery, "time_to_full",)((t) => {
-        if (t === -1) {
-            return "Calculating..."
+    
+    const formatTime = (t: any) => {
+        if (t === -1 || !t) {
+            return "...";
         }
-        const hours = Math.floor(t / 3600)
-        const minutes = Math.floor((t % 3600) / 60)
-        return `${hours}h ${minutes}m`
-    })
+        const hours = Math.floor(t / 3600);
+        const minutes = Math.floor((t % 3600) / 60);
+        return `${hours}h ${minutes}m`;
+    };
+
+    const timeToFull = createBinding(battery, "time_to_full",)((t) => formatTime(t))
 
     const energyRate = createBinding(battery, "energyRate",)((w) => `${Math.floor(w)}W`);
 
+    const batteryState = createBinding(battery, "energy",)((e) => {
+        const state = battery.state;
+        switch (state) {
+            case AstalBattery.State.CHARGING:
+                return formatTime(battery.timeToFull);
+            case AstalBattery.State.DISCHARGING:
+                return formatTime(battery.timeToEmpty);
+            case AstalBattery.State.EMPTY:
+                return "Empty";
+            case AstalBattery.State.FULLY_CHARGED:
+            case AstalBattery.State.PENDING_CHARGE:
+            case AstalBattery.State.PENDING_DISCHARGE:
+                return "Charged";
+            default:
+                return "";
+        }
+    })
 
     const batteryTooltip = createBinding(battery, "state",)((s) => {
         let tooltip = "";
@@ -65,7 +84,7 @@ export function BatteryWidget() {
     })
 
     return (
-        <box orientation={Gtk.Orientation.VERTICAL}>
+        <box orientation={Gtk.Orientation.VERTICAL} tooltipText={batteryTooltip}>
             <levelbar
                 widthRequest={75}
                 heightRequest={20}
@@ -73,9 +92,8 @@ export function BatteryWidget() {
                 value={percentBinding.as(v => v)}
                 valign={Gtk.Align.CENTER}
                 hexpand={false}
-                tooltipText={batteryTooltip}
             />
-            <label label={timeToEmpty} cssName={"battery-percent"}/>
+            <label label={batteryState} cssName={"battery-percent"} />
         </box>
 
     )
