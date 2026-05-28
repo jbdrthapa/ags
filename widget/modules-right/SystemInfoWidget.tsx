@@ -1,5 +1,6 @@
 import Gtk from "gi://Gtk?version=4.0";
 import GLib from 'gi://GLib';
+import Gio from 'gi://Gio';
 import app from "ags/gtk4/app";
 import { WindowName } from "../../constants";
 import SystemInfoService from "../../services/SystemInfoService";
@@ -12,12 +13,31 @@ export function SystemInfoWidget() {
 
     const systemInfoService = SystemInfoService.get_default();
 
+    const avatarImg = createBinding(systemInfoService, "avatar");
+
+    const dynamicGtkCss = avatarImg.as(path => {
+        const finalPath = (path && path.startsWith("/")) ? path : "avatar-default";
+
+        if (finalPath.startsWith("/")) {
+            return `
+            background-image: url('file://${finalPath}');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        `;
+        }
+
+        return `
+        background-image: icon('${finalPath}');
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+    `;
+    });
+
     return (
         <box orientation={Gtk.Orientation.HORIZONTAL} cssName="system-info-container" spacing={0}>
-
-            <box hexpand={true} halign={Gtk.Align.START} cssName="user-avatar">
-                <image iconSize={Gtk.IconSize.LARGE} />
-            </box>
+            <box hexpand={true} halign={Gtk.Align.START} cssName="user-avatar" css={dynamicGtkCss} />
             <box hexpand={true} halign={Gtk.Align.START}>
                 <box orientation={Gtk.Orientation.VERTICAL} vexpand={false} valign={Gtk.Align.CENTER}>
                     <label label={createBinding(systemInfoService, "host_info")} cssName={"system-info-data-header"} hexpand={false} halign={Gtk.Align.START} />

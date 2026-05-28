@@ -1,57 +1,41 @@
 @use "theme" as *;
 
-
-.battery-charging {
-    //color: $green;
+battery-percent {
+    background: none;
+    font-size: 14px;
+    font-weight: 600;
+    color: $text;
+    text-shadow:
+        2px 2px 0 $crust,
+        -2px -2px 0 $crust,
+        2px -2px 0 $crust,
+        -2px 2px 0 $crust;
 }
 
+battery-bar {
+    >trough {
+        border-radius: $border-radius;
+        padding: 6px;
+        background-color: $base-transparent;
+    }
 
-.battery-full {
-    //color: $green;
-}
+    >trough block.low {
+        border-radius: $border-radius;
+        padding: 2px;
+        background-color: $red;
+    }
 
+    >trough block.high {
+        border-radius: $border-radius;
+        background-color: $peach;
+    }
 
-.battery-discharging {
-    //color: $red;
-}
+    >trough block.full {
+        border-radius: $border-radius;
+        background-color: $green;
+    }
 
-
-.battery-empty {
-    //color: $red;
-}
-
-
-.battery-pending-charge {
-    //color: $overlay0;
-}
-
-
-.battery-pending-discharge {
-    //color: $overlay0;
-}
-
-
-.battery-unknown {
-    //color: $red;
-}
-
-
-.battery-launcher-background-full,
-.battery-launcher-background-charging {
-    background-color: $green;
-    border-radius: $border-radius;
-}
-
-.battery-launcher-background-empty,
-.battery-launcher-background-discharging,
-.battery-launcher-background-unknown {
-    background-color: $red;
-    border-radius: $border-radius;
-}
-
-.battery-launcher-background-charge,
-.battery-launcher-background-pending-charge,
-.battery-launcher-background-pending-discharge {
-    background-color: $white;
-    border-radius: $border-radius;
+    >trough block.empty {
+        background-color: transparent;
+    }
 }

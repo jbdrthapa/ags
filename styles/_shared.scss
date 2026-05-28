@@ -3,10 +3,10 @@
 #js-shell-modules-left,
 #js-shell-modules-center,
 #js-shell-modules-right {
-  background-color: transparent;
-  background: none;
-  border: none;
-  box-shadow: none;
+  background-color: $base-transparent;
+  border-radius: $border-radius;
+  border: 2px solid $accent-background;
+  padding: 0px;
 }
 
 tooltip {
@@ -15,13 +15,6 @@ tooltip {
   border-radius: $border-radius;
   border: 2px solid $surface1;
   padding: 10px;
-}
-
-window#PopupWindow {
-  background-color: transparent;
-  background-image: none;
-  box-shadow: none;
-  border-radius: $border-radius;
 }
 
 invisible-backdrop-window {
@@ -38,7 +31,7 @@ invisible-backdrop {
   border-radius: 0px;
 }
 
-bar-button-background{
+bar-button-background {
   background-color: $surface2;
   border-radius: $border-radius;
 }

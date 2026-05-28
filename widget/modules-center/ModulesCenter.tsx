@@ -5,7 +5,10 @@ import { Astal } from "ags/gtk4"
 import { WorldClocks } from "../../services/WorldClocks"
 import { ClockWidget } from "./ClockWidget"
 import { CalendarWidget } from "./CalendarWidget"
+import { WeatherBarWidget, WeatherDetailWidget } from "./WeatherWidget"
 import { WindowName } from "../../constants"
+import TimeService from "../../services/TimeService"
+import { createBinding } from "gnim"
 
 const windowName = WindowName.modulesCenter;
 
@@ -16,11 +19,24 @@ export function ModulesCenter() {
     const times = WorldClocks();
     const clockWidget = ClockWidget();
     const calendarWidget = CalendarWidget();
+    const weatherBarWidget = WeatherBarWidget();
+    const weatherDetailWidget = WeatherDetailWidget();
+    const timeService = TimeService.get_default();
 
     const button = (
-        <button onClicked={() => popup.toggle()} cssName={"date-time-container"}>
-            <label label={times[0].as(t => `${t.tz_date}    󰇙    ${t.tz_time}`)} cssName={"bar-date-time"} />
-        </button>
+        <box>
+            <button onClicked={() => popup.toggle()} cssName={"date-time-container"}>
+                <box marginStart={10} marginEnd={10}>
+                    <box>
+                        <label label={createBinding(timeService, "hour")} cssName={"bar-date-time"}/>
+                        <label label="󰇙" cssName={"bar-date-time"}/>
+                        <label label={createBinding(timeService, "minute")} cssName={"bar-date-time"}/>
+                    </box>
+
+                    {weatherBarWidget}
+                </box>
+            </button>
+        </box>
     ) as any;
 
     popup = new PopupWindow({
@@ -30,7 +46,10 @@ export function ModulesCenter() {
         margin: 8,
         child: (
             <box cssName="modules-center-container" orientation={Gtk.Orientation.HORIZONTAL} spacing={20}>
-                {clockWidget}
+                <box orientation={Gtk.Orientation.VERTICAL}>
+                    {clockWidget}
+                    {weatherDetailWidget}
+                </box>
                 {calendarWidget}
             </box>
         )

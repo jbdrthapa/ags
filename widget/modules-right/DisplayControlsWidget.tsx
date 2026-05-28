@@ -1,5 +1,5 @@
 import Gtk from "gi://Gtk?version=4.0";
-import { For, createBinding } from "gnim";
+import { createBinding } from "gnim";
 import DisplayService from "../../services/DisplayService";
 
 export function DisplayControlsWidget() {

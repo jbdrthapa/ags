@@ -1,9 +1,7 @@
 import Gtk from "gi://Gtk?version=4.0";
-import GLib from 'gi://GLib';
 import AstalNetwork from "gi://AstalNetwork"
 import { For, With, createBinding } from "ags"
-import { exec, execAsync } from "ags/process"
-import { createPoll } from "ags/time";
+import { execAsync } from "ags/process"
 
 export function WirelessPillWidget() {
     const wifi_network_device_name = "wlp99s0"
@@ -48,24 +46,34 @@ export function WirelessPillWidget() {
         )
     }
 
-    function PillInfo(icon: any, name: string, detail: any) {
+    function PillInfo(icon: any, name: string, ssidLabel: any, ssidFullLabel: any) {
         return (
             <box orientation={Gtk.Orientation.HORIZONTAL}>
                 <image iconName={icon} cssName="pill-button-image" />
                 <box orientation={Gtk.Orientation.VERTICAL}>
                     {/* Remove quotes to use the variable, not the string "name" */}
                     <label xalign={0} label={name} cssName="pill-button-name" />
-                    <label xalign={0} label={detail} cssName="pill-button-detail" />
+                    <label xalign={0} label={ssidLabel} tooltipText={ssidFullLabel} cssName="pill-button-detail" />
                 </box>
             </box>
         )
     }
 
     function WiFiPillInfo() {
+        let ssidLabelFull;
+        const maxSsidWidth = 15;
         const iconName = wifi.as(w => w?.iconName || "")
-        const ssidLabel = wifi.as(w => w?.ssid || "Disconnected")
 
-        return PillInfo(iconName, "Wireless", ssidLabel);
+        const ssidLabel = wifi.as(w => {
+            ssidLabelFull = w?.ssid || "Disconnected";
+            return ssidLabelFull.length > maxSsidWidth
+                ? ssidLabelFull.slice(0, maxSsidWidth) + "…"
+                : ssidLabelFull;
+        });
+
+        console.log(ssidLabelFull);
+
+        return PillInfo(iconName, "Wireless", ssidLabel, ssidLabelFull);
     }
 
     return (

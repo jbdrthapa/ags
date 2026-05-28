@@ -12,7 +12,6 @@ app.start({
   instanceName:"js-shell",
   css: style,
   main() {
-
     for (const monitor of app.get_monitors()) {
       Bar(monitor)
       Settings(monitor)

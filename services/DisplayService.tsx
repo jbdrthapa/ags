@@ -2,6 +2,8 @@ import GObject from "gi://GObject";
 import { execAsync } from "ags/process";
 import GLib from "gi://GLib";
 
+const displayDevice = "amdgpu_bl1";
+
 const DisplayServiceProperties = {
     'brightness-percent': GObject.ParamSpec.int(
         'brightness-percent',
@@ -21,7 +23,7 @@ const DisplayServiceProperties = {
     )
 };
 
-const checkTimer=5 * 1000;
+const checkTimer = 10 * 1000;
 
 class InternalDisplayService extends GObject.Object {
     static instance: InternalDisplayService;
@@ -30,7 +32,7 @@ class InternalDisplayService extends GObject.Object {
         return this.instance;
     }
 
-    
+
 
     brightness_percent = 0;
     brightness_icon = "\u{f0cb5}";
@@ -47,10 +49,10 @@ class InternalDisplayService extends GObject.Object {
     }
 
     updateBrightnessPercent() {
-        execAsync(['brightnessctl', '-d', 'amdgpu_bl2', 'g']).then((brightness) => {
+        execAsync(['brightnessctl', '-d', `${displayDevice}`, 'g']).then((brightness) => {
             const current = Number(brightness.trim());
 
-            execAsync(['brightnessctl', '-d', 'amdgpu_bl2', 'm']).then((max) => {
+            execAsync(['brightnessctl', '-d', `${displayDevice}`, 'm']).then((max) => {
                 const maxBrightness = Number(max.trim());
                 if (maxBrightness > 0) {
 
@@ -108,14 +110,12 @@ class InternalDisplayService extends GObject.Object {
     setBrightnessValue(value: number) {
         const target = Math.round(value);
 
-        execAsync(['brightnessctl', '-d', 'amdgpu_bl2', 's', `${target}%`])
+        execAsync(['brightnessctl', '-d', `${displayDevice}`, 's', `${target}%`])
             .catch(print);
     }
 
 }
 
-const DisplayService = GObject.registerClass({
-    Properties: DisplayServiceProperties,
-}, InternalDisplayService);
+const DisplayService = GObject.registerClass({ Properties: DisplayServiceProperties, }, InternalDisplayService);
 
 export default DisplayService;

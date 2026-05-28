@@ -8,7 +8,6 @@ import { AudioControlsWidget } from "./AudioControlsWidget"
 import { MprisWidget } from "./MprisWidget"
 import { PowerButtonsWidget } from "./PowerButtons"
 import { WindowName } from "../../constants"
-import { PowerProfileWidget } from "../bar/PowerProfileWidget"
 
 const windowName = WindowName.modulesRight;
 

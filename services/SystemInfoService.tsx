@@ -1,6 +1,7 @@
 import GObject from "gi://GObject";
 import { execAsync } from "ags/process";
 import GLib from "gi://GLib";
+import Gio from "gi://Gio";
 
 const SystemInfoServiceProperties = {
     'host-info': GObject.ParamSpec.string(
@@ -16,11 +17,19 @@ const SystemInfoServiceProperties = {
         'Uptime Info',
         GObject.ParamFlags.READWRITE,
         ' '
+    ),
+    'avatar': GObject.ParamSpec.string(
+        'avatar',
+        'Avatar',
+        'Avatar',
+        GObject.ParamFlags.READWRITE,
+        ' '
     )
 };
 
-const hostnameTimer = 15 * 60 * 1000; // 15 minutes
-const uptimeTimer = 60 * 1000; // minute
+const hostnameTimer = 1 * 15 * 60 * 1000;       // 15 minutes
+const uptimeTimer = 1 * 1 * 60 * 1000;          // 1 minute
+const avatarUpdateTimer = 12 * 60 * 60 * 1000   // 12 hours
 
 class InternalSystemInfoService extends GObject.Object {
     static instance: InternalSystemInfoService;
@@ -31,6 +40,7 @@ class InternalSystemInfoService extends GObject.Object {
 
     host_info = '';
     uptime_info = '';
+    avatar = '';
 
     constructor() {
         super();
@@ -39,6 +49,8 @@ class InternalSystemInfoService extends GObject.Object {
 
         this.updateUptime();
 
+        this.updateUserAvatar();
+
         GLib.timeout_add(GLib.PRIORITY_DEFAULT, hostnameTimer, () => {
             this.updateHostname();
             return GLib.SOURCE_CONTINUE;
@@ -46,6 +58,11 @@ class InternalSystemInfoService extends GObject.Object {
 
         GLib.timeout_add(GLib.PRIORITY_DEFAULT, uptimeTimer, () => {
             this.updateUptime();
+            return GLib.SOURCE_CONTINUE;
+        });
+
+        GLib.timeout_add(GLib.PRIORITY_DEFAULT, avatarUpdateTimer, () => {
+            this.updateUserAvatar();
             return GLib.SOURCE_CONTINUE;
         });
     }
@@ -62,10 +79,27 @@ class InternalSystemInfoService extends GObject.Object {
         }).catch(print);
     }
 
+    updateUserAvatar() {
+        const homeDirectory = GLib.get_home_dir();
+
+        const lookupPaths = [
+            `${homeDirectory}/.face`,
+            `${homeDirectory}/.face.icon`,
+            `${homeDirectory}/Pictures/avatar.png`
+        ]
+
+        for (const path of lookupPaths) {
+            if (Gio.File.new_for_path(path).query_exists(null)) {
+                this.avatar = path;
+                return;
+            }
+        }
+
+        this.avatar = "avatar-default";
+    }
+
 }
 
-const SystemInfoService = GObject.registerClass({
-    Properties: SystemInfoServiceProperties,
-}, InternalSystemInfoService);
+const SystemInfoService = GObject.registerClass({ Properties: SystemInfoServiceProperties, }, InternalSystemInfoService);
 
 export default SystemInfoService;

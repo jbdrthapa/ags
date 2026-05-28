@@ -10,12 +10,12 @@ import { AboutSettings } from "./AboutSettings";
 
 export default function Settings(gdkmonitor: Gdk.Monitor) {
     const windowName = WindowName.settings;
-    const displaySettings = new DisplaySettings();
-    const wallpaperSettings = new WallpaperSettings();
-    const wiredNetworkSettings = new WiredNetworkSettings();
-    const wirelessNetworkSettings = new WirelessNetworkSettings();
-    const bluetoothSettings = new BluetoothSettings();
-    const aboutSettings = new AboutSettings();
+    const displaySettings = DisplaySettings() as any;
+    const wallpaperSettings = WallpaperSettings() as any;
+    const wiredNetworkSettings = WiredNetworkSettings() as any;
+    const wirelessNetworkSettings = WirelessNetworkSettings() as any;
+    const bluetoothSettings = BluetoothSettings() as any;
+    const aboutSettings = AboutSettings() as any;
 
     let notebook = new Gtk.Notebook({
         tabPos: Gtk.PositionType.LEFT,

@@ -1,5 +1,6 @@
 import AstalCava from "gi://AstalCava";
 import { createState } from "ags";
+import GLib from "gi://GLib";
 
 const blocks = [
   "\u2581",
@@ -12,20 +13,29 @@ const blocks = [
   "\u2588",
 ];
 
+const checkTimer = 10 * 1000;
 const CAVA_BARS = 30;
 const FPS = 120;
+let isMusicPlaying = false;
 
 export const CavaWidget = () => {
   const cava = AstalCava.get_default()!;
+
   cava.set_framerate(FPS);
   cava.set_bars(CAVA_BARS);
 
   const [visible, setVisible] = createState(false);
   const [visuals, setVisuals] = createState("");
 
+  isMusicPlaying = !(cava.bars === 0 || cava.values.length === 0 || cava.values.every((v) => v < 0.001));
+
+  GLib.timeout_add(GLib.PRIORITY_DEFAULT, checkTimer, () => {
+    isMusicPlaying = !(cava.bars === 0 || cava.values.length === 0 || cava.values.every((v) => v < 0.001));
+    return GLib.SOURCE_CONTINUE;
+  });
+
   cava.connect("notify::values", ({ values }) => {
-    const isVisible = shouldVisualize(CAVA_BARS, values);
-    if (isVisible) {
+    if (isMusicPlaying) {
       setVisible(true);
       setVisuals(
         values
@@ -44,8 +54,4 @@ export const CavaWidget = () => {
       <label label={visuals} />
     </box>
   );
-};
-
-const shouldVisualize = (bars: number, values: number[]): boolean => {
-  return !(bars === 0 || values.length === 0 || values.every((v) => v < 0.001));
 };
