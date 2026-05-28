@@ -2,7 +2,7 @@ import GObject from "gi://GObject";
 import { execAsync } from "ags/process";
 import GLib from "gi://GLib";
 
-const displayDevice = "amdgpu_bl1";
+let displayDevice: null | string = null;
 
 const DisplayServiceProperties = {
     'brightness-percent': GObject.ParamSpec.int(
@@ -32,13 +32,29 @@ class InternalDisplayService extends GObject.Object {
         return this.instance;
     }
 
-
-
     brightness_percent = 0;
     brightness_icon = "\u{f0cb5}";
 
     constructor() {
         super();
+
+        let result = this.init();
+
+        result.then((value) => {
+            if (!value) {
+                return;
+            }
+        });
+    }
+
+    async init() {
+
+        await this.resolveBrtCtlDevice();
+
+        if (!displayDevice) {
+            console.log("Brightness control device could not be resolved !!!");
+            return false;
+        }
 
         this.updateBrightnessPercent();
 
@@ -46,6 +62,8 @@ class InternalDisplayService extends GObject.Object {
             this.updateBrightnessPercent();
             return GLib.SOURCE_CONTINUE;
         });
+
+        return true;
     }
 
     updateBrightnessPercent() {
@@ -114,6 +132,35 @@ class InternalDisplayService extends GObject.Object {
             .catch(print);
     }
 
+    resolveBrtCtlDevice(): Promise<void> {
+
+        return execAsync(['brightnessctl', '-l'])
+            .then((output) => {
+                const lines = output.split('\n');
+
+                for (const line of lines) {
+                    if (line.includes("of class 'backlight'")) {
+                        const match = line.match(/'([^']+)'/);
+
+                        if (match) {
+                            const deviceName = match[1];
+
+                            if (deviceName.startsWith('amd') || deviceName.startsWith('intel')) {
+                                displayDevice = deviceName;
+                                break;
+                            }
+                        }
+                    }
+                }
+
+                if (displayDevice) {
+                    console.log(`Found backlight device: ${displayDevice}`);
+                } else {
+                    console.log("No AMD or Intel backlight device found.");
+                }
+            })
+            .catch(print);
+    }
 }
 
 const DisplayService = GObject.registerClass({ Properties: DisplayServiceProperties, }, InternalDisplayService);
