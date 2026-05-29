@@ -3,6 +3,7 @@ import { execAsync } from "ags/process";
 import GLib from "gi://GLib";
 
 let displayDevice: null | string = null;
+let devicePath: null | string = null;
 
 const DisplayServiceProperties = {
     'brightness-percent': GObject.ParamSpec.int(
@@ -23,7 +24,7 @@ const DisplayServiceProperties = {
     )
 };
 
-const checkTimer = 10 * 1000;
+const checkTimer = 0.5 * 1000;
 
 class InternalDisplayService extends GObject.Object {
     static instance: InternalDisplayService;
@@ -32,8 +33,10 @@ class InternalDisplayService extends GObject.Object {
         return this.instance;
     }
 
-    brightness_percent = 0;
-    brightness_icon = "\u{f0cb5}";
+    private max_brightness_value = 1;
+    private last_brightness_percent = 0;
+    private brightness_percent = 0;
+    private brightness_icon = "\u{f0cb5}";
 
     constructor() {
         super();
@@ -56,6 +59,17 @@ class InternalDisplayService extends GObject.Object {
             return false;
         }
 
+        // Cache file mapping paths and max value once to avoid reloading them
+        devicePath = `/sys/class/backlight/${displayDevice}`;
+        try {
+            const [success, maxContent] = GLib.file_get_contents(`${devicePath}/max_brightness`);
+            if (success) {
+                this.max_brightness_value = Number(new TextDecoder().decode(maxContent).trim());
+            }
+        } catch (e) {
+            print("Failed to read system max_brightness file", e);
+        }
+
         this.updateBrightnessPercent();
 
         GLib.timeout_add(GLib.PRIORITY_DEFAULT, checkTimer, () => {
@@ -67,22 +81,29 @@ class InternalDisplayService extends GObject.Object {
     }
 
     updateBrightnessPercent() {
-        execAsync(['brightnessctl', '-d', `${displayDevice}`, 'g']).then((brightness) => {
-            const current = Number(brightness.trim());
 
-            execAsync(['brightnessctl', '-d', `${displayDevice}`, 'm']).then((max) => {
-                const maxBrightness = Number(max.trim());
-                if (maxBrightness > 0) {
+        if (!devicePath) return;
 
-                    this.brightness_percent = Math.round((current / maxBrightness) * 100);
+        try {
+            // Natively read file contents synchronously (extremely low overhead for sysfs files)
+            const [success, content] = GLib.file_get_contents(`${devicePath}/brightness`);
+            if (!success) return;
 
-                    this.notify("brightness-percent");
+            const current = Number(new TextDecoder().decode(content).trim());
 
-                    this.updateBrightnessIcon();
+            // Exit early before performing any object updates or math equations
+            if (this.last_brightness_percent === current) {
+                return;
+            }
+            this.last_brightness_percent = current;
 
-                }
-            }).catch(print);
-        }).catch(print);
+            // Compute values and deploy to proxy getters/setters instantly
+            this.brightness_percent = Math.round((current / this.max_brightness_value) * 100);
+            this.notify("brightness-percent");
+            this.updateBrightnessIcon();
+        } catch (err) {
+            print("Sysfs read crash: ", err);
+        }
     }
 
     updateBrightnessIcon() {
@@ -90,34 +111,19 @@ class InternalDisplayService extends GObject.Object {
         let icon;
 
         if (this.brightness_percent < 11) {
-            icon = "󰛩";
-        }
-        else if (this.brightness_percent < 21) {
-            icon = "󱩎";
+            icon = "\u{f06e9}";
         }
         else if (this.brightness_percent < 31) {
-            icon = "󱩏";
-        }
-        else if (this.brightness_percent < 41) {
-            icon = "󱩐";
-        }
-        else if (this.brightness_percent < 51) {
-            icon = "󱩑";
+            icon = "\u{f1a4e}";
         }
         else if (this.brightness_percent < 61) {
-            icon = "󱩒";
+            icon = "\u{f1a52}";
         }
-        else if (this.brightness_percent < 71) {
-            icon = "󱩓";
-        }
-        else if (this.brightness_percent < 81) {
-            icon = "󱩔";
-        }
-        else if (this.brightness_percent < 91) {
-            icon = "󱩖";
+        else if (this.brightness_percent < 86) {
+            icon = "\u{f1a56}";
         }
         else {
-            icon = "󰛨";
+            icon = "\u{f06e8}";
         }
 
         this.brightness_icon = icon;

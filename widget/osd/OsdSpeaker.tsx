@@ -58,8 +58,8 @@ export default function OsdSpeaker(gdkmonitor: Gdk.Monitor) {
     >
         <box cssName={"osd-box"} orientation={Gtk.Orientation.HORIZONTAL} spacing={8}>
             <label label={"Speaker"} hexpand={false} halign={Gtk.Align.CENTER} cssName="osd-device-name" />
-            <image iconName={iconBinding} pixelSize={32} />
-            <label label={volumeBinding.as(v => `${Math.round(v * 100)}`)} />
+            <image iconName={iconBinding} pixelSize={32} cssName={"osd-box-icon"} />
+            <label label={volumeBinding.as(v => `${Math.round(v * 100)}`)} cssName={"osd-box-label"} />
             <levelbar
                 widthRequest={100}
                 heightRequest={25}

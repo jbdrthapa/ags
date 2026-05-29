@@ -1,21 +1,28 @@
 import { Astal, Gtk, Gdk } from "ags/gtk4"
 import { createBinding, createState } from "ags"
-import Wp from "gi://AstalWp"
+import DisplayService from "../../services/DisplayService"
 import { WindowName } from "../../constants"
 
 const ANIMATION_TIME = 2000
 let delayId: any = null
 let initCount = 2
 
-export default function OsdMicrophone(gdkmonitor: Gdk.Monitor) {
+export default function OsdBrigtness(gdkmonitor: Gdk.Monitor) {
 
     const windowName = WindowName.osd;
 
-    const microphone = Wp.get_default()?.get_audio().defaultMicrophone
-    if (!microphone) return <box />
+    const brightness = DisplayService.get_default()
+    if (!brightness) return <box />
 
-    const volumeBinding = createBinding(microphone, "volume")
-    const iconBinding = createBinding(microphone, "volume-icon")
+    const brightnessBinding = createBinding(brightness, "brightness_percent")
+    const iconBinding = createBinding(brightness, "brightness_icon")
+
+    // GTK LevelBar expects 0.0 -> 1.0. Divide the 0-100 service percentage by 100.
+    const levelBarBinding = brightnessBinding.as(p => (p ?? 0) / 100)
+
+    // Create a text string binding (e.g., "53%")
+    const textPercentBinding = brightnessBinding.as(p => `${Math.round(p ?? 0)}%`)
+
 
     // Destructure the accessor [0] and the setter function [1]
     const [visible, setVisible] = createState(false)
@@ -44,10 +51,10 @@ export default function OsdMicrophone(gdkmonitor: Gdk.Monitor) {
         }, ANIMATION_TIME)
     }
 
-    microphone.connect("notify::volume", () => showOsd())
-    microphone.connect("notify::mute", () => showOsd())
+    brightness.connect("notify::brightness-percent", () => showOsd())
+    brightness.connect("notify::brightness-icon", () => showOsd())
 
-    const osdMicrophone = (<window
+    const osdBrightness = (<window
         name={windowName}
         namespace={windowName}
         gdkmonitor={gdkmonitor}
@@ -57,14 +64,14 @@ export default function OsdMicrophone(gdkmonitor: Gdk.Monitor) {
         visible={visible} // Pass the read-only accessor object here
     >
         <box cssName={"osd-box"} orientation={Gtk.Orientation.HORIZONTAL} spacing={8}>
-            <label label={"Microphone"} hexpand={false} halign={Gtk.Align.CENTER} cssName="osd-device-name" />
-            <image iconName={iconBinding} pixelSize={32} cssName={"osd-box-icon"}/>
-            <label label={volumeBinding.as(v => `${Math.round(v * 100)}`)} cssName={"osd-box-label"} />
+            <label label={"Brightness"} hexpand={false} halign={Gtk.Align.CENTER} cssName="osd-device-name" />
+            <label label={iconBinding} css="font-size: 24px;" cssName={"osd-box-icon"} />
+            <label label={textPercentBinding} cssName={"osd-box-label"} />
             <levelbar
                 widthRequest={100}
                 heightRequest={25}
                 cssClasses={["osd-bar"]}
-                value={volumeBinding.as(v => v)}
+                value={levelBarBinding}
                 valign={Gtk.Align.CENTER}
                 hexpand={true}
             />
@@ -72,5 +79,5 @@ export default function OsdMicrophone(gdkmonitor: Gdk.Monitor) {
     </window>
     ) as Gtk.Window;
 
-    return osdMicrophone;
+    return osdBrightness;
 }
