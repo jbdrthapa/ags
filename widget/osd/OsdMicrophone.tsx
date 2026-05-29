@@ -7,15 +7,15 @@ const ANIMATION_TIME = 2000
 let delayId: any = null
 let initCount = 2
 
-export default function OsdVolume(gdkmonitor: Gdk.Monitor) {
+export default function OsdMicrophone(gdkmonitor: Gdk.Monitor) {
 
-    const windowName = WindowName.osdvolume;
+    const windowName = WindowName.osd;
 
-    const speaker = Wp.get_default()?.get_audio().defaultSpeaker
-    if (!speaker) return <box />
+    const microphone = Wp.get_default()?.get_audio().defaultMicrophone
+    if (!microphone) return <box />
 
-    const volumeBinding = createBinding(speaker, "volume")
-    const iconBinding = createBinding(speaker, "volume-icon")
+    const volumeBinding = createBinding(microphone, "volume")
+    const iconBinding = createBinding(microphone, "volume-icon")
 
     // Destructure the accessor [0] and the setter function [1]
     const [visible, setVisible] = createState(false)
@@ -44,10 +44,10 @@ export default function OsdVolume(gdkmonitor: Gdk.Monitor) {
         }, ANIMATION_TIME)
     }
 
-    speaker.connect("notify::volume", () => showOsd())
-    speaker.connect("notify::mute", () => showOsd())
+    microphone.connect("notify::volume", () => showOsd())
+    microphone.connect("notify::mute", () => showOsd())
 
-    const osdWindow = (<window
+    const osdMicrophone = (<window
         name={windowName}
         namespace={windowName}
         gdkmonitor={gdkmonitor}
@@ -57,7 +57,7 @@ export default function OsdVolume(gdkmonitor: Gdk.Monitor) {
         visible={visible} // Pass the read-only accessor object here
     >
         <box cssName={"osd-box"} orientation={Gtk.Orientation.HORIZONTAL} spacing={8}>
-            <label label={"Speaker"} hexpand={false} halign={Gtk.Align.CENTER} cssName="osd-device-name" />
+            <label label={"Microphone"} hexpand={false} halign={Gtk.Align.CENTER} cssName="osd-device-name" />
             <image iconName={iconBinding} pixelSize={32} />
             <label label={volumeBinding.as(v => `${Math.round(v * 100)}`)} />
             <levelbar
@@ -72,5 +72,5 @@ export default function OsdVolume(gdkmonitor: Gdk.Monitor) {
     </window>
     ) as Gtk.Window;
 
-    return osdWindow;
+    return osdMicrophone;
 }
