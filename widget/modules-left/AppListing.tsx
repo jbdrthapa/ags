@@ -31,24 +31,34 @@ function launch(app?: Apps.Application) {
     }
 }
 
+
 function AppItem({ app }: { app: Apps.Application }) {
 
     return (
         <button
-            cssName="app-item"
+            cssName="app-tile"
             onClicked={() => {
                 appListingWindow.hide_all();
                 launch(app);
-            }}>
-            <box>
-                <box cssName="app-icon-wrapper">
-                    <image iconName={app.icon_name || "image-missing"} cssName="app-icon" />
-                </box>
-                <label label={app.name} cssName="app-name" />
+            }}
+        >
+            <box orientation={Gtk.Orientation.VERTICAL} halign={Gtk.Align.CENTER} tooltipText={app.description}>
+                <image
+                    iconName={app.icon_name || "image-missing"}
+                    pixelSize={84}
+                    cssName="app-icon"
+                />
+                <label
+                    label={app.name}
+                    wrap
+                    justify={Gtk.Justification.CENTER}
+                    cssName="app-name"
+                />
             </box>
         </button>
     );
 }
+
 
 
 
@@ -111,26 +121,37 @@ export function AppListing() {
     ) as any;
 
     const appsListing = (
-
-        <box orientation={Gtk.Orientation.VERTICAL} vexpand>
+        <Gtk.FlowBox
+            vexpand
+            hexpand
+            selectionMode={Gtk.SelectionMode.NONE}
+            columnSpacing={40}
+            rowSpacing={40}
+            minChildrenPerLine={6}
+            maxChildrenPerLine={6}
+            homogeneous={false}
+        >
             <For each={list}>
-                {(app, index) => (
-                    <AppItem app={app} />
+                {(app) => (
+                    <Gtk.FlowBoxChild>
+                        <AppItem app={app} />
+                    </Gtk.FlowBoxChild>
                 )}
             </For>
-        </box>
-    )
+        </Gtk.FlowBox>
+    );
+
 
 
     appListingWindow = new PopupWindow({
         name: windowName,
         namespace: windowName,
-        anchor: Astal.WindowAnchor.TOP | Astal.WindowAnchor.LEFT,
+        anchor: Astal.WindowAnchor.NONE,
         margin: 8,
         child: (
             <box cssName="modules-left-container" orientation={Gtk.Orientation.VERTICAL}>
                 {searchEntry}
-                <scrolledwindow vexpand heightRequest={400} $={(ref) => (appsScroll = ref)}>
+                <scrolledwindow vexpand heightRequest={800} hexpand widthRequest={1200} $={(ref) => (appsScroll = ref)}>
                     {appsListing}
                 </scrolledwindow>
             </box>

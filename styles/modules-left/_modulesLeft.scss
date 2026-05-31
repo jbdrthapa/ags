@@ -46,16 +46,6 @@ app-icon-wrapper {
   padding: 0px;
 }
 
-app-icon {
-  -gtk-icon-size: 48px;
-  margin: 0;
-}
-
-app-name {
-  margin-left: 20px;
-  font-size: 18px;
-}
-
 /* In your .css file */
 scrollbar {
   opacity: 0;
@@ -83,4 +73,24 @@ search-entry {
 
 search-entry:hover {
   border-color: $accent-background-transparent;
+}
+
+
+app-tile {
+    padding: 12px;
+    border-radius: $border-radius;
+}
+
+app-tile:hover {
+    background: $accent-background}
+
+app-icon {
+    margin-bottom: 10px;
+}
+
+app-name {
+    color: $text;
+    font-size: 20px;
+    font-weight: 600;
+    max-width: 80px;
 }
