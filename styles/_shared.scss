@@ -5,8 +5,12 @@
 #js-shell-modules-right {
   background-color: $base-transparent;
   border-radius: $border-radius;
-  border: 2px solid $accent-background;
+  border: 2px solid $surface0;
   padding: 0px;
+}
+
+#js-shell-modules-left{
+  padding: 20px;
 }
 
 tooltip {
