@@ -5,7 +5,7 @@ import { WindowName } from "../../constants"
 
 const ANIMATION_TIME = 2000
 let delayId: any = null
-let initCount = 2
+let initCount = 5
 
 export default function OsdBrigtness(gdkmonitor: Gdk.Monitor) {
 
@@ -30,7 +30,7 @@ export default function OsdBrigtness(gdkmonitor: Gdk.Monitor) {
     function showOsd() {
 
         // Added so it doesn't show the OSD when initializing. 
-        // This is due to 2 subscription to WirePlumber signals ("notify::volume","notify::mute").
+        // This is due to 4 subscriptions to Brightness signals.
 
         if (initCount > 0) {
             initCount--;
