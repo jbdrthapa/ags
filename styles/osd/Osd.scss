@@ -14,17 +14,17 @@ osd-device-name {
 }
 
 osd-box {
-    background-color: $base-transparent;
+    background-color: $base;
     border-radius: 99px;
     padding: 20px;
 }
 
-osd-box image {
+osd-box-icon {
     color: $overlay0;
     margin-right: 10px;
 }
 
-osd-box label {
+osd-box-label {
     background-color: $crust;
     padding: 4px;
     border-radius: $border-radius;

@@ -10,17 +10,17 @@ const TimeServiceProperties = {
         GObject.ParamFlags.READWRITE,
         '?'
     ),
-    'hour': GObject.ParamSpec.string(
-        'hour',
-        'Hour',
-        'Hour',
+    'time': GObject.ParamSpec.string(
+        'time',
+        'Time',
+        'Time',
         GObject.ParamFlags.READWRITE,
         '?'
     ),
-    'minute': GObject.ParamSpec.string(
-        'minute',
-        'Minute',
-        'Minute',
+    'date': GObject.ParamSpec.string(
+        'date',
+        'Date',
+        'Date',
         GObject.ParamFlags.READWRITE,
         '?'
     )
@@ -39,8 +39,8 @@ class InternalTimeService extends GObject.Object {
     }
 
     timezone = '';
-    hour = '';
-    minute = '';
+    time = '';
+    date = '';
 
     constructor() {
         super();
@@ -63,16 +63,24 @@ class InternalTimeService extends GObject.Object {
         try {
             console.log("Checking local time");
 
-            this.hour = await execAsync("bash -c 'date +%I'");
-            this.notify("hour");
+            let hour = await execAsync("bash -c 'date +%I'");
+            let minute = await execAsync("bash -c 'date +%M'");
+            let ampm = await execAsync("bash -c 'date +%P'");
 
-            this.minute = await execAsync("bash -c 'date +%M'");
-            this.notify("minute");
+            let weekday = await execAsync("bash -c 'date +%a'");
+            let month = await execAsync("bash -c 'date +%b'");
+            let day = await execAsync("bash -c 'date +%d'");
 
-            console.log(`Local time received as : ${this.hour} : ${this.minute}`);
+            this.time = hour + " : " + minute + " " + ampm;
+            this.notify("time");
+
+            this.date = weekday + ", " + month + " " + day;
+            this.notify("date");
+
+            console.log(`Local time received as : ${this.time} ${this.date}`);
         }
         catch {
-            console.log("Unable to refresh local time");
+            console.log("Unable to refresh local time and date.");
         }
     }
 
