@@ -1,4 +1,3 @@
-
 import Gtk from "gi://Gtk?version=4.0"
 import Apps from "gi://AstalApps"
 import PopupWindow from "../PopupWindow"
@@ -34,6 +33,17 @@ function launch(app?: Apps.Application) {
 
 function AppItem({ app }: { app: Apps.Application }) {
 
+    const appNameLengthMax = 15;
+    const appName = app.name.length > appNameLengthMax
+        ? app.name.substring(0, appNameLengthMax) + "..."
+        : app.name;
+
+    let appTooltip = "Application: " + app.name;
+
+    if (app.description !== null) {
+        appTooltip += "\n" + "Description: " + app.description;
+    }
+
     return (
         <button
             cssName="app-tile"
@@ -42,14 +52,14 @@ function AppItem({ app }: { app: Apps.Application }) {
                 launch(app);
             }}
         >
-            <box orientation={Gtk.Orientation.VERTICAL} halign={Gtk.Align.CENTER} tooltipText={app.description}>
+            <box orientation={Gtk.Orientation.VERTICAL} halign={Gtk.Align.CENTER} tooltipText={appTooltip}>
                 <image
                     iconName={app.icon_name || "image-missing"}
-                    pixelSize={84}
+                    pixelSize={96}
                     cssName="app-icon"
                 />
                 <label
-                    label={app.name}
+                    label={appName}
                     wrap
                     justify={Gtk.Justification.CENTER}
                     cssName="app-name"
@@ -58,9 +68,6 @@ function AppItem({ app }: { app: Apps.Application }) {
         </button>
     );
 }
-
-
-
 
 export function AppListing() {
     let searchentry: Gtk.Entry
@@ -141,8 +148,6 @@ export function AppListing() {
         </Gtk.FlowBox>
     );
 
-
-
     appListingWindow = new PopupWindow({
         name: windowName,
         namespace: windowName,
@@ -151,7 +156,7 @@ export function AppListing() {
         child: (
             <box cssName="modules-left-container" orientation={Gtk.Orientation.VERTICAL}>
                 {searchEntry}
-                <scrolledwindow vexpand heightRequest={800} hexpand widthRequest={1200} $={(ref) => (appsScroll = ref)}>
+                <scrolledwindow vexpand heightRequest={860} hexpand widthRequest={1300} $={(ref) => (appsScroll = ref)}>
                     {appsListing}
                 </scrolledwindow>
             </box>
