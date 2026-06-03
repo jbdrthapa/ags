@@ -9,6 +9,7 @@ import { TrayWidget } from "./bar/TrayWidget"
 import { PowerProfileWidget } from "./bar/PowerProfileWidget"
 import { BatteryWidget } from "./bar/BatteryWidget"
 import { WindowName } from "../constants";
+import IPCService from "../services/IPCService"
 // import { CavaWidget } from "./bar/CavaWidget"
 
 let modulesLeft: any;
@@ -35,6 +36,7 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
   const powerProfileWidget = PowerProfileWidget();
   const batteryWidget = BatteryWidget();
   // const cavaWidget = CavaWidget();
+  const ipcService = new IPCService();
 
   const backdrop = (
     <window
