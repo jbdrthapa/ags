@@ -1,6 +1,6 @@
 import GObject from "gi://GObject";
 import app from "ags/gtk4/app"
-import { WindowName } from "../constants";
+import { AppListing } from "../widget/modules-left/AppListing"
 
 const IPCServiceProperties = {
 
@@ -16,23 +16,19 @@ class InternalIPCService extends GObject.Object {
     constructor() {
         super();
 
-        // Connect to the native Astal IPC request server
+        let appListing = AppListing();
+
         app.connect("request", (app, request, response) => {
-            // 1. Parse incoming text (Strings can be plain text or structured JSON)
             const command = request[0];
 
             switch (command) {
-                case "launch-menu":
-
-                    // Todo launch the menu window
-                    app.get_window(WindowName.modulesLeft).show();
-                    
-                    response("SUCCESS: Launching menu");
+                case "launch-apps":
+                    appListing.toggle();
+                    response("Launching apps");
                     break;
 
                 default:
-                    // Always return a failure fallback so the calling shell doesn't hang
-                    response(`ERROR: Unknown custom command '${command}'`);
+                    response(`ERROR: Unknown request command '${command}'`);
                     break;
             }
         });

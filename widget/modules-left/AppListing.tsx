@@ -70,6 +70,11 @@ function AppItem({ app }: { app: Apps.Application }) {
 }
 
 export function AppListing() {
+
+    if (appListingWindow) {
+        return appListingWindow;
+    }
+
     let searchentry: Gtk.Entry
     let appsScroll: Gtk.ScrolledWindow
     let win: Astal.Window
