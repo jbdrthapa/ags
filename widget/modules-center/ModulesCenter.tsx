@@ -33,7 +33,6 @@ export function ModulesCenter() {
                         <label label={createBinding(timeService, "time")} cssName={"bar-date-time"} />
                         <label label="󰇙" cssName={"bar-date-time"} />
                     </box>
-
                     {weatherBarWidget}
                 </box>
             </button>
