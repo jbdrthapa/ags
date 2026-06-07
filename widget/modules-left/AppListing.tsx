@@ -142,6 +142,8 @@ export function AppListing() {
             minChildrenPerLine={6}
             maxChildrenPerLine={6}
             homogeneous={false}
+            valign={Gtk.Align.START}
+            halign={Gtk.Align.START}
         >
             <For each={list}>
                 {(app) => (
