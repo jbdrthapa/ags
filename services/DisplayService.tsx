@@ -37,6 +37,7 @@ class InternalDisplayService extends GObject.Object {
     private last_brightness_percent = 0;
     private brightness_percent = 0;
     private brightness_icon = "\u{f0cb5}";
+    private adjustment_value = 5;
 
     constructor() {
         super();
@@ -136,6 +137,16 @@ class InternalDisplayService extends GObject.Object {
 
         execAsync(['brightnessctl', '-d', `${displayDevice}`, 's', `${target}%`])
             .catch(print);
+    }
+
+    increaseBrightness() {
+        var adjusted_value = this.brightness_percent + this.adjustment_value;
+        this.setBrightnessValue(adjusted_value);
+    }
+
+    decreaseBrightness() {
+        var adjusted_value = this.brightness_percent - this.adjustment_value;
+        this.setBrightnessValue(adjusted_value);
     }
 
     resolveBrtCtlDevice(): Promise<void> {
