@@ -1,6 +1,7 @@
 import GObject from "gi://GObject";
 import app from "ags/gtk4/app"
 import { AppListing } from "../widget/modules-left/AppListing"
+import DisplayService from "./DisplayService";
 
 const IPCServiceProperties = {
 
@@ -18,6 +19,8 @@ class InternalIPCService extends GObject.Object {
 
         let appListing = AppListing();
 
+        let displayService = DisplayService.get_default();
+
         app.connect("request", (app, request, response) => {
             const command = request[0];
 
@@ -26,7 +29,14 @@ class InternalIPCService extends GObject.Object {
                     appListing.toggle();
                     response("Launching apps");
                     break;
-
+                case "increase-brightness":
+                    displayService.increaseBrightness();
+                    response("Increase Brightness");
+                    break;
+                case "decrease-brightness":
+                    displayService.decreaseBrightness();
+                    response("Decrease Brightness");
+                    break;
                 default:
                     response(`ERROR: Unknown request command '${command}'`);
                     break;
