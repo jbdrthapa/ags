@@ -20,17 +20,19 @@ export function WorkspaceWidget() {
 
   return (
     <box>
-      <box cssName="workspace-container" orientation={Gtk.Orientation.HORIZONTAL}>
+      <box spacing={10} cssName="workspace-container" orientation={Gtk.Orientation.HORIZONTAL}>
+        <button
+          valign={Gtk.Align.CENTER}
+          cssClasses={["workspace-item", "close"]}
+          onClicked={() => {
+            execAsync("niri msg action close-window")
+          }}
+          tooltipText={"Close Active"}
+        >
+          <label label="󰛉" />
+        </button>
         <box spacing={5}>
-          <button
-            valign={Gtk.Align.CENTER}
-            cssClasses={["workspace-item", "close"]}
-            onClicked={() => {
-              execAsync("niri msg action close-window")
-            }}
-          >
-            <label label="󰛉" />
-          </button>
+
           <For each={workspaces}>
             {(ws: NiriWorkspace) => (
               <button valign={Gtk.Align.CENTER}
@@ -45,28 +47,12 @@ export function WorkspaceWidget() {
             )}
           </For>
         </box>
-      </box>
-
-      <box spacing={10} cssName="active-window-container" marginStart={10}>
-
-        {/* Application Icon */}
-        <image visible={focused.as(win => !!win)} icon-name={focused.as(win => win?.app_id || "image-missing")} cssName="active-window-icon" />
-
-        {/* Application Title */}
-        <label cssName={"active-window-name"} label={focused.as(win => {
-          if (!win || !win.title) return "";
-
-          const maxLength = 60;
-          return win.title.length > maxLength
-            ? win.title.substring(0, maxLength) + "..."
-            : win.title;
-        })}
-          visible={focused.as(win => !!win && !!win.title)}
+        <image
+          visible={focused.as(win => !!win)}
+          icon-name={focused.as(win => win?.app_id || "image-missing")}
+          cssName="active-window-icon"
           tooltipText={focused.as(win => {
             if (!win || !win.title) return "";
-
-            // console.log("Focused window title:", win.title);
-
             return win.title;
           })}
         />
