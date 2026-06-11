@@ -9,7 +9,7 @@
   padding: 0px;
 }
 
-#js-shell-modules-left{
+#js-shell-modules-left {
   padding: 20px;
 }
 
@@ -63,6 +63,7 @@ bar-module-button-right {
 
 bar-module-button:hover {
   background-color: $surface0;
+  color: $accent-background;
   box-shadow: inset 1px -1px 0 0 $base, 0 4px 6px rgba(0, 0, 0, 0.5);
 }
 

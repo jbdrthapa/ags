@@ -2,6 +2,7 @@
 
 power-profile-button {
     background-color: transparent;
+    transition: transform 340ms cubic-bezier(.33, 1, .68, 1);
     background: none;
     margin-top: -5px;
     text-shadow:
@@ -9,6 +10,9 @@ power-profile-button {
         -2px -2px 0 $base,
         2px -2px 0 $base,
         -2px 2px 0 $base;
+}
+power-profile-button:hover{
+    transform: scale(1.25);
 }
 
 .power-profile-power-saver {

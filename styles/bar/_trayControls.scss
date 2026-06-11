@@ -4,24 +4,25 @@ tray-container {
   margin: 0px;
   margin-left: 8px;
   margin-right: 8px;
-  padding-left:8px;
+  padding-left: 8px;
   padding-right: 8px;
   padding-top: 1px;
   padding-bottom: 1px;
-  background-color: $base-transparent;
+  background-color: $crust-transparent;
   border-radius: $border-radius;
-  border: 2px solid $white;
+  border: 2px solid $base;
 }
 
 tray-module-button {
   border-radius: $border-radius;
   min-width: 50px;
   margin: 3px;
- }
+}
 
 tray-module-button>button {
-  transition: transform 150ms ease-out;
   background-color: transparent;
+  transform: scale(1);
+  transition: transform 340ms cubic-bezier(.33, 1, .68, 1);
 }
 
 tray-module-button:hover {
@@ -30,6 +31,5 @@ tray-module-button:hover {
 
 tray-module-button-image {
   background-color: transparent;
-  -gtk-icon-size: 24px;
-
+  -gtk-icon-size: 22px;
 }
