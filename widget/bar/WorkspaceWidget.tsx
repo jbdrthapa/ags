@@ -31,7 +31,7 @@ export function WorkspaceWidget() {
         >
           <label label="󰛉" />
         </button>
-        <box spacing={5}>
+        <box spacing={7}>
 
           <For each={workspaces}>
             {(ws: NiriWorkspace) => (
