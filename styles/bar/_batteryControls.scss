@@ -13,6 +13,7 @@ battery-percent {
 }
 
 battery-bar {
+    padding-bottom: 3px;
     >trough {
         border-radius: $border-radius;
         padding: 6px;
