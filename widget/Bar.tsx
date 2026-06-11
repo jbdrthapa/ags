@@ -81,9 +81,9 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
         <box $type="end">
           <box orientation={Gtk.Orientation.HORIZONTAL} spacing={10}>
             {/*{cavaWidget}*/}
-            {trayWidget}
             {powerProfileWidget}
             {batteryWidget}
+            {trayWidget}
             {modulesRight}
           </box>
         </box>
