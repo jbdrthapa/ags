@@ -27,9 +27,9 @@ export function ModulesCenter() {
             <button onClicked={() => popup.toggle()} >
                 <box>
                     <label label={createBinding(timeService, "date")} cssName={"bar-date-time"} />
-                    <label label="󰇙" cssName={"bar-date-time"} />
+                    <label label="󰇙" cssName={"bar-date-time-delim"} />
                     <label label={createBinding(timeService, "time")} cssName={"bar-date-time"} />
-                    <label label="󰇙" cssName={"bar-date-time"} />
+                    <label label="󰇙" cssName={"bar-date-time-delim"} />
                     {weatherBarWidget}
                 </box>
             </button>

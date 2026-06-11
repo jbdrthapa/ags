@@ -21,6 +21,11 @@ bar-date-time {
   padding-right: 5px;
 }
 
+bar-date-time-delim {
+  @extend bar-date-time;
+  color: $surface2;
+}
+
 time-container {
   background-color: transparent;
   margin-bottom: 10px;
