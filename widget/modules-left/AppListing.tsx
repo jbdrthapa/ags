@@ -159,7 +159,6 @@ export function AppListing() {
         name: windowName,
         namespace: windowName,
         anchor: Astal.WindowAnchor.NONE,
-        margin: 8,
         child: (
             <box cssName="modules-left-container" orientation={Gtk.Orientation.VERTICAL}>
                 {searchEntry}

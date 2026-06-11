@@ -9,8 +9,6 @@ import { TrayWidget } from "./bar/TrayWidget"
 import { PowerProfileWidget } from "./bar/PowerProfileWidget"
 import { BatteryWidget } from "./bar/BatteryWidget"
 import { WindowName } from "../constants";
-import IPCService from "../services/IPCService"
-// import { CavaWidget } from "./bar/CavaWidget"
 
 let modulesLeft: any;
 let modulesCenter: any;
@@ -35,8 +33,6 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
   const trayWidget = TrayWidget();
   const powerProfileWidget = PowerProfileWidget();
   const batteryWidget = BatteryWidget();
-  // const cavaWidget = CavaWidget();
-  const ipcService = new IPCService();
 
   const backdrop = (
     <window
@@ -78,14 +74,11 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
         <box $type="center">
           {modulesCenter}
         </box>
-        <box $type="end">
-          <box orientation={Gtk.Orientation.HORIZONTAL} spacing={10}>
-            {/*{cavaWidget}*/}
-            {powerProfileWidget}
-            {batteryWidget}
-            {trayWidget}
-            {modulesRight}
-          </box>
+        <box $type="end" spacing={10}>
+          {powerProfileWidget}
+          {batteryWidget}
+          {trayWidget}
+          {modulesRight}
         </box>
       </centerbox>
     </window>

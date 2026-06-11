@@ -10,7 +10,6 @@ tray-module-button {
   border-radius: $border-radius;
   transition: transform 340ms cubic-bezier(.33, 1, .68, 1);
   min-width: 50px;
-  margin: 3px;
 }
 
 tray-module-button>button {
@@ -24,5 +23,5 @@ tray-module-button:hover {
 
 tray-module-button-image {
   background-color: transparent;
-  -gtk-icon-size: 26px;
+  -gtk-icon-size: 22px;
 }

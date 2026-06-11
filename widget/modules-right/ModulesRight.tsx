@@ -39,7 +39,7 @@ export function ModulesRight() {
         name: windowName,
         namespace: windowName,
         anchor: Astal.WindowAnchor.TOP | Astal.WindowAnchor.RIGHT,
-        margin: 0,
+        margin: 8,
         child: (
             <box cssName="modules-right-container" vexpand={true} orientation={Gtk.Orientation.VERTICAL}>
                 <box orientation={Gtk.Orientation.VERTICAL} vexpand={true}  valign={Gtk.Align.START} spacing={10}>
