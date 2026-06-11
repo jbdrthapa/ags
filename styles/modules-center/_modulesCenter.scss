@@ -9,7 +9,8 @@ modules-center-container {
 }
 
 date-time-container {
-  background-color: $base-transparent;
+  background-color: $mantle-transparent;
+  border: 2px solid $surface2;
   border-radius: $border-radius;
 }
 

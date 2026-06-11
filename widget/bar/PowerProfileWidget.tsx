@@ -45,7 +45,7 @@ export function PowerProfileWidget() {
   }
 
   return (
-    <button vexpand={false} valign={Gtk.Align.START} onClicked={cycleProfile} tooltipText={activeProfile} cssName="power-profile-button">
+    <button vexpand valign={Gtk.Align.CENTER} onClicked={cycleProfile} tooltipText={activeProfile} cssName="power-profile-button">
       <label vexpand={true} valign={Gtk.Align.START} label={activeProfile.as(getIcon)} cssClasses={powerProfileClass} />
     </button>
   )
