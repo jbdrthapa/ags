@@ -31,6 +31,17 @@ export function WorkspaceWidget() {
         >
           <label label="󰛉" />
         </button>
+        <button
+          valign={Gtk.Align.CENTER}
+          cssClasses={["workspace-item", "focus"]}
+          onClicked={() => {
+            execAsync("niri msg action focus-column-left")
+          }}
+          tooltipText={"Focus Left"}
+        >
+          <label label="" />
+        </button>
+
         <box spacing={7}>
 
           <For each={workspaces}>
@@ -47,6 +58,17 @@ export function WorkspaceWidget() {
             )}
           </For>
         </box>
+        <button
+          valign={Gtk.Align.CENTER}
+          cssClasses={["workspace-item", "focus"]}
+          onClicked={() => {
+            execAsync("niri msg action focus-column-right")
+          }}
+          tooltipText={"Focus Right"}
+        >
+          <label label="" />
+        </button>
+
         <image
           visible={focused.as(win => !!win)}
           icon-name={focused.as(win => win?.app_id || "image-missing")}
