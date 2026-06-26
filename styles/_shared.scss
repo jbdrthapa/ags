@@ -2,8 +2,7 @@
 
 #js-shell-modules-left,
 #js-shell-modules-center,
-#js-shell-modules-right,
-#js-shell-desktopmenu {
+#js-shell-modules-right {
   background-color: $base-transparent;
   border-radius: $border-radius;
   border: 2px solid $surface0;
@@ -15,7 +14,8 @@
 }
 
 #js-shell-desktopmenu {
-  padding: 10px;
+  background-color: transparent;
+  padding: 5px;
 }
 
 tooltip {
@@ -73,20 +73,19 @@ bar-module-button:hover {
 }
 
 desktop-menu-button label {
-  background-color: $base;
+  background-color: $base-transparent;
   transition: all 400ms cubic-bezier(0.4, 0, 0.2, 1);
+  border: 2px solid $surface0;
   color: $overlay0;
   font-weight: 600;
-  border-radius: $border-radius;
-  min-width: 60px;
-  padding: 10px;
+  border-radius: 99px;
+  min-width: 160px;
+  padding: 5px;
   margin: 2px;
 }
 
 desktop-menu-button label:hover {
-  background-color: $surface0;
-  color: $accent-background;
-  box-shadow: inset 1px -1px 0 0 $base, 0 4px 6px rgba(0, 0, 0, 0.5);
+  border: 2px solid $accent-background;
 }
 
 /* The main slider container */
