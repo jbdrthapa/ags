@@ -36,6 +36,15 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
   const batteryWidget = BatteryWidget();
   const ipcService = new IPCService();
 
+  const backdropButton = (
+    <button
+      cssName="invisible-backdrop"
+      onClicked={() => {
+        CloseAllMenus();
+      }}
+    />
+  ) as Gtk.Button;
+
   const backdrop = (
     <window
       name={windowName}
@@ -46,12 +55,7 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
       application={app}
       cssName={"invisible-backdrop-window"}
     >
-      <button
-        cssName="invisible-backdrop"
-        onClicked={() => {
-          CloseAllMenus();
-        }}
-      />
+      {backdropButton}
     </window>
   ) as Astal.Window;
 
@@ -87,12 +91,23 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
 
   ) as Astal.Window;
 
-  const gesture = new Gtk.GestureClick();
-  gesture.connect("pressed", () => {
+  const backdropButtonGesture = new Gtk.GestureClick();
+  backdropButtonGesture.set_button(0); // Listen to all the buttons 
+  backdropButtonGesture.connect("pressed", (controller, n_press, x, y) => {
+
+    const button = controller.get_current_button();
+    console.log(`Mouse button ${button} pressed at coords: ${x}, ${y}`)
+  });
+
+  backdropButton.add_controller(backdropButtonGesture);
+
+  const barGesture = new Gtk.GestureClick();
+  barGesture.connect("pressed", () => {
+
     hide_others();
   });
 
-  barWindow.add_controller(gesture);
+  barWindow.add_controller(barGesture);
 
   function hide_others() {
     app.get_windows().forEach(window => {
