@@ -8,8 +8,8 @@ import { ModulesRight } from "./modules-right/ModulesRight"
 import { TrayWidget } from "./bar/TrayWidget"
 import { PowerProfileWidget } from "./bar/PowerProfileWidget"
 import { BatteryWidget } from "./bar/BatteryWidget"
-import { WindowName } from "../constants";
-import PopupWindow from "../widget/PopupWindow"
+import { DesktopMenu } from "./DesktopMenu"
+import { WindowName } from "../constants"
 import IPCService from "../services/IPCService"
 
 let modulesLeft: any;
@@ -30,6 +30,7 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
   modulesLeft = new (ModulesLeft as any)();
   modulesCenter = new (ModulesCenter as any)();
   modulesRight = new (ModulesRight as any)();
+  let desktopMenu = DesktopMenu();
 
   const workspaceWidget = WorkspaceWidget();
   const trayWidget = TrayWidget();
@@ -92,18 +93,6 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
 
   ) as Astal.Window;
 
-  let contextMenu = new PopupWindow({
-    name: windowName,
-    namespace: windowName,
-    anchor: Astal.WindowAnchor.TOP | Astal.WindowAnchor.LEFT,
-    child: (
-      <box orientation={Gtk.Orientation.VERTICAL}>
-        <button>Settings</button>
-        <button>Apps</button>
-      </box>
-    )
-  });
-
   const backdropButtonGesture = new Gtk.GestureClick();
   backdropButtonGesture.set_button(0); // Listen to all the buttons 
   backdropButtonGesture.connect("pressed", (controller, n_press, x, y) => {
@@ -111,9 +100,9 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
 
     if (button === 3) {
       console.log(`Mouse button ${button} pressed at coords: ${x}, ${y}`)
-      contextMenu.marginLeft = x + 8;
-      contextMenu.marginTop = y + 8;
-      contextMenu.toggle();
+      desktopMenu.marginLeft = x + 8;
+      desktopMenu.marginTop = y + 8;
+      desktopMenu.toggle();
     }
   });
 
