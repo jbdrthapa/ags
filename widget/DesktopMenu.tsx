@@ -13,8 +13,8 @@ export function DesktopMenu() {
         anchor: Astal.WindowAnchor.TOP | Astal.WindowAnchor.LEFT,
         child: (
             <box orientation={Gtk.Orientation.VERTICAL}>
-                <button>Settings</button>
-                <button>Apps</button>
+                <button cssName="desktop-menu-button">Settings</button>
+                <button cssName="desktop-menu-button">Apps</button>
             </box>
         )
     });

@@ -2,7 +2,8 @@
 
 #js-shell-modules-left,
 #js-shell-modules-center,
-#js-shell-modules-right {
+#js-shell-modules-right,
+#js-shell-desktopmenu {
   background-color: $base-transparent;
   border-radius: $border-radius;
   border: 2px solid $surface0;
@@ -11,6 +12,10 @@
 
 #js-shell-modules-left {
   padding: 20px;
+}
+
+#js-shell-desktopmenu {
+  padding: 10px;
 }
 
 tooltip {
@@ -62,6 +67,23 @@ bar-module-button-right {
 }
 
 bar-module-button:hover {
+  background-color: $surface0;
+  color: $accent-background;
+  box-shadow: inset 1px -1px 0 0 $base, 0 4px 6px rgba(0, 0, 0, 0.5);
+}
+
+desktop-menu-button label {
+  background-color: $base;
+  transition: all 400ms cubic-bezier(0.4, 0, 0.2, 1);
+  color: $overlay0;
+  font-weight: 600;
+  border-radius: $border-radius;
+  min-width: 60px;
+  padding: 10px;
+  margin: 2px;
+}
+
+desktop-menu-button label:hover {
   background-color: $surface0;
   color: $accent-background;
   box-shadow: inset 1px -1px 0 0 $base, 0 4px 6px rgba(0, 0, 0, 0.5);

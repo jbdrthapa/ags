@@ -15,6 +15,7 @@ import IPCService from "../services/IPCService"
 let modulesLeft: any;
 let modulesCenter: any;
 let modulesRight: any;
+let desktopMenu = DesktopMenu();
 
 const windowName = WindowName.bar;
 
@@ -22,6 +23,7 @@ function CloseAllMenus() {
   modulesCenter.popup.hide_all();
   modulesLeft.popup.hide_all();
   modulesRight.popup.hide_all();
+  desktopMenu.hide_all();
 }
 
 export default function Bar(gdkmonitor: Gdk.Monitor) {
@@ -30,7 +32,6 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
   modulesLeft = new (ModulesLeft as any)();
   modulesCenter = new (ModulesCenter as any)();
   modulesRight = new (ModulesRight as any)();
-  let desktopMenu = DesktopMenu();
 
   const workspaceWidget = WorkspaceWidget();
   const trayWidget = TrayWidget();
@@ -39,12 +40,7 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
   const ipcService = new IPCService();
 
   const backdropButton = (
-    <button
-      cssName="invisible-backdrop"
-      onClicked={() => {
-        CloseAllMenus();
-      }}
-    />
+    <button cssName="invisible-backdrop" />
   ) as Gtk.Button;
 
   const backdrop = (
@@ -95,13 +91,17 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
 
   const backdropButtonGesture = new Gtk.GestureClick();
   backdropButtonGesture.set_button(0); // Listen to all the buttons 
+  let offset = 8;
   backdropButtonGesture.connect("pressed", (controller, n_press, x, y) => {
     const button = controller.get_current_button();
 
-    if (button === 3) {
+    if (button === 1) {
+      CloseAllMenus();
+    }
+    else if (button === 3) {
       console.log(`Mouse button ${button} pressed at coords: ${x}, ${y}`)
-      desktopMenu.marginLeft = x + 8;
-      desktopMenu.marginTop = y + 8;
+      desktopMenu.marginLeft = x + offset;
+      desktopMenu.marginTop = y + offset;
       desktopMenu.toggle();
     }
   });
@@ -130,6 +130,7 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
   app.add_window(modulesLeft.popup);
   app.add_window(modulesCenter.popup);
   app.add_window(modulesRight.popup);
+  app.add_window(desktopMenu);
 
   console.debug("Current windows in app:");
   app.windows.forEach(win => console.log(win.name));
