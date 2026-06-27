@@ -38,14 +38,6 @@ app-item:hover {
   border-radius: $border-radius;
 }
 
-app-icon-wrapper {
-  background-color: $border;
-  border-radius: $border-radius;
-  min-width: 50px;
-  min-height: 50px;
-  padding: 0px;
-}
-
 /* In your .css file */
 scrollbar {
   opacity: 0;

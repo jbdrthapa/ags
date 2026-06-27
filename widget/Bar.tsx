@@ -99,7 +99,7 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
       CloseAllMenus();
     }
     else if (button === 3) {
-      console.log(`Mouse button ${button} pressed at coords: ${x}, ${y}`)
+      // console.log(`Mouse button ${button} pressed at coords: ${x}, ${y}`)
       desktopMenu.marginLeft = x + offset;
       desktopMenu.marginTop = y + offset;
       desktopMenu.toggle();
