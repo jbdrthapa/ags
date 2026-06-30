@@ -16,12 +16,38 @@ export function AudioSettings() {
     const microphonesBinding = createComputed(() => { return microphonesRawBinding() || []; });
 
 
+    //      ===================================================
+    //                  AUDIO SETTINGS
+    //      ===================================================
+    //      [🔊] Headphones (Built-in Audio)     [★ Default]
+    //      -------------------------------------------------
+    //      Layout: Stereo  |  State: Active  |  Muted: False
+
+    //      Channel Volumes:
+    //      左 Front Left   [=============|---------]  60%
+    //      右 Front Right  [=============|---------]  60%
+
+    //      [🔈] Monitor (HDMI Audio Output)     [Set Default]
+    //      -------------------------------------------------
+    //      Layout: 5.1     |  State: Idle    |  Muted: True
+
+
     const CHANNEL_LAYOUT: Record<number, string> = {
-        1: "Mono",
-        2: "Stereo",
-        4: "Quad",
-        6: "5.1 Surround",
-        8: "7.1 Surround"
+        1: "󰎤",
+        2: "󰎧",
+        4: "󰎭",
+        6: "󰎳",
+        8: "󰎹"
+    };
+
+    const MUTED_STATE: Record<string, string> = {
+        "true": "",
+        "false": "",
+    };
+
+    const DEFAULT_STATE: Record<string, string> = {
+        "true": "",
+        "false": "",
     };
 
     const NODE_STATE: Record<number, string> = {
@@ -30,6 +56,13 @@ export function AudioSettings() {
         2: "SUSPENDED",
         3: "IDLE",
         4: "RUNNING",
+    };
+
+    const SPEAKER_CHANNEL: Record<string, string> = {
+        "FL": "Front Left",
+        "FR": "Front Right",
+        "SL": "Surround Left",
+        "SR": "Surround Right",
     };
 
     return (
@@ -53,12 +86,13 @@ export function AudioSettings() {
 
                     const isMuted = createComputed(() => {
                         const rawIsMuted = createBinding(speaker, "mute");
-                        return rawIsMuted().toString() ?? "?";
+                        console.log("Muted: " + rawIsMuted().toString());
+                        return MUTED_STATE[rawIsMuted().toString()] ?? "?";
                     });
 
                     const isDefault = createComputed(() => {
                         const rawIsDefault = createBinding(speaker, "isDefault");
-                        return rawIsDefault().toString() ?? "?";
+                        return DEFAULT_STATE[rawIsDefault().toString()] ?? "?";
                     });
 
                     const state = createComputed(() => {
@@ -78,8 +112,23 @@ export function AudioSettings() {
                         <box spacing={10} orientation={Gtk.Orientation.VERTICAL} cssName="section-background">
 
                             <box orientation={Gtk.Orientation.HORIZONTAL} spacing={10}>
-                                <label label="Description" xalign={0} cssName="settings-param-caption" />
                                 <label label={description} cssName="settings-param-value" halign={Gtk.Align.START} />
+                            </box>
+                            <box orientation={Gtk.Orientation.HORIZONTAL} spacing={3}>
+                                <box orientation={Gtk.Orientation.HORIZONTAL} spacing={3}>
+                                    <label label="Layout" xalign={0} cssName="settings-param-caption" />
+                                    <label label={layout} cssName="settings-param-value" halign={Gtk.Align.START} />
+                                </box>
+
+                                <box orientation={Gtk.Orientation.HORIZONTAL} spacing={3}>
+                                    <label label="State" xalign={0} cssName="settings-param-caption" />
+                                    <label label={state} cssName="settings-param-value" halign={Gtk.Align.START} />
+                                </box>
+
+                                <box orientation={Gtk.Orientation.HORIZONTAL} spacing={3}>
+                                    <label label="Muted" xalign={0} cssName="settings-param-caption" />
+                                    <label label={isMuted} cssName="settings-param-value" halign={Gtk.Align.START} />
+                                </box>
                             </box>
 
                             <box orientation={Gtk.Orientation.HORIZONTAL} spacing={10}>
@@ -88,38 +137,27 @@ export function AudioSettings() {
                             </box>
 
                             <box orientation={Gtk.Orientation.HORIZONTAL} spacing={10}>
-                                <label label="Muted" xalign={0} cssName="settings-param-caption" />
-                                <label label={isMuted} cssName="settings-param-value" halign={Gtk.Align.START} />
-                            </box>
-
-                            <box orientation={Gtk.Orientation.HORIZONTAL} spacing={10}>
                                 <label label="Default" xalign={0} cssName="settings-param-caption" />
                                 <label label={isDefault} cssName="settings-param-value" halign={Gtk.Align.START} />
                             </box>
 
-                            <box orientation={Gtk.Orientation.HORIZONTAL} spacing={10}>
-                                <label label="State" xalign={0} cssName="settings-param-caption" />
-                                <label label={state} cssName="settings-param-value" halign={Gtk.Align.START} />
-                            </box>
-
-                            <box orientation={Gtk.Orientation.HORIZONTAL} spacing={10}>
-                                <label label="Layout" xalign={0} cssName="settings-param-caption" />
-                                <label label={layout} cssName="settings-param-value" halign={Gtk.Align.START} />
-                            </box>
-
                             <For each={createComputed(() => speaker.channels || [])}>
                                 {(channel: any) => {
-                                    // 1. Create a live hook for this specific channel's volume property
+
                                     const channelVolume = createBinding(channel, "volume");
 
-                                    // 2. Derive a reactive text stream from that live hook
                                     const volumeText = createComputed(() => `${Math.round(channelVolume() * 100)}%`);
 
                                     return (
                                         <box orientation={Gtk.Orientation.HORIZONTAL} spacing={10} marginStart={15}>
                                             <label label={`${channel.name}:`} />
-                                            {/* 3. Pass the accessor function directly so the widget redraws when it ticks */}
                                             <label label={volumeText} />
+                                            <slider
+                                                cssClasses={["slider-control"]}
+                                                tooltipText={volumeText}
+                                                widthRequest={280}
+                                                onChangeValue={({ value }) => channel.set_volume(value)}
+                                                value={channelVolume} />
                                         </box>
                                     );
                                 }}
