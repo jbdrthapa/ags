@@ -51,7 +51,7 @@ export function Settings() {
                             halign={Gtk.Align.END}
                             onClicked={() => {
                                 const window = app.get_window(windowName);
-                                window?.close();
+                                window?.toggle();
                             }}
                             cssName="settings-close-button"
                         >
