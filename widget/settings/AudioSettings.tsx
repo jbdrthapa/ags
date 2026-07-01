@@ -86,7 +86,6 @@ export function AudioSettings() {
 
                     const isMuted = createComputed(() => {
                         const rawIsMuted = createBinding(speaker, "mute");
-                        console.log("Muted: " + rawIsMuted().toString());
                         return MUTED_STATE[rawIsMuted().toString()] ?? "?";
                     });
 
@@ -107,6 +106,7 @@ export function AudioSettings() {
                         return CHANNEL_LAYOUT[count] ?? "?";
                     });
 
+                    const lockChannels = createBinding(speaker, "lockChannels");
 
                     return (
                         <box spacing={10} orientation={Gtk.Orientation.VERTICAL} cssName="section-background">
@@ -141,6 +141,21 @@ export function AudioSettings() {
                                 <label label={isDefault} cssName="settings-param-value" halign={Gtk.Align.START} />
                             </box>
 
+                            <box orientation={Gtk.Orientation.HORIZONTAL} spacing={10}>
+                                <label label="Lock" xalign={0} cssName="settings-param-caption" />
+                                <Gtk.Switch
+                                active={lockChannels}
+                                hexpand={false}
+                                vexpand={false}
+                                halign={Gtk.Align.END}
+                                valign={Gtk.Align.CENTER}
+                                onNotifyActive={(self) => {
+                                    speaker.lockChannels = self.active;
+                                }}/>
+                            </box>
+
+                            
+
                             <For each={createComputed(() => speaker.channels || [])}>
                                 {(channel: any) => {
 
@@ -148,9 +163,14 @@ export function AudioSettings() {
 
                                     const volumeText = createComputed(() => `${Math.round(channelVolume() * 100)}%`);
 
+                                    const channelName = createComputed(() => {
+                                        const rawChannelName = createBinding(channel, "name");
+                                        return SPEAKER_CHANNEL[rawChannelName()];
+                                    })
+
                                     return (
                                         <box orientation={Gtk.Orientation.HORIZONTAL} spacing={10} marginStart={15}>
-                                            <label label={`${channel.name}:`} />
+                                            <label label={channelName} />
                                             <label label={volumeText} />
                                             <slider
                                                 cssClasses={["slider-control"]}
@@ -158,6 +178,7 @@ export function AudioSettings() {
                                                 widthRequest={280}
                                                 onChangeValue={({ value }) => channel.set_volume(value)}
                                                 value={channelVolume} />
+
                                         </box>
                                     );
                                 }}
@@ -167,8 +188,9 @@ export function AudioSettings() {
                         </box>
                     )
                 }}
-            </For>
+            </For >
         </box >
     );
 }
+
 

@@ -40,9 +40,9 @@ export default function Settings(gdkmonitor: Gdk.Monitor) {
             namespace={windowName}
             class={windowName}
             gdkmonitor={gdkmonitor}
-            anchor={Astal.WindowAnchor.BOTTOM}
+            anchor={Astal.WindowAnchor.NONE}
             exclusivity={Astal.Exclusivity.IGNORE}
-            layer={Astal.Layer.TOP}
+            layer={Astal.Layer.OVERLAY}
             application={app}
             visible={false}
             $={(self) => {

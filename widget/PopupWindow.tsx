@@ -16,8 +16,8 @@ export default GObject.registerClass({
 
         const revealer = new Gtk.Revealer({
             child: child,
-            transition_type: Gtk.RevealerTransitionType.FADE_SLIDE_DOWN,
-            transition_duration: 200,
+            transition_type: Gtk.RevealerTransitionType.SLIDE_DOWN,
+            transition_duration: 300,
             reveal_child: false,
         });
 
@@ -70,7 +70,7 @@ export default GObject.registerClass({
             if (!this.revealer.reveal_child) {
                 this.set_visible(false);
             }
-        }, 200);
+        }, 50);
     }
 
     toggle() {
