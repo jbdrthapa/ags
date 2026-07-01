@@ -5,6 +5,7 @@ import { ModulesCenter } from "./modules-center/ModulesCenter"
 import { ModulesLeft } from "./modules-left/ModulesLeft"
 import { WorkspaceWidget } from "./bar/WorkspaceWidget"
 import { ModulesRight } from "./modules-right/ModulesRight"
+import { Settings } from "./settings/Settings"
 import { TrayWidget } from "./bar/TrayWidget"
 import { PowerProfileWidget } from "./bar/PowerProfileWidget"
 import { BatteryWidget } from "./bar/BatteryWidget"
@@ -15,6 +16,7 @@ import IPCService from "../services/IPCService"
 let modulesLeft: any;
 let modulesCenter: any;
 let modulesRight: any;
+let settings: any;
 let desktopMenu = DesktopMenu();
 
 const windowName = WindowName.bar;
@@ -32,6 +34,7 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
   modulesLeft = new (ModulesLeft as any)();
   modulesCenter = new (ModulesCenter as any)();
   modulesRight = new (ModulesRight as any)();
+  settings = new (Settings as any)();
 
   const workspaceWidget = WorkspaceWidget();
   const trayWidget = TrayWidget();
@@ -131,6 +134,7 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
   app.add_window(modulesCenter.popup);
   app.add_window(modulesRight.popup);
   app.add_window(desktopMenu);
+  app.add_window(settings);
 
   console.debug("Current windows in app:");
   app.windows.forEach(win => console.log(win.name));
