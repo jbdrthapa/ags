@@ -33,11 +33,11 @@ export function AudioSettings() {
 
 
     const CHANNEL_LAYOUT: Record<number, string> = {
-        1: "󰎤",
-        2: "󰎧",
-        4: "󰎭",
-        6: "󰎳",
-        8: "󰎹"
+        1: "assets/speaker_layout/mono.svg",
+        2: "assets/speaker_layout/stereo.svg",
+        4: "assets/speaker_layout/quad.svg",
+        6: "assets/speaker_layout/5p1_surround.svg",
+        8: "assets/speaker_layout/7p1_surround.svg"
     };
 
     const MUTED_STATE: Record<string, string> = {
@@ -116,7 +116,7 @@ export function AudioSettings() {
                         return MEDIA_CLASS[rawMediaClass()] ?? "?";
                     });
 
-                    const layout = createComputed(() => {
+                    const layoutIconPath = createComputed(() => {
                         const rawLayout = createBinding(speaker, "channels");
                         const channelsArray = rawLayout() || [];
                         const count = channelsArray.length;
@@ -134,7 +134,7 @@ export function AudioSettings() {
                             <box orientation={Gtk.Orientation.HORIZONTAL} spacing={3}>
                                 <box orientation={Gtk.Orientation.HORIZONTAL} spacing={3}>
                                     <label label="Layout" xalign={0} cssName="settings-param-caption" />
-                                    <label label={layout} cssName="settings-param-value" halign={Gtk.Align.START} />
+                                    <image file={layoutIconPath} iconSize={Gtk.IconSize.LARGE} cssName="settings-param-icon" halign={Gtk.Align.START} />
                                 </box>
 
                                 <box orientation={Gtk.Orientation.HORIZONTAL} spacing={3}>
