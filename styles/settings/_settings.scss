@@ -54,6 +54,12 @@ section-background {
   min-height: 500px;
 }
 
+settings-param-heading {
+  color: $overlay0;
+  font-weight: 600;
+  font-size: 24px;
+}
+
 settings-param-caption,
 settings-param-caption-compact {
   color: $subtext0;
@@ -89,15 +95,10 @@ settings-param-value {
 }
 
 settings-param-value-compact {
-  padding-left: 10px;
-  padding-right: 10px;
-  padding-top: 2px;
-  padding-bottom: 2px;
+  padding: 2px;
 }
 
-settings-param-icon {
-  
-}
+settings-param-icon {}
 
 settings-button {
   background-color: $surface0;

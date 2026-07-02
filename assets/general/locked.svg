@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <!-- Shackle / U-bar -->
+  <path d="M18 28 V20 C18 11.2 24.2 4 32 4 C39.8 4 46 11.2 46 20 V28" fill="none" stroke="#e0e0e0" stroke-width="6" stroke-linecap="round"/>
+  <!-- Lock Body -->
+  <rect x="10" y="24" width="44" height="34" rx="6" fill="#3584e4"/>
+  <!-- Keyhole Detail -->
+  <circle cx="32" cy="38" r="4" fill="#ffffff"/>
+  <path d="M30 40 H34 L35 48 H29 Z" fill="#ffffff"/>
+</svg>
