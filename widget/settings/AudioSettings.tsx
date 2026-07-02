@@ -1,7 +1,7 @@
 import Gtk from "gi://Gtk?version=4.0";
-import Gdk from "gi://Gdk?version=4.0"
 import { For, createBinding, createComputed } from "gnim";
-import AstalWp from "gi://AstalWp?version=0.1"
+import AstalWp from "gi://AstalWp?version=0.1";
+import Utils from "../../utils";
 
 export function AudioSettings() {
 
@@ -32,19 +32,21 @@ export function AudioSettings() {
     //      Layout: 5.1     |  State: Idle    |  Muted: True
 
 
+    const CONFIG_DIR = `${Utils.GetUserConfigDirectory()}/ags`;
+
     const CHANNEL_LAYOUT: Record<number, string> = {
-        1: "assets/speaker_layout/mono.svg",
-        2: "assets/speaker_layout/stereo.svg",
-        4: "assets/speaker_layout/quad.svg",
-        6: "assets/speaker_layout/5p1_surround.svg",
-        8: "assets/speaker_layout/7p1_surround.svg"
+        1: `${CONFIG_DIR}/assets/speaker_layout/mono.svg`,
+        2: `${CONFIG_DIR}/assets/speaker_layout/stereo.svg`,
+        4: `${CONFIG_DIR}/assets/speaker_layout/quad.svg`,
+        6: `${CONFIG_DIR}/assets/speaker_layout/5p1_surround.svg`,
+        8: `${CONFIG_DIR}/assets/speaker_layout/7p1_surround.svg`
     };
 
     const NODE_STATE: Record<number, string> = {
-        0: "assets/node_state/node_state_0_creating.svg",              // ASTAL_WP_NODE_STATE_CREATING
-        1: "assets/node_state/node_state_1_suspended.svg",             // ASTAL_WP_NODE_STATE_SUSPENDED
-        2: "assets/node_state/node_state_2_idle.svg",                  // ASTAL_WP_NODE_STATE_IDLE
-        3: "assets/node_state/node_state_3_running.svg",               // ASTAL_WP_NODE_STATE_RUNNING
+        0: `${CONFIG_DIR}/assets/node_state/node_state_0_creating.svg`,              // ASTAL_WP_NODE_STATE_CREATING
+        1: `${CONFIG_DIR}/assets/node_state/node_state_1_suspended.svg`,             // ASTAL_WP_NODE_STATE_SUSPENDED
+        2: `${CONFIG_DIR}/assets/node_state/node_state_2_idle.svg`,                  // ASTAL_WP_NODE_STATE_IDLE
+        3: `${CONFIG_DIR}/assets/node_state/node_state_3_running.svg`,               // ASTAL_WP_NODE_STATE_RUNNING
     };
 
     const SPEAKER_CHANNEL: Record<string, string> = {
@@ -55,16 +57,16 @@ export function AudioSettings() {
     };
 
     const MEDIA_CLASS: Record<number, string> = {
-        0: "assets/media_class/media_0_unknown.svg",                   // ASTAL_WP_MEDIA_CLASS_UNKNOWN
-        1: "assets/media_class/media_1_audio_microphone.svg",          // ASTAL_WP_MEDIA_CLASS_AUDIO_MICROPHONE
-        2: "assets/media_class/media_2_audio_speaker.svg",             // ASTAL_WP_MEDIA_CLASS_AUDIO_SPEAKER
-        3: "assets/media_class/media_3_audio_recorder.svg",            // ASTAL_WP_MEDIA_CLASS_AUDIO_RECORDER
-        4: "assets/media_class/media_4_audio_stream.svg",              // ASTAL_WP_MEDIA_CLASS_AUDIO_STREAM
-        5: "assets/media_class/media_5_video_source.svg",              // ASTAL_WP_MEDIA_CLASS_VIDEO_SOURCE
-        6: "assets/media_class/media_6_video_sink.svg",                // ASTAL_WP_MEDIA_CLASS_VIDEO_SINK
-        7: "assets/media_class/media_7_video_recorder.svg",            // ASTAL_WP_MEDIA_CLASS_VIDEO_RECORDER
-        8: "assets/media_class/media_8_video_stream.svg",              // ASTAL_WP_MEDIA_CLASS_VIDEO_STREAM
-        9: "assets/media_class/media_9_audio_source_virtual",          // ASTAL_WP_MEDIA_CLASS_AUDIO_SOURCE_VIRTUAL
+        0: `${CONFIG_DIR}/assets/media_class/media_0_unknown.svg`,                   // ASTAL_WP_MEDIA_CLASS_UNKNOWN
+        1: `${CONFIG_DIR}/assets/media_class/media_1_audio_microphone.svg`,          // ASTAL_WP_MEDIA_CLASS_AUDIO_MICROPHONE
+        2: `${CONFIG_DIR}/assets/media_class/media_2_audio_speaker.svg`,             // ASTAL_WP_MEDIA_CLASS_AUDIO_SPEAKER
+        3: `${CONFIG_DIR}/assets/media_class/media_3_audio_recorder.svg`,            // ASTAL_WP_MEDIA_CLASS_AUDIO_RECORDER
+        4: `${CONFIG_DIR}/assets/media_class/media_4_audio_stream.svg`,              // ASTAL_WP_MEDIA_CLASS_AUDIO_STREAM
+        5: `${CONFIG_DIR}/assets/media_class/media_5_video_source.svg`,              // ASTAL_WP_MEDIA_CLASS_VIDEO_SOURCE
+        6: `${CONFIG_DIR}/assets/media_class/media_6_video_sink.svg`,                // ASTAL_WP_MEDIA_CLASS_VIDEO_SINK
+        7: `${CONFIG_DIR}/assets/media_class/media_7_video_recorder.svg`,            // ASTAL_WP_MEDIA_CLASS_VIDEO_RECORDER
+        8: `${CONFIG_DIR}/assets/media_class/media_8_video_stream.svg`,              // ASTAL_WP_MEDIA_CLASS_VIDEO_STREAM
+        9: `${CONFIG_DIR}/assets/media_class/media_9_audio_source_virtual`,          // ASTAL_WP_MEDIA_CLASS_AUDIO_SOURCE_VIRTUAL
     }
 
     return (
