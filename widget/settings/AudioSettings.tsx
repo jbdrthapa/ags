@@ -40,21 +40,11 @@ export function AudioSettings() {
         8: "assets/speaker_layout/7p1_surround.svg"
     };
 
-    const MUTED_STATE: Record<string, string> = {
-        "true": "",
-        "false": "",
-    };
-
-    const DEFAULT_STATE: Record<string, string> = {
-        "true": "",
-        "false": "",
-    };
-
     const NODE_STATE: Record<number, string> = {
-        0: "Creating",                  // ASTAL_WP_NODE_STATE_CREATING
-        1: "Suspended",                 // ASTAL_WP_NODE_STATE_SUSPENDED
-        2: "Idle",                      // ASTAL_WP_NODE_STATE_IDLE
-        3: "Running",                   // ASTAL_WP_NODE_STATE_RUNNING
+        0: "assets/node_state/node_state_0_creating.svg",              // ASTAL_WP_NODE_STATE_CREATING
+        1: "assets/node_state/node_state_1_suspended.svg",             // ASTAL_WP_NODE_STATE_SUSPENDED
+        2: "assets/node_state/node_state_2_idle.svg",                  // ASTAL_WP_NODE_STATE_IDLE
+        3: "assets/node_state/node_state_3_running.svg",               // ASTAL_WP_NODE_STATE_RUNNING
     };
 
     const SPEAKER_CHANNEL: Record<string, string> = {
@@ -65,16 +55,16 @@ export function AudioSettings() {
     };
 
     const MEDIA_CLASS: Record<number, string> = {
-        0: "Unknown",                   // ASTAL_WP_MEDIA_CLASS_UNKNOWN
-        1: "Audio Microphone",          // ASTAL_WP_MEDIA_CLASS_AUDIO_MICROPHONE
-        2: "Audio Speaker",             // ASTAL_WP_MEDIA_CLASS_AUDIO_SPEAKER
-        3: "Audio Recorder",            // ASTAL_WP_MEDIA_CLASS_AUDIO_RECORDER
-        4: "Audio Stream",              // ASTAL_WP_MEDIA_CLASS_AUDIO_STREAM
-        5: "Video Source",              // ASTAL_WP_MEDIA_CLASS_VIDEO_SOURCE
-        6: "Video Sink",                // ASTAL_WP_MEDIA_CLASS_VIDEO_SINK
-        7: "Video Recorder",            // ASTAL_WP_MEDIA_CLASS_VIDEO_RECORDER
-        8: "Video Stream",              // ASTAL_WP_MEDIA_CLASS_VIDEO_STREAM
-        9: "Audio Source (Virtual)",    // ASTAL_WP_MEDIA_CLASS_AUDIO_SOURCE_VIRTUAL
+        0: "assets/media_class/media_0_unknown.svg",                   // ASTAL_WP_MEDIA_CLASS_UNKNOWN
+        1: "assets/media_class/media_1_audio_microphone.svg",          // ASTAL_WP_MEDIA_CLASS_AUDIO_MICROPHONE
+        2: "assets/media_class/media_2_audio_speaker.svg",             // ASTAL_WP_MEDIA_CLASS_AUDIO_SPEAKER
+        3: "assets/media_class/media_3_audio_recorder.svg",            // ASTAL_WP_MEDIA_CLASS_AUDIO_RECORDER
+        4: "assets/media_class/media_4_audio_stream.svg",              // ASTAL_WP_MEDIA_CLASS_AUDIO_STREAM
+        5: "assets/media_class/media_5_video_source.svg",              // ASTAL_WP_MEDIA_CLASS_VIDEO_SOURCE
+        6: "assets/media_class/media_6_video_sink.svg",                // ASTAL_WP_MEDIA_CLASS_VIDEO_SINK
+        7: "assets/media_class/media_7_video_recorder.svg",            // ASTAL_WP_MEDIA_CLASS_VIDEO_RECORDER
+        8: "assets/media_class/media_8_video_stream.svg",              // ASTAL_WP_MEDIA_CLASS_VIDEO_STREAM
+        9: "assets/media_class/media_9_audio_source_virtual",          // ASTAL_WP_MEDIA_CLASS_AUDIO_SOURCE_VIRTUAL
     }
 
     return (
@@ -96,22 +86,12 @@ export function AudioSettings() {
                         return rawIcon() ?? "audio-volume-muted";
                     });
 
-                    const isMuted = createComputed(() => {
-                        const rawIsMuted = createBinding(speaker, "mute");
-                        return MUTED_STATE[rawIsMuted().toString()] ?? "?";
-                    });
-
-                    const isDefault = createComputed(() => {
-                        const rawIsDefault = createBinding(speaker, "isDefault");
-                        return DEFAULT_STATE[rawIsDefault().toString()] ?? "?";
-                    });
-
-                    const state = createComputed(() => {
+                    const nodeStateIconPath = createComputed(() => {
                         const rawState = createBinding(speaker, "state");
                         return NODE_STATE[rawState()] ?? "?";
                     });
 
-                    const mediaClass = createComputed(() => {
+                    const mediaClassIconPath = createComputed(() => {
                         const rawMediaClass = createBinding(speaker, "mediaClass");
                         return MEDIA_CLASS[rawMediaClass()] ?? "?";
                     });
@@ -122,6 +102,10 @@ export function AudioSettings() {
                         const count = channelsArray.length;
                         return CHANNEL_LAYOUT[count] ?? "?";
                     });
+
+                    const isDefault = createBinding(speaker, "isDefault");
+
+                    const isMute = createBinding(speaker, "mute");
 
                     const lockChannels = createBinding(speaker, "lockChannels");
 
@@ -139,17 +123,25 @@ export function AudioSettings() {
 
                                 <box orientation={Gtk.Orientation.HORIZONTAL} spacing={3}>
                                     <label label="Class" xalign={0} cssName="settings-param-caption" />
-                                    <label label={mediaClass} cssName="settings-param-value" halign={Gtk.Align.START} />
+                                    <image file={mediaClassIconPath} iconSize={Gtk.IconSize.LARGE} cssName="settings-param-icon" halign={Gtk.Align.START} />
                                 </box>
 
                                 <box orientation={Gtk.Orientation.HORIZONTAL} spacing={3}>
                                     <label label="State" xalign={0} cssName="settings-param-caption" />
-                                    <label label={state} cssName="settings-param-value" halign={Gtk.Align.START} />
+                                    <image file={nodeStateIconPath} iconSize={Gtk.IconSize.LARGE} cssName="settings-param-icon" halign={Gtk.Align.START} />
                                 </box>
 
                                 <box orientation={Gtk.Orientation.HORIZONTAL} spacing={3}>
                                     <label label="Muted" xalign={0} cssName="settings-param-caption" />
-                                    <label label={isMuted} cssName="settings-param-value" halign={Gtk.Align.START} />
+                                    <Gtk.Switch
+                                        active={isMute}
+                                        hexpand={false}
+                                        vexpand={false}
+                                        halign={Gtk.Align.END}
+                                        valign={Gtk.Align.CENTER}
+                                        onNotifyActive={(self) => {
+                                            speaker.mute = self.active;
+                                        }} />
                                 </box>
                             </box>
 
@@ -160,7 +152,15 @@ export function AudioSettings() {
 
                             <box orientation={Gtk.Orientation.HORIZONTAL} spacing={10}>
                                 <label label="Default" xalign={0} cssName="settings-param-caption" />
-                                <label label={isDefault} cssName="settings-param-value" halign={Gtk.Align.START} />
+                                <Gtk.Switch
+                                    active={isDefault}
+                                    hexpand={false}
+                                    vexpand={false}
+                                    halign={Gtk.Align.END}
+                                    valign={Gtk.Align.CENTER}
+                                    onNotifyActive={(self) => {
+                                        speaker.isDefault = self.active;
+                                    }} />
                             </box>
 
                             <box orientation={Gtk.Orientation.HORIZONTAL} spacing={10}>
