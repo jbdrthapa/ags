@@ -14,19 +14,19 @@ export default GObject.registerClass({
     constructor(props: any & { child: Gtk.Widget }) {
         const { name, child, ...rest } = props;
 
-        const revealer = new Gtk.Revealer({
-            child: child,
-            transition_type: Gtk.RevealerTransitionType.SLIDE_DOWN,
-            transition_duration: 300,
-            reveal_child: false,
-        });
-
         super({
             ...rest,
             name,
             layer: Astal.Layer.OVERLAY,
             visible: false,
             keymode: Astal.Keymode.ON_DEMAND,
+        });
+
+        const revealer = new Gtk.Revealer({
+            child: child,
+            transition_type: Gtk.RevealerTransitionType.SLIDE_DOWN,
+            transition_duration: 300,
+            reveal_child: false,
         });
 
         this.revealer = revealer;
