@@ -1,7 +1,6 @@
 import app from "ags/gtk4/app"
 import style from "./styles/main.scss"
 import Bar from "./widget/Bar"
-import Settings from "./widget/settings/Settings"
 import NotificationPopups from "./widget/modules-right/NotificationPopups"
 import Osd from "./widget/osd/Osd"
 
@@ -14,7 +13,6 @@ app.start({
   main() {
     for (const monitor of app.get_monitors()) {
       Bar(monitor)
-      Settings(monitor)
       NotificationPopups(monitor)
       Osd(monitor)
     }

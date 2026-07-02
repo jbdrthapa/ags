@@ -5,6 +5,7 @@ import app from "ags/gtk4/app";
 import { WindowName } from "../../constants";
 import SystemInfoService from "../../services/SystemInfoService";
 import { createBinding } from "gnim";
+import PopupWindow from "../PopupWindow";
 
 const settingsWindowName = WindowName.settings
 const modulesRightWindowName = WindowName.modulesRight;
@@ -47,11 +48,12 @@ export function SystemInfoWidget() {
             <box orientation={Gtk.Orientation.VERTICAL} halign={Gtk.Align.END} hexpand={false} vexpand={false} valign={Gtk.Align.CENTER}>
                 <button label="" cssName="system-info-button" tooltipText="Settings" onClicked={() => {
                     app.toggle_window(modulesRightWindowName);
-                    app.toggle_window(settingsWindowName)
+                    let settingsWindow = app.get_window(settingsWindowName);
+                    settingsWindow?.toggle();
                 }} />
 
                 <button label="" cssName="system-info-button" tooltipText="Restart Shell" onClicked={() => {
-                    GLib.spawn_command_line_async('bash -c "ags quit -i js-shell; ags run"');
+                    GLib.spawn_command_line_async('bash -c "killall gjs; ~/.config/ags/js-shell"');
                 }} />
             </box>
         </box>

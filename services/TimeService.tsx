@@ -61,7 +61,7 @@ class InternalTimeService extends GObject.Object {
 
     private async RefreshTime() {
         try {
-            console.log("Checking local time");
+            console.debug("Checking local time");
 
             let hour = await execAsync("bash -c 'date +%I'");
             let minute = await execAsync("bash -c 'date +%M'");
@@ -77,7 +77,7 @@ class InternalTimeService extends GObject.Object {
             this.date = weekday + ", " + month + " " + day;
             this.notify("date");
 
-            console.log(`Local time received as : ${this.time} ${this.date}`);
+            console.debug(`Local time received as : ${this.time} ${this.date}`);
         }
         catch {
             console.log("Unable to refresh local time and date.");

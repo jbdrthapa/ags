@@ -16,7 +16,6 @@ let popup: any;
 
 export function ModulesCenter() {
 
-    const times = WorldClocks();
     const clockWidget = ClockWidget();
     const calendarWidget = CalendarWidget();
     const weatherBarWidget = WeatherBarWidget();
@@ -24,15 +23,13 @@ export function ModulesCenter() {
     const timeService = TimeService.get_default();
 
     const button = (
-        <box>
-            <button onClicked={() => popup.toggle()} cssName={"date-time-container"}>
-                <box marginStart={10} marginEnd={10}>
-                    <box>
-                        <label label={createBinding(timeService, "date")} cssName={"bar-date-time"} />
-                        <label label="󰇙" cssName={"bar-date-time"} />
-                        <label label={createBinding(timeService, "time")} cssName={"bar-date-time"} />
-                        <label label="󰇙" cssName={"bar-date-time"} />
-                    </box>
+        <box cssName={"date-time-weather-container"}>
+            <button onClicked={() => popup.toggle()} >
+                <box>
+                    <label label={createBinding(timeService, "date")} cssName={"bar-date-time"} />
+                    <label label="󰇙" cssName={"bar-date-time-delim"} />
+                    <label label={createBinding(timeService, "time")} cssName={"bar-date-time"} />
+                    <label label="󰇙" cssName={"bar-date-time-delim"} />
                     {weatherBarWidget}
                 </box>
             </button>

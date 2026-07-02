@@ -14,10 +14,13 @@ osd-device-name {
 }
 
 osd-box {
-    background-color: $base;
+    background-color: $crust;
     border-radius: 99px;
-    padding: 20px;
-    border: 2px solid $surface0;
+    padding: 15px;
+    padding-left: 35px;
+    padding-right: 35px;
+    border: 2px solid $accent-background;
+    min-width: 520px;
 }
 
 osd-box-icon {
@@ -26,7 +29,8 @@ osd-box-icon {
 }
 
 osd-box-label {
-    background-color: $crust;
+    background-color: $mantle;
+    border: 1px solid $surface0;
     padding: 4px;
     border-radius: $border-radius;
     min-width: 60px;
@@ -39,14 +43,13 @@ osd-box levelbar {
     min-width: 200px;
 
     >trough {
-        background-color: $crust;
+        background-color: $black;
         border-radius: $border-radius;
     }
 
     >trough block {
-        background-color: $accent-background-transparent;
         border-radius: $border-radius;
-        border: 2px solid $base;
+        border: 1px solid $surface0;
     }
 
     >trough block.low {

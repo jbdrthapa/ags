@@ -2,12 +2,9 @@
 
 settings-container {
   background-color: $base-transparent;
-  border-top: 2px solid $surface1-transparent;
-  border-left: 2px solid $surface1-transparent;
-  border-right: 2px solid $surface1-transparent;
-
-  border-top-left-radius: $border-radius;
-  border-top-right-radius: $border-radius;
+  border: 2px solid $surface1-transparent;
+  padding: 10px;
+  border-radius: $border-radius;
   min-width: 800px;
   min-height: 800px;
 }
@@ -98,6 +95,10 @@ settings-param-value-compact {
   padding-bottom: 2px;
 }
 
+settings-param-icon {
+  
+}
+
 settings-button {
   background-color: $surface0;
   color: $overlay0;
@@ -123,6 +124,7 @@ settings-notebook {
   background-color: $base-transparent;
   min-width: 800px;
   min-height: 800px;
+  border: 0px;
 
   &>stack {
     background-color: $base-transparent;
