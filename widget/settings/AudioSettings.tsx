@@ -76,6 +76,7 @@ export function AudioSettings() {
     }
 
     return (
+
         <box orientation={Gtk.Orientation.VERTICAL} spacing={10}>
 
             <label label="Audio Settings" halign={Gtk.Align.START} cssName="section-heading" />
@@ -134,41 +135,31 @@ export function AudioSettings() {
                         const lockChannels = createBinding(speaker, "lockChannels");
 
                         return (
-                            <box spacing={5} orientation={Gtk.Orientation.VERTICAL} cssName="section-background">
+
+
+                            <box spacing={20} orientation={Gtk.Orientation.VERTICAL} cssName="section-background">
 
                                 <box orientation={Gtk.Orientation.HORIZONTAL} spacing={20}>
                                     <image file={mediaClassIconPath} iconSize={Gtk.IconSize.LARGE} cssName="settings-param-icon" halign={Gtk.Align.START} />
                                     <label label={description} cssName="settings-param-heading" halign={Gtk.Align.START} />
                                 </box>
 
-                                <box orientation={Gtk.Orientation.HORIZONTAL} spacing={3}>
-                                    <box orientation={Gtk.Orientation.VERTICAL} spacing={3}>
-                                        <image file={layoutIconPath} tooltipText={layoutName} pixelSize={48} cssName="settings-param-icon" halign={Gtk.Align.CENTER} />
-                                        <label label={layoutName} xalign={0.5} cssName="settings-param-caption" />
-                                    </box>
-
-                                    <box orientation={Gtk.Orientation.VERTICAL} spacing={3}>
-                                        <image file={nodeStateIconPath} tooltipText={nodeState} pixelSize={48} cssName="settings-param-icon" halign={Gtk.Align.CENTER} />
-                                        <label label={nodeState} xalign={0.5} cssName="settings-param-caption" />
-                                    </box>
-
-                                    <box orientation={Gtk.Orientation.HORIZONTAL} spacing={3}>
-                                        <label label="Muted" xalign={0} cssName="settings-param-caption" />
-                                        <Gtk.Switch
-                                            active={isMute}
-                                            hexpand={false}
-                                            vexpand={false}
-                                            halign={Gtk.Align.END}
-                                            valign={Gtk.Align.CENTER}
-                                            onNotifyActive={(self) => {
-                                                speaker.mute = self.active;
-                                            }} />
-                                    </box>
-                                </box>
-
                                 <box orientation={Gtk.Orientation.HORIZONTAL} spacing={10}>
                                     <label label="Icon" xalign={0} cssName="settings-param-caption" />
                                     <label label={volumeIcon} cssName="settings-param-value" halign={Gtk.Align.START} />
+                                </box>
+
+                                <box orientation={Gtk.Orientation.HORIZONTAL} spacing={3}>
+                                    <label label="Muted" xalign={0} cssName="settings-param-caption" />
+                                    <Gtk.Switch
+                                        active={isMute}
+                                        hexpand={false}
+                                        vexpand={false}
+                                        halign={Gtk.Align.END}
+                                        valign={Gtk.Align.CENTER}
+                                        onNotifyActive={(self) => {
+                                            speaker.mute = self.active;
+                                        }} />
                                 </box>
 
                                 <box orientation={Gtk.Orientation.HORIZONTAL} spacing={10}>
@@ -234,6 +225,18 @@ export function AudioSettings() {
                                             }} />
                                     </box>
                                 </box>
+
+                                <box orientation={Gtk.Orientation.HORIZONTAL} spacing={3} marginTop={20}>
+                                    <box orientation={Gtk.Orientation.VERTICAL} spacing={3}>
+                                        <image file={layoutIconPath} tooltipText={layoutName} pixelSize={48} cssName="settings-param-icon" halign={Gtk.Align.CENTER} />
+                                        <label label={layoutName} xalign={0.5} cssName="settings-param-caption" />
+                                    </box>
+
+                                    <box orientation={Gtk.Orientation.VERTICAL} spacing={3}>
+                                        <image file={nodeStateIconPath} tooltipText={nodeState} pixelSize={48} cssName="settings-param-icon" halign={Gtk.Align.CENTER} />
+                                        <label label={nodeState} xalign={0.5} cssName="settings-param-caption" />
+                                    </box>
+                                </box>
                             </box>
                         )
                     }}
@@ -241,6 +244,7 @@ export function AudioSettings() {
             </box>
 
         </box >
+
     );
 }
 
