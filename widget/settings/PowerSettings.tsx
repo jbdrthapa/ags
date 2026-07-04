@@ -143,7 +143,7 @@ export function PowerSettings() {
                         const energyFull = createComputed(() => { const rawEnergyFull = createBinding(device, "energyFull"); return rawEnergyFull.toString(); });
                         const energy = createComputed(() => { const rawEnergy = createBinding(device, "energy"); return rawEnergy.toString(); });
 
-                        const energyRate = createComputed(() => { const rawEnergyRate = createBinding(device, "energyRate"); return rawEnergyRate.toString(); });
+                        const energyRate = createComputed(() => { const rawEnergyRate = createBinding(device, "energyRate"); return rawEnergyRate().toFixed(1).toString() + " w"; });
                         const voltage = createComputed(() => { const rawVoltage = createBinding(device, "voltage"); return rawVoltage.toString(); });
                         const chargeCycles = createComputed(() => { const rawChargeCycles = createBinding(device, "chargeCycles"); return rawChargeCycles.toString(); });
 
@@ -177,41 +177,46 @@ export function PowerSettings() {
 
                                 <box orientation={Gtk.Orientation.HORIZONTAL} visible={hasVendor} spacing={10}>
                                     <label label="Vendor" xalign={0} cssName="settings-param-caption" />
-                                    <label label={vendor} cssName="settings-param-value" halign={Gtk.Align.START} />
+                                    <label label={vendor} css="min-width: 220px;" cssName="settings-param-value" halign={Gtk.Align.START} />
                                 </box>
 
                                 <box orientation={Gtk.Orientation.HORIZONTAL} visible={supportsTechnology} spacing={10}>
                                     <label label="Technology" xalign={0} cssName="settings-param-caption" />
-                                    <label label={technology} cssName="settings-param-value" halign={Gtk.Align.START} />
+                                    <label label={technology} css="min-width: 220px;" cssName="settings-param-value" halign={Gtk.Align.START} />
                                     <image file={technologyIconPath} tooltipText={technology} pixelSize={48} cssName="settings-param-icon" halign={Gtk.Align.START} />
                                 </box>
 
                                 <box orientation={Gtk.Orientation.HORIZONTAL} spacing={10}>
                                     <label label="State" xalign={0} cssName="settings-param-caption" />
-                                    <label label={state} cssName="settings-param-value" halign={Gtk.Align.START} />
+                                    <label label={state} css="min-width: 220px;" cssName="settings-param-value" halign={Gtk.Align.START} />
                                     <image file={stateIconPath} tooltipText={state} pixelSize={48} cssName="settings-param-icon" halign={Gtk.Align.START} />
+                                </box>
+
+                                <box orientation={Gtk.Orientation.HORIZONTAL} spacing={10}>
+                                    <label label="Rate" xalign={0} cssName="settings-param-caption" />
+                                    <label label={energyRate} css="min-width: 220px;" cssName="settings-param-value" halign={Gtk.Align.START} />
+                                </box>
+
+                                <box orientation={Gtk.Orientation.HORIZONTAL} visible={hasTimeToFull} spacing={10}>
+                                    <label label="Time to full" xalign={0} cssName="settings-param-caption" />
+                                    <label label={timeToFull} css="min-width: 220px;" cssName="settings-param-value" halign={Gtk.Align.START} />
+                                </box>
+
+                                <box orientation={Gtk.Orientation.HORIZONTAL} visible={hasTimeToEmtpy} spacing={10}>
+                                    <label label="Time to empty" xalign={0} cssName="settings-param-caption" />
+                                    <label label={timeToEmpty} css="min-width: 220px;" cssName="settings-param-value" halign={Gtk.Align.START} />
                                 </box>
 
                                 <box orientation={Gtk.Orientation.HORIZONTAL} visible={hasVendor} spacing={10}>
                                     <label label="Capacity" xalign={0} cssName="settings-param-caption" />
                                     <Gtk.ProgressBar fraction={rawCapacity} valign={Gtk.Align.CENTER}></Gtk.ProgressBar>
-                                    <label label={capacity} cssName="settings-param-value" halign={Gtk.Align.START} />
+                                    <label label={capacity} css="min-width: 50px;" cssName="settings-param-value" halign={Gtk.Align.START} />
                                 </box>
 
                                 <box orientation={Gtk.Orientation.HORIZONTAL} spacing={10}>
                                     <label label="Percentage" xalign={0} cssName="settings-param-caption" />
                                     <Gtk.ProgressBar fraction={rawPercentage} valign={Gtk.Align.CENTER}></Gtk.ProgressBar>
-                                    <label label={percentage} cssName="settings-param-value" halign={Gtk.Align.START} />
-                                </box>
-
-                                <box orientation={Gtk.Orientation.HORIZONTAL} visible={hasTimeToFull} spacing={10}>
-                                    <label label="Time to full" xalign={0} cssName="settings-param-caption" />
-                                    <label label={timeToFull} cssName="settings-param-value" halign={Gtk.Align.START} />
-                                </box>
-
-                                <box orientation={Gtk.Orientation.HORIZONTAL} visible={hasTimeToEmtpy} spacing={10}>
-                                    <label label="Time to empty" xalign={0} cssName="settings-param-caption" />
-                                    <label label={timeToEmpty} cssName="settings-param-value" halign={Gtk.Align.START} />
+                                    <label label={percentage} css="min-width: 50px;" cssName="settings-param-value" halign={Gtk.Align.START} />
                                 </box>
 
                             </box>
