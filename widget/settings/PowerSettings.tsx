@@ -99,6 +99,17 @@ export function PowerSettings() {
                             return DEVICE_TYPE[rawDeviceType()][1] ?? "Unknown";
                         });
 
+                        const rawPercentage = createBinding(device, "percentage");
+
+                        const batteryIconPath = createComputed(() => {
+                            let percentage = rawPercentage();
+                            if (percentage <= 0) return "${CONFIG_DIR}/assets/power/battery/battery_0.svg";
+                            const rawValue = percentage * 100;
+                            const percentValue = Math.min(100, Math.ceil(rawValue / 10) * 10);
+                            let iconPath = `${CONFIG_DIR}/assets/power/battery/battery_${percentValue}.svg`;
+                            return iconPath;
+                        });
+
                         const vendor = createBinding(device, "vendor");
 
                         const hasVendor = vendor.as(v => v !== null && v !== undefined && v !== "");
@@ -132,8 +143,6 @@ export function PowerSettings() {
                             return formattedCapacity;
                         });
 
-                        const rawPercentage = createBinding(device, "percentage");
-
                         const percentage = createComputed(() => {
                             const formattedPercentage = `${Math.round((rawPercentage() ?? 0) * 100)} %`;
                             return formattedPercentage ?? "Unknown Device";
@@ -163,17 +172,21 @@ export function PowerSettings() {
 
                         const temperature = createComputed(() => { const rawTemperature = createBinding(device, "temperature"); return rawTemperature.toString(); });
 
-
-
                         const charging = createBinding(device, "charging");
 
                         return (
-                            <box orientation={Gtk.Orientation.VERTICAL} spacing={20} cssName="section-background">
+                            <box orientation={Gtk.Orientation.VERTICAL} spacing={10} cssName="section-background">
 
                                 <box orientation={Gtk.Orientation.HORIZONTAL} spacing={20}>
                                     <image file={deviceTypeIconPath} iconSize={Gtk.IconSize.LARGE} cssName="settings-param-icon" halign={Gtk.Align.START} />
                                     <label label={deviceType} cssName="settings-param-heading" halign={Gtk.Align.START} />
                                 </box>
+
+                                <box orientation={Gtk.Orientation.HORIZONTAL} halign={Gtk.Align.CENTER}>
+                                    <image file={batteryIconPath} pixelSize={128} />
+                                    <label label={percentage} css="font-weight:800; font-size:32px;" />
+                                </box>
+
 
                                 <box orientation={Gtk.Orientation.HORIZONTAL} visible={hasVendor} spacing={10}>
                                     <label label="Vendor" xalign={0} cssName="settings-param-caption" />
