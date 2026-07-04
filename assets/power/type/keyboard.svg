@@ -1,0 +1,11 @@
+<!-- type_keyboard_high_detail.svg -->
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <!-- Base -->
+  <rect x="10" y="18" width="44" height="24" rx="3" fill="#ffffff"/>
+  <!-- Keys -->
+  <rect x="14" y="22" width="6" height="4" fill="#f6d32d"/>
+  <rect x="22" y="22" width="6" height="4" fill="#f6d32d"/>
+  <rect x="30" y="22" width="6" height="4" fill="#f6d32d"/>
+  <rect x="38" y="22" width="6" height="4" fill="#f6d32d"/>
+  <rect x="14" y="28" width="30" height="4" fill="#f6d32d"/>
+</svg>

@@ -1,0 +1,6 @@
+<!-- type_bluetooth_generic_high_detail.svg -->
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <rect x="26" y="14" width="12" height="36" rx="6" fill="#ffffff"/>
+  <path d="M32 18 L38 24 L32 30 L38 36 L32 42"
+        fill="none" stroke="#3584e4" stroke-width="3"/>
+</svg>

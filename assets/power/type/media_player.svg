@@ -1,0 +1,9 @@
+<!-- type_media_player_high_detail.svg -->
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <!-- Device -->
+  <rect x="18" y="10" width="28" height="44" rx="4" fill="#ffffff"/>
+  <!-- Screen -->
+  <rect x="20" y="14" width="24" height="20" rx="2" fill="#62a0ea"/>
+  <!-- Play button -->
+  <polygon points="26,20 40,28 26,36" fill="#ffffff"/>
+</svg>

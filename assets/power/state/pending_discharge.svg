@@ -1,0 +1,12 @@
+<!-- state_pending_discharge_high_detail.svg -->
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <!-- Shell -->
+  <rect x="12" y="16" width="40" height="32" rx="4" fill="#ffffff"/>
+  <rect x="52" y="24" width="4" height="16" rx="2" fill="#ffffff"/>
+  <!-- Clock -->
+  <circle cx="32" cy="26" r="6" fill="#f6d32d"/>
+  <line x1="32" y1="26" x2="32" y2="22" stroke="#ffffff" stroke-width="2"/>
+  <line x1="32" y1="26" x2="36" y2="26" stroke="#ffffff" stroke-width="2"/>
+  <!-- Down arrow -->
+  <polygon points="32,34 26,42 30,42 30,48 34,48 34,42 38,42" fill="#f6d32d"/>
+</svg>

@@ -1,0 +1,10 @@
+<!-- type_monitor_high_detail.svg -->
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <!-- Screen -->
+  <rect x="10" y="10" width="44" height="28" rx="3" fill="#ffffff"/>
+  <!-- Accent display -->
+  <rect x="14" y="14" width="36" height="20" rx="2" fill="#c061cb"/>
+  <!-- Stand -->
+  <rect x="26" y="40" width="12" height="4" rx="2" fill="#ffffff"/>
+  <rect x="22" y="44" width="20" height="4" rx="2" fill="#ffffff"/>
+</svg>
