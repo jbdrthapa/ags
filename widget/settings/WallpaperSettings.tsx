@@ -70,37 +70,19 @@ export function WallpaperSettings() {
         const filename = GLib.path_get_basename(path);
         const image_file = getOriginalFromThumb(path);
         const btn = (
-            <button
-                cssName={"wallpaper-thumbnail"}
-                onClicked={() => execAsync(`awww img --transition-type random --transition-fps 120 --transition-duration 1 "${image_file}"`)}
-                heightRequest={200}
-                valign={Gtk.Align.CENTER}
-                halign={Gtk.Align.CENTER}
-            >
-                <box orientation={Gtk.Orientation.VERTICAL}>
-                    <Gtk.Image
-                        file={path}
-                        pixelSize={256}
-                        widthRequest={256}
-                        heightRequest={160}
-                        vexpand={true}
-                        hexpand={true}
-                    />
-                    <label
-                        label={filename}
-                        tooltipText={filename}
-                        wrap={true}
-                        wrap_mode={Pango.WrapMode.WORD_CHAR}
-                        max_width_chars={20}
-                        valign={Gtk.Align.END}
-                        halign={Gtk.Align.FILL}
-                        yalign={1}
-                    />
-                </box>
-            </button>
+            <box orientation={Gtk.Orientation.VERTICAL} cssName="wallpaper-thumbnail">
+                <image file={path} pixelSize={256} tooltipText={filename} />
+                <label label={filename} tooltipText={filename} wrap={true} wrap_mode={Pango.WrapMode.WORD_CHAR} max_width_chars={20} valign={Gtk.Align.END} halign={Gtk.Align.FILL} yalign={1} />
+            </box>
         ) as Gtk.Widget;
 
         flowbox.insert(btn, -1);
+
+        const buttonGesture = new Gtk.GestureClick();
+        btn.add_controller(buttonGesture);
+        buttonGesture.connect("pressed", () => {
+            execAsync(`awww img --transition-type random --transition-fps 120 --transition-duration 1 "${image_file}"`);
+        });
     }
 
     return (
