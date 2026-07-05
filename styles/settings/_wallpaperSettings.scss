@@ -13,6 +13,10 @@ wallpaper-thumbnail {
     padding: 2px;
 }
 
+wallpaper-thumbnail:focus {
+    border: 2px solid $accent-background;
+}
+
 wallpaper-thumbnail:hover {
     border: 2px solid $accent-background;
 }

@@ -32,6 +32,11 @@ function GetThumbnailFile(image_file: string) {
     return thumbnail_file;
 }
 
+function SetWallpaper(image: string) {
+    execAsync(`awww img --transition-type random --transition-fps 120 --transition-duration 1 "${image}"`);
+
+}
+
 export function WallpaperSettings() {
     const flowbox = new Gtk.FlowBox({
         cssName: "wallpaper-container",
@@ -68,26 +73,38 @@ export function WallpaperSettings() {
     for (let i = 0; i < files.length; i++) {
         const path = files[i];
         const filename = GLib.path_get_basename(path);
-        const image_file = getOriginalFromThumb(path);
-        const btn = (
-            <box orientation={Gtk.Orientation.VERTICAL} cssName="wallpaper-thumbnail">
+        const image_file = getOriginalFromThumb(path) ?? "";
+        const tile = (
+            <box focusable={true} canFocus={true} orientation={Gtk.Orientation.VERTICAL}>
                 <image file={path} pixelSize={256} tooltipText={filename} />
                 <label label={filename} tooltipText={filename} wrap={true} wrap_mode={Pango.WrapMode.WORD_CHAR} max_width_chars={20} valign={Gtk.Align.END} halign={Gtk.Align.FILL} yalign={1} />
             </box>
         ) as Gtk.Widget;
 
-        flowbox.insert(btn, -1);
+        const child = new Gtk.FlowBoxChild({
+            cssName: "wallpaper-thumbnail",
+            focusable: true,
+            canFocus: true,
+        });
+
+        child.set_child(tile);
+
+        flowbox.insert(child, -1);
 
         const buttonGesture = new Gtk.GestureClick();
-        btn.add_controller(buttonGesture);
+        child.add_controller(buttonGesture);
         buttonGesture.connect("pressed", () => {
-            execAsync(`awww img --transition-type random --transition-fps 120 --transition-duration 1 "${image_file}"`);
+            SetWallpaper(image_file);
         });
+
+        child.connect("activate", () => {
+            SetWallpaper(image_file);
+        });
+
     }
 
     return (
         <scrolledwindow
-            hscrollbarPolicy={Gtk.PolicyType.NEVER}
             child={flowbox as any}
         />
     );
