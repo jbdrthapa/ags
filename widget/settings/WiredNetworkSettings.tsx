@@ -29,14 +29,37 @@ export function WiredNetworkSettings() {
         120: [`${CONFIG_DIR}/assets/network/state/nmdevice_failed_120.svg`, "Failed"]
     };
 
+    const NM_SPEED: Record<number, [string, string]> = {
+        // Unknown / link down
+        0: [`${CONFIG_DIR}/assets/network/wired/speed/nmdevice_speed_unknown_0.svg`, "Unknown"],
+        10: [`${CONFIG_DIR}/assets/network/wired/speed/nmdevice_speed_10.svg`, "10 Mbps"],
+        100: [`${CONFIG_DIR}/assets/network/wired/speed/nmdevice_speed_100.svg`, "100 Mbps"],
+        1000: [`${CONFIG_DIR}/assets/network/wired/speed/nmdevice_speed_1g_1000.svg`, "1 Gbps"],
+        // Multi‑Gig speeds (AstalNetwork / NMDeviceEthernet raw values)
+        2500: [`${CONFIG_DIR}/assets/network/wired/speed/nmdevice_speed_2_5g_2500.svg`, "2.5 Gbps"],
+        5000: [`${CONFIG_DIR}/assets/network/wired/speed/nmdevice_speed_5g_5000.svg`, "5 Gbps"],
+        // High‑speed NICs
+        10000: [`${CONFIG_DIR}/assets/network/wired/speed/nmdevice_speed_10g_10000.svg`, "10 Gbps"],
+        25000: [`${CONFIG_DIR}/assets/network/wired/speed/nmdevice_speed_25g_25000.svg`, "25 Gbps"],
+        100000: [`${CONFIG_DIR}/assets/network/wired/speed/nmdevice_speed_100g_100000.svg`, "100 Gbps"]
+    };
+
+    const iconName = createBinding(wired, "iconName");
+
+    const rawState = createBinding(wired, "state");
     const state = createComputed(() => {
-        const rawState = createBinding(wired, "state");
         return NM_STATE[rawState()][1] ?? "?";
     });
-
     const stateIconPath = createComputed(() => {
-        const rawState = createBinding(wired, "state");
         return NM_STATE[rawState()][0] ?? "?";
+    });
+
+    const rawSpeed = createBinding(wired, "speed");
+    const speed = createComputed(() => {
+        return NM_SPEED[rawSpeed()][1] ?? "?";
+    });
+    const speedIconPath = createComputed(() => {
+        return NM_SPEED[rawSpeed()][0] ?? "?";
     });
 
     return (
@@ -46,10 +69,21 @@ export function WiredNetworkSettings() {
 
             <box spacing={10} orientation={Gtk.Orientation.VERTICAL} cssName="section-background">
 
+                <box orientation={Gtk.Orientation.HORIZONTAL} spacing={20}>
+                    <image iconSize={Gtk.IconSize.LARGE} cssName="settings-param-icon" iconName={iconName} />
+                    {/* <label label={ssid} cssName="settings-param-heading" halign={Gtk.Align.START} /> */}
+                </box>
+
                 <box orientation={Gtk.Orientation.HORIZONTAL} spacing={10}>
                     <label label="State" xalign={0} cssName="settings-param-caption" />
                     <label label={state} css="min-width: 220px;" cssName="settings-param-value" halign={Gtk.Align.START} />
                     <image file={stateIconPath} tooltipText={state} pixelSize={48} cssName="settings-param-icon" halign={Gtk.Align.START} />
+                </box>
+
+                <box orientation={Gtk.Orientation.HORIZONTAL} spacing={10}>
+                    <label label="Speed" xalign={0} cssName="settings-param-caption" />
+                    <label label={speed} css="min-width: 220px;" cssName="settings-param-value" halign={Gtk.Align.START} />
+                    <image file={speedIconPath} tooltipText={speed} pixelSize={48} cssName="settings-param-icon" halign={Gtk.Align.START} />
                 </box>
 
             </box>
