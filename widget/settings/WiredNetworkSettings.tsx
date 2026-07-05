@@ -44,7 +44,21 @@ export function WiredNetworkSettings() {
         100000: [`${CONFIG_DIR}/assets/network/wired/speed/nmdevice_speed_100g_100000.svg`, "100 Gbps"]
     };
 
+    const device = createBinding(wired, "device");
+
     const iconName = createBinding(wired, "iconName");
+
+    const deviceInterface = createComputed(() => {
+        return device().interface;
+    });
+
+    const macAddress = createComputed(() => {
+        return device().hwAddress;
+    });
+
+    const mtu = createComputed(() => {
+        return device().mtu.toString();
+    });
 
     const rawState = createBinding(wired, "state");
     const state = createComputed(() => {
@@ -71,7 +85,7 @@ export function WiredNetworkSettings() {
 
                 <box orientation={Gtk.Orientation.HORIZONTAL} spacing={20}>
                     <image iconSize={Gtk.IconSize.LARGE} cssName="settings-param-icon" iconName={iconName} />
-                    {/* <label label={ssid} cssName="settings-param-heading" halign={Gtk.Align.START} /> */}
+                    <label label={deviceInterface} cssName="settings-param-heading" halign={Gtk.Align.START} />
                 </box>
 
                 <box orientation={Gtk.Orientation.HORIZONTAL} spacing={10}>
@@ -84,6 +98,16 @@ export function WiredNetworkSettings() {
                     <label label="Speed" xalign={0} cssName="settings-param-caption" />
                     <label label={speed} css="min-width: 220px;" cssName="settings-param-value" halign={Gtk.Align.START} />
                     <image file={speedIconPath} tooltipText={speed} pixelSize={48} cssName="settings-param-icon" halign={Gtk.Align.START} />
+                </box>
+
+                <box orientation={Gtk.Orientation.HORIZONTAL} spacing={10}>
+                    <label label="MAC" xalign={0} cssName="settings-param-caption" />
+                    <label label={macAddress} css="min-width: 220px;" cssName="settings-param-value" halign={Gtk.Align.START} />
+                </box>
+
+                <box orientation={Gtk.Orientation.HORIZONTAL} spacing={10}>
+                    <label label="MTU" xalign={0} cssName="settings-param-caption" />
+                    <label label={mtu} css="min-width: 220px;" cssName="settings-param-value" halign={Gtk.Align.START} />
                 </box>
 
             </box>
