@@ -1,0 +1,8 @@
+<!-- nmdevice_deactivating_110.svg (fading ring) -->
+<svg width="24" height="24" viewBox="0 0 24 24"
+     xmlns="http://www.w3.org/2000/svg">
+  <circle cx="12" cy="12" r="8" fill="none"
+          stroke="#04a5e5" stroke-width="2" stroke-dasharray="4 3"/>
+  <path d="M12 6v3" fill="none"
+        stroke="#04a5e5" stroke-width="2" stroke-linecap="round"/>
+</svg>
