@@ -13,6 +13,7 @@ export function WirelessNetworkSettings() {
 
     if (!wifi) return <box />;
 
+    const iconName = createBinding(wifi, "iconName");
 
     const ssid = createComputed(() => {
         const rawSsid = createBinding(wifi, "ssid");
@@ -38,7 +39,15 @@ export function WirelessNetworkSettings() {
         return rawState().toString() ?? "?"; // TODO: icon replace
     });
 
+    const bandwidth = createComputed(() => {
+        const rawBandWidth = createBinding(wifi, "bandwidth");
+        return rawBandWidth().toString() ?? "?";
+    });
 
+    const frequency = createComputed(() => {
+        const rawFrequency = createBinding(wifi, "frequency");
+        return rawFrequency().toString() ?? "?";
+    });
 
     return (
         <box orientation={Gtk.Orientation.VERTICAL} spacing={10}>
@@ -46,9 +55,10 @@ export function WirelessNetworkSettings() {
             <label label="Wireless Network" halign={Gtk.Align.START} cssName="section-heading" />
 
             <box spacing={10} orientation={Gtk.Orientation.VERTICAL} cssName="section-background">
-                <box orientation={Gtk.Orientation.HORIZONTAL} spacing={10}>
-                    <label label="SSID" xalign={0} cssName="settings-param-caption" />
-                    <label label={ssid} cssName="settings-param-value" halign={Gtk.Align.START} />
+                
+                <box orientation={Gtk.Orientation.HORIZONTAL} spacing={20}>
+                    <image iconSize={Gtk.IconSize.LARGE} cssName="settings-param-icon" iconName={iconName}/>
+                    <label label={ssid} cssName="settings-param-heading" halign={Gtk.Align.START} />
                 </box>
 
                 <box orientation={Gtk.Orientation.HORIZONTAL} spacing={10}>
@@ -60,6 +70,16 @@ export function WirelessNetworkSettings() {
                 <box orientation={Gtk.Orientation.HORIZONTAL} spacing={10}>
                     <label label="State" xalign={0} cssName="settings-param-caption" />
                     <label label={state} cssName="settings-param-value" halign={Gtk.Align.START} />
+                </box>
+
+                <box orientation={Gtk.Orientation.HORIZONTAL} spacing={10}>
+                    <label label="Frequency" xalign={0} cssName="settings-param-caption" />
+                    <label label={frequency} cssName="settings-param-value" halign={Gtk.Align.START} />
+                </box>
+
+                <box orientation={Gtk.Orientation.HORIZONTAL} spacing={10}>
+                    <label label="Bandwidth" xalign={0} cssName="settings-param-caption" />
+                    <label label={bandwidth} cssName="settings-param-value" halign={Gtk.Align.START} />
                 </box>
             </box>
         </box>
