@@ -1,5 +1,6 @@
 import Gtk from "gi://Gtk?version=4.0";
 import GLib from "gi://GLib";
+import Gio from 'gi://Gio';
 import { execAsync } from "ags/process"
 import Pango from "gi://Pango";
 
@@ -73,11 +74,35 @@ export function WallpaperSettings() {
     for (let i = 0; i < files.length; i++) {
         const path = files[i];
         const filename = GLib.path_get_basename(path);
+        const file = Gio.File.new_for_path(path);
         const image_file = getOriginalFromThumb(path) ?? "";
+
         const tile = (
-            <box focusable={true} canFocus={true} orientation={Gtk.Orientation.VERTICAL}>
-                <image file={path} pixelSize={256} tooltipText={filename} />
-                <label label={filename} tooltipText={filename} wrap={true} wrap_mode={Pango.WrapMode.WORD_CHAR} max_width_chars={20} valign={Gtk.Align.END} halign={Gtk.Align.FILL} yalign={1} />
+            <box
+                cssName="wallpaper-tile"
+                orientation={Gtk.Orientation.VERTICAL}
+                overflow={Gtk.Overflow.HIDDEN}
+                focusable={true}
+                canFocus={true}
+            >
+                <Gtk.Picture
+                    cssName="wallpaper-image"
+                    file={file}
+                    tooltipText={filename}
+                    hexpand={true}
+                    vexpand={true}
+                    keepAspectRatio={true}
+                    contentFit={Gtk.ContentFit.COVER}
+                />
+                <label
+                    label={filename}
+                    tooltipText={filename}
+                    wrap={true}
+                    wrap_mode={Pango.WrapMode.WORD_CHAR}
+                    max_width_chars={20}
+                    valign={Gtk.Align.END}
+                    halign={Gtk.Align.FILL}
+                />
             </box>
         ) as Gtk.Widget;
 
