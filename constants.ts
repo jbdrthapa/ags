@@ -3,7 +3,7 @@ export const WindowName = {
     modulesCenter: "js-shell-modules-center",
     modulesRight: "js-shell-modules-right",
     bar: "bar-background",
-    settings: "js-shell-settings",
+    settings: "js-shell-modules-settings",
     osd: "js-shell-osd",
     desktopMenu: "js-shell-desktopmenu"
 } as const;

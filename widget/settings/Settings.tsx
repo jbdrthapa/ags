@@ -47,7 +47,6 @@ export function Settings() {
         namespace: windowName,
         anchor: Astal.WindowAnchor.NONE,
         exclusivity: Astal.Exclusivity.IGNORE,
-        layer: Astal.Layer.TOP,
         application: app,
         child: (
             <box cssName="settings-container">

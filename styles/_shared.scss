@@ -9,6 +9,11 @@
   padding: 0px;
 }
 
+popup-window-style {
+  border-radius: $border-radius;
+  background-color: transparent;
+}
+
 #js-shell-modules-left {
   padding: 20px;
 }

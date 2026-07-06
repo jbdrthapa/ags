@@ -20,6 +20,7 @@ export default GObject.registerClass({
             layer: Astal.Layer.OVERLAY,
             visible: false,
             keymode: Astal.Keymode.ON_DEMAND,
+            cssName:"popup-window-style",
         });
 
         const revealer = new Gtk.Revealer({
