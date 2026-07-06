@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+  <rect width="256" height="256" fill="none"/>
+  <g transform="translate(40,40)">
+    <path d="M40 144 L72 40 L104 40 L72 144 Z" fill="#04a5e5"/>
+    <path d="M72 144 L104 40 L136 40 L104 144 Z" fill="#7287fd"/>
+    <path d="M104 144 L136 40 L168 40 L136 144 Z" fill="#209fb5"/>
+    <g transform="translate(88,88)">
+      <path d="M0 0 L16 16 L0 32" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      <line x1="24" y1="16" x2="40" y2="16" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round"/>
+    </g>
+  </g>
+  <text x="40" y="210" font-family="Segoe UI, sans-serif" font-size="32" font-weight="600" fill="#df8e1d">js-shell</text>
+</svg>

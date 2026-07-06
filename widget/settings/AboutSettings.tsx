@@ -1,8 +1,12 @@
 import Gtk from "gi://Gtk?version=4.0";
 import app from "ags/gtk4/app"
-
+import Utils from "../../utils";
 
 export function AboutSettings() {
+
+    const CONFIG_DIR = `${Utils.GetUserConfigDirectory()}/ags`;
+
+    const jsshellLogoPath = `${CONFIG_DIR}/assets/general/js-shell-vibrant-shell.svg`
 
     return (
         <box orientation={Gtk.Orientation.VERTICAL} spacing={10}>
@@ -10,6 +14,9 @@ export function AboutSettings() {
             <label label="About" halign={Gtk.Align.START} cssName="section-heading" />
 
             <box spacing={10} orientation={Gtk.Orientation.VERTICAL} cssName="section-background">
+
+                <image file={jsshellLogoPath} tooltipText={app.instanceName} pixelSize={256} cssName="settings-param-icon" valign={Gtk.Align.START} />
+
                 <box orientation={Gtk.Orientation.HORIZONTAL} spacing={10}>
                     <label label="Title" xalign={0} cssName="settings-param-caption" />
                     <label label={app.instanceName} cssName="settings-param-value" halign={Gtk.Align.START} />
