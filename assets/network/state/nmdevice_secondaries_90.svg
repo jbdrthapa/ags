@@ -1,0 +1,10 @@
+<!-- nmdevice_secondaries_90.svg (stacked circles) -->
+<svg width="24" height="24" viewBox="0 0 24 24"
+     xmlns="http://www.w3.org/2000/svg">
+  <circle cx="10" cy="10" r="3" fill="none"
+          stroke="#04a5e5" stroke-width="2"/>
+  <circle cx="15" cy="14" r="3" fill="none"
+          stroke="#04a5e5" stroke-width="2"/>
+  <line x1="12" y1="12" x2="13" y2="12"
+        stroke="#04a5e5" stroke-width="2" stroke-linecap="round"/>
+</svg>

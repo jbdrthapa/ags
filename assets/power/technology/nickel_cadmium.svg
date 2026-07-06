@@ -1,0 +1,9 @@
+<!-- tech_nickel_cadmium.svg -->
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <!-- Cylinders -->
+  <rect x="18" y="16" width="12" height="32" rx="6" fill="#ffffff"/>
+  <rect x="34" y="16" width="12" height="32" rx="6" fill="#ffffff"/>
+  <!-- Cadmium indicator -->
+  <rect x="22" y="28" width="4" height="8" rx="2" fill="#57e389"/>
+  <rect x="38" y="28" width="4" height="8" rx="2" fill="#57e389"/>
+</svg>

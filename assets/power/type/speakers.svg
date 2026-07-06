@@ -1,0 +1,10 @@
+<!-- type_speakers_high_detail.svg -->
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <!-- Cabinet -->
+  <rect x="18" y="12" width="28" height="40" rx="4" fill="#ffffff"/>
+  <!-- Woofers -->
+  <circle cx="32" cy="24" r="5" fill="#62a0ea"/>
+  <circle cx="32" cy="36" r="8" fill="#62a0ea"/>
+  <!-- Highlights -->
+  <circle cx="32" cy="36" r="4" fill="#ffffff" opacity="0.4"/>
+</svg>

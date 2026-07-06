@@ -1,0 +1,10 @@
+<!-- type_headphones_high_detail.svg -->
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <!-- Band -->
+  <path d="M20 26 Q32 14 44 26" fill="none" stroke="#ffffff" stroke-width="4"/>
+  <!-- Earcups -->
+  <rect x="18" y="26" width="8" height="16" rx="4" fill="#ffffff"/>
+  <rect x="38" y="26" width="8" height="16" rx="4" fill="#ffffff"/>
+  <!-- Accent -->
+  <circle cx="32" cy="32" r="6" fill="#62a0ea"/>
+</svg>

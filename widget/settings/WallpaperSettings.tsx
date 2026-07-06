@@ -1,5 +1,6 @@
 import Gtk from "gi://Gtk?version=4.0";
 import GLib from "gi://GLib";
+import Gio from 'gi://Gio';
 import { execAsync } from "ags/process"
 import Pango from "gi://Pango";
 
@@ -30,6 +31,11 @@ function GetThumbnailFile(image_file: string) {
     }
 
     return thumbnail_file;
+}
+
+function SetWallpaper(image: string) {
+    execAsync(`awww img --transition-type random --transition-fps 120 --transition-duration 1 "${image}"`);
+
 }
 
 export function WallpaperSettings() {
@@ -68,44 +74,62 @@ export function WallpaperSettings() {
     for (let i = 0; i < files.length; i++) {
         const path = files[i];
         const filename = GLib.path_get_basename(path);
-        const image_file = getOriginalFromThumb(path);
-        const btn = (
-            <button
-                cssName={"wallpaper-thumbnail"}
-                onClicked={() => execAsync(`awww img --transition-type random --transition-fps 120 --transition-duration 1 "${image_file}"`)}
-                heightRequest={200}
-                valign={Gtk.Align.CENTER}
-                halign={Gtk.Align.CENTER}
+        const file = Gio.File.new_for_path(path);
+        const image_file = getOriginalFromThumb(path) ?? "";
+
+        const tile = (
+            <box
+                cssName="wallpaper-tile"
+                orientation={Gtk.Orientation.VERTICAL}
+                overflow={Gtk.Overflow.HIDDEN}
+                focusable={true}
+                canFocus={true}
             >
-                <box orientation={Gtk.Orientation.VERTICAL}>
-                    <Gtk.Image
-                        file={path}
-                        pixelSize={256}
-                        widthRequest={256}
-                        heightRequest={160}
-                        vexpand={true}
-                        hexpand={true}
-                    />
-                    <label
-                        label={filename}
-                        tooltipText={filename}
-                        wrap={true}
-                        wrap_mode={Pango.WrapMode.WORD_CHAR}
-                        max_width_chars={20}
-                        valign={Gtk.Align.END}
-                        halign={Gtk.Align.FILL}
-                        yalign={1}
-                    />
-                </box>
-            </button>
+                <Gtk.Picture
+                    cssName="wallpaper-image"
+                    file={file}
+                    tooltipText={filename}
+                    hexpand={true}
+                    vexpand={true}
+                    keepAspectRatio={true}
+                    contentFit={Gtk.ContentFit.COVER}
+                />
+                <label
+                    label={filename}
+                    tooltipText={filename}
+                    wrap={true}
+                    wrap_mode={Pango.WrapMode.WORD_CHAR}
+                    max_width_chars={20}
+                    valign={Gtk.Align.END}
+                    halign={Gtk.Align.FILL}
+                />
+            </box>
         ) as Gtk.Widget;
 
-        flowbox.insert(btn, -1);
+        const child = new Gtk.FlowBoxChild({
+            cssName: "wallpaper-thumbnail",
+            focusable: true,
+            canFocus: true,
+        });
+
+        child.set_child(tile);
+
+        flowbox.insert(child, -1);
+
+        const buttonGesture = new Gtk.GestureClick();
+        child.add_controller(buttonGesture);
+        buttonGesture.connect("pressed", () => {
+            SetWallpaper(image_file);
+        });
+
+        child.connect("activate", () => {
+            SetWallpaper(image_file);
+        });
+
     }
 
     return (
         <scrolledwindow
-            hscrollbarPolicy={Gtk.PolicyType.NEVER}
             child={flowbox as any}
         />
     );

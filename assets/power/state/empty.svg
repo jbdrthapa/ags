@@ -1,0 +1,10 @@
+<!-- state_empty_high_detail.svg -->
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <!-- Shell -->
+  <rect x="12" y="16" width="40" height="32" rx="4" fill="#ffffff"/>
+  <rect x="52" y="24" width="4" height="16" rx="2" fill="#ffffff"/>
+  <!-- Empty interior -->
+  <rect x="18" y="20" width="28" height="20" rx="3" fill="#e01b24"/>
+  <!-- Warning bar -->
+  <rect x="18" y="20" width="28" height="4" rx="2" fill="#ffffff" opacity="0.4"/>
+</svg>

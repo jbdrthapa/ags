@@ -1,0 +1,12 @@
+<!-- battery_0.svg -->
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <!-- Battery body -->
+  <rect x="8" y="16" width="44" height="32" rx="4" ry="4"
+        fill="none" stroke="#ffffff" stroke-width="2"/>
+  <!-- Battery nub -->
+  <rect x="52" y="24" width="4" height="16" rx="2" ry="2"
+        fill="#ffffff"/>
+  <!-- Fill (0%) -->
+  <rect x="10" y="18" width="0" height="28" rx="2" ry="2"
+        fill="#ff0000"/>
+</svg>

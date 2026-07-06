@@ -1,0 +1,18 @@
+<!-- power_plugged_not_charging.svg -->
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+
+  <!-- Plug prongs -->
+  <rect x="24" y="8" width="4" height="14" rx="2" fill="#ffffff"/>
+  <rect x="36" y="8" width="4" height="14" rx="2" fill="#ffffff"/>
+
+  <!-- Plug body -->
+  <rect x="20" y="22" width="24" height="22" rx="4" fill="#ffffff"/>
+
+  <!-- Cable -->
+  <rect x="30" y="44" width="4" height="12" rx="2" fill="#ffffff"/>
+
+  <!-- Idle indicator (yellow pause bars) -->
+  <rect x="26" y="26" width="4" height="16" rx="2" fill="#ffcc00"/>
+  <rect x="34" y="26" width="4" height="16" rx="2" fill="#ffcc00"/>
+
+</svg>

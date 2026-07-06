@@ -1,0 +1,24 @@
+<!-- type_line_power_high_detail.svg -->
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+
+  <!-- Plug prongs -->
+  <rect x="22" y="8" width="6" height="16" rx="2" fill="#ffffff"/>
+  <rect x="36" y="8" width="6" height="16" rx="2" fill="#ffffff"/>
+
+  <!-- Plug body -->
+  <rect x="18" y="24" width="28" height="22" rx="4" fill="#ffffff"/>
+
+  <!-- Cable -->
+  <rect x="30" y="46" width="4" height="12" rx="2" fill="#ffffff"/>
+
+  <!-- High‑detail charging bolt (accent) -->
+  <polygon
+    points="32,26 26,40 30,40 28,54 38,36 34,36"
+    fill="#57e389"
+  />
+
+  <!-- Energy highlights -->
+  <rect x="20" y="26" width="24" height="3" rx="2" fill="#ffffff" opacity="0.35"/>
+  <rect x="20" y="32" width="24" height="3" rx="2" fill="#ffffff" opacity="0.35"/>
+
+</svg>

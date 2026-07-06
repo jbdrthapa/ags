@@ -1,0 +1,11 @@
+<!-- type_gaming_input_high_detail.svg -->
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <!-- Controller -->
+  <rect x="16" y="20" width="32" height="20" rx="10" fill="#ffffff"/>
+  <!-- D-pad -->
+  <rect x="22" y="26" width="4" height="10" fill="#f6d32d"/>
+  <rect x="20" y="28" width="8" height="4" fill="#f6d32d"/>
+  <!-- Buttons -->
+  <circle cx="38" cy="26" r="3" fill="#f6d32d"/>
+  <circle cx="42" cy="30" r="3" fill="#f6d32d"/>
+</svg>

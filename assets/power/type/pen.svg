@@ -1,0 +1,7 @@
+<!-- type_pen_high_detail.svg -->
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <!-- Body -->
+  <polygon points="20,12 28,12 44,44 36,44" fill="#ffffff"/>
+  <!-- Tip -->
+  <polygon points="36,44 44,44 40,52" fill="#f6d32d"/>
+</svg>

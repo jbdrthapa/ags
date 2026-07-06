@@ -1,0 +1,10 @@
+<!-- type_video_high_detail.svg -->
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <!-- Frame -->
+  <rect x="12" y="14" width="40" height="26" rx="3" fill="#ffffff"/>
+  <!-- Accent play -->
+  <polygon points="26,20 40,27 26,34" fill="#c061cb"/>
+  <!-- Scanlines -->
+  <rect x="14" y="18" width="36" height="2" fill="#ffffff" opacity="0.35"/>
+  <rect x="14" y="30" width="36" height="2" fill="#ffffff" opacity="0.35"/>
+</svg>
