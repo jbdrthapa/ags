@@ -81,6 +81,11 @@ app-tile:hover {
   background: $base-transparent;
 }
 
+app-tile:focus {
+  border: 2px solid $accent-background;
+  background: $base-transparent;
+}
+
 app-icon {
   margin-bottom: 10px;
 }

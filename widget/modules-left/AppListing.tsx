@@ -45,8 +45,7 @@ function AppItem({ app }: { app: Apps.Application }) {
     }
 
     return (
-        <button
-            cssName="app-tile"
+        <button css="background-color: transparent;"
             onClicked={() => {
                 appListingWindow.hide_all();
                 launch(app);
@@ -147,7 +146,7 @@ export function AppListing() {
         >
             <For each={list}>
                 {(app) => (
-                    <Gtk.FlowBoxChild>
+                    <Gtk.FlowBoxChild cssName="app-tile">
                         <AppItem app={app} />
                     </Gtk.FlowBoxChild>
                 )}
