@@ -42,7 +42,7 @@ export default function Dock() {
                         cssName="dock-item"
                         tooltipText={`${app.name}\n${app.description || "Application Launcher"}`}
                         onClicked={() => {
-                            console.log(`Launching application path: ${app.name}`)
+                            execAsync("niri msg action close-overview");
                             app.launch()
                         }}>
                         <image iconName={app.icon_name || "application-x-executable"} pixelSize={32} />

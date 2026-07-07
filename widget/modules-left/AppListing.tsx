@@ -5,6 +5,7 @@ import { Astal, Gdk } from "ags/gtk4"
 import { For, createState } from "ags";
 import { subprocess } from "ags/process";
 import { WindowName } from "../../constants"
+import { execAsync } from "ags/process";
 
 const windowName = WindowName.modulesLeft;
 
@@ -14,6 +15,8 @@ let appListingWindow: any;
 function launch(app?: Apps.Application) {
     if (app) {
         appListingWindow.hide()
+
+        execAsync("niri msg action close-overview");
 
         // Check if the .desktop file has Terminal=true
         const needsTerminal = app.app.get_boolean("Terminal");
