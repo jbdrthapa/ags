@@ -1,6 +1,6 @@
 import Gtk from "gi://Gtk?version=4.0";
 import app from "ags/gtk4/app"
-import Utils from "../../utils";
+import Utils from "../../Utils";
 
 export function AboutSettings() {
 

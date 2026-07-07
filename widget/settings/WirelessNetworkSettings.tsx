@@ -1,7 +1,7 @@
 import Gtk from "gi://Gtk?version=4.0";
 import Network from "gi://AstalNetwork"
 import { createBinding, createComputed } from "gnim";
-import Utils from "../../utils";
+import Utils from "../../Utils";
 
 export function WirelessNetworkSettings() {
 

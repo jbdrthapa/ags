@@ -5,6 +5,7 @@ import { Astal, Gdk } from "ags/gtk4"
 import { For, createState } from "ags";
 import { subprocess } from "ags/process";
 import { WindowName } from "../../constants"
+import { execAsync } from "ags/process";
 
 const windowName = WindowName.modulesLeft;
 
@@ -14,6 +15,8 @@ let appListingWindow: any;
 function launch(app?: Apps.Application) {
     if (app) {
         appListingWindow.hide()
+
+        execAsync("niri msg action close-overview");
 
         // Check if the .desktop file has Terminal=true
         const needsTerminal = app.app.get_boolean("Terminal");
@@ -45,8 +48,7 @@ function AppItem({ app }: { app: Apps.Application }) {
     }
 
     return (
-        <button
-            cssName="app-tile"
+        <button css="background-color: transparent;"
             onClicked={() => {
                 appListingWindow.hide_all();
                 launch(app);
@@ -78,6 +80,7 @@ export function AppListing() {
     let searchentry: Gtk.Entry
     let appsScroll: Gtk.ScrolledWindow
     let win: Astal.Window
+    let flowBox: Gtk.FlowBox
 
     const apps = new Apps.Apps();
     const initialResults = apps.fuzzy_query("")
@@ -99,11 +102,6 @@ export function AppListing() {
         console.log("Key pressed", Gdk.keyval_name(keyval), "with modifier", mod);
         if (keyval === Gdk.KEY_Escape) {
             appListingWindow.visible = false
-            return true
-        }
-
-        if (keyval === Gdk.KEY_Return || keyval === Gdk.KEY_KP_Enter) {
-            launch(list.peek()[0])
             return true
         }
 
@@ -132,11 +130,12 @@ export function AppListing() {
         />
     ) as any;
 
-    const appsListing = (
+    flowBox = (
         <Gtk.FlowBox
             vexpand
             hexpand
-            selectionMode={Gtk.SelectionMode.NONE}
+            selectionMode={Gtk.SelectionMode.SINGLE}
+            activate_on_single_click={true}
             columnSpacing={40}
             rowSpacing={40}
             minChildrenPerLine={6}
@@ -144,16 +143,23 @@ export function AppListing() {
             homogeneous={false}
             valign={Gtk.Align.START}
             halign={Gtk.Align.START}
+            onChildActivated={(self, child) => {
+                const button = child.child;
+                if (button) {
+                    button.activate();
+                }
+            }}
         >
             <For each={list}>
                 {(app) => (
-                    <Gtk.FlowBoxChild>
+                    <Gtk.FlowBoxChild cssName="app-tile">
                         <AppItem app={app} />
                     </Gtk.FlowBoxChild>
                 )}
             </For>
         </Gtk.FlowBox>
-    );
+    )
+
 
     appListingWindow = new PopupWindow({
         name: windowName,
@@ -163,7 +169,7 @@ export function AppListing() {
             <box cssName="modules-left-container" orientation={Gtk.Orientation.VERTICAL}>
                 {searchEntry}
                 <scrolledwindow vexpand heightRequest={860} hexpand widthRequest={1300} $={(ref) => (appsScroll = ref)}>
-                    {appsListing}
+                    {flowBox}
                 </scrolledwindow>
             </box>
         )
