@@ -23,16 +23,6 @@ export function WorkspaceWidget() {
       <box spacing={10} cssName="workspace-container" orientation={Gtk.Orientation.HORIZONTAL}>
         <button
           valign={Gtk.Align.CENTER}
-          cssClasses={["workspace-item", "close"]}
-          onClicked={() => {
-            execAsync("niri msg action close-window")
-          }}
-          tooltipText={"Close Active"}
-        >
-          <label label="󰛉" />
-        </button>
-        <button
-          valign={Gtk.Align.CENTER}
           cssClasses={["workspace-item", "focus"]}
           onClicked={() => {
             execAsync("niri msg action focus-column-left")
