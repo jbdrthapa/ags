@@ -11,12 +11,14 @@ import { PowerProfileWidget } from "./bar/PowerProfileWidget"
 import { BatteryWidget } from "./bar/BatteryWidget"
 import { DesktopMenu } from "./DesktopMenu"
 import { WindowName } from "../constants"
+import Dock from "./bar/Dock"
 import IPCService from "../services/IPCService"
 
 let modulesLeft: any;
 let modulesCenter: any;
 let modulesRight: any;
 let settings: any;
+let dock: any;
 let desktopMenu = DesktopMenu();
 
 const windowName = WindowName.bar;
@@ -35,6 +37,7 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
   modulesCenter = new (ModulesCenter as any)();
   modulesRight = new (ModulesRight as any)();
   settings = new (Settings as any)();
+  dock = new (Dock as any)();
 
   const workspaceWidget = WorkspaceWidget();
   const trayWidget = TrayWidget();
@@ -76,6 +79,7 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
       <centerbox cssName="bar">
         <box $type="start" spacing={10}>
           {modulesLeft}
+          {dock}
           {workspaceWidget}
         </box>
         <box $type="center">
