@@ -1,7 +1,7 @@
 import Gtk from "gi://Gtk?version=4.0";
 import { For, createBinding, createComputed } from "gnim";
 import AstalBattery from "gi://AstalBattery?version=0.1";
-import Utils from "../../utils";
+import Utils from "../../Utils";
 
 export function PowerSettings() {
 

@@ -1,17 +1,11 @@
 import Gtk from "gi://Gtk?version=4.0"
 import Apps from "gi://AstalApps"
 import { execAsync } from "ags/process";
+import Config from "../../conf/Config";
 
 const appsService = new Apps.Apps()
 
-const DOCK_LAUNCHERS = [
-    "brave",
-    "kitty",
-    "nautilus",
-    "g4music",
-    "vscodium",
-    "galculator"
-]
+const DOCK_LAUNCHERS = Config.GetDockLaunchers();
 
 export default function Dock() {
     return (
@@ -26,10 +20,11 @@ export default function Dock() {
                 <label label="󰛉" />
             </button>
             {DOCK_LAUNCHERS.map(appName => {
-                const app = appsService.fuzzy_query(appName)?.[0]
+                const app: Apps.Application = appsService.fuzzy_query(appName)?.[0]
                     || appsService.get_list().find(a => a.name.toLowerCase().includes(appName.toLowerCase()))
 
                 if (!app) {
+
                     return (
                         <button cssName="dock-item dead" tooltipText={`Missing: ${appName}`}>
                             <image iconName="image-missing" pixelSize={32} />
