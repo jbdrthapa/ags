@@ -52,6 +52,21 @@ loadConfig();
 
 // Export functions
 
+export function GetOpenWeatherAPIKey() {
+    if (!cachedConfig) return "";
+    return cachedConfig.open_weather_api_key;
+}
+
+export function GetOpenWeatherCityCode() {
+    if (!cachedConfig) return "";
+    return cachedConfig.open_weather_city_code;
+}
+
+export function GetMeasurementUnits() {
+    if (!cachedConfig) return "";
+    return cachedConfig.measurement_units;
+}
+
 export function GetDockLaunchers() {
     if (!cachedConfig) return [];
     return Array.isArray(cachedConfig.dock_launchers)
@@ -60,6 +75,9 @@ export function GetDockLaunchers() {
 }
 
 const Config = {
+    GetOpenWeatherAPIKey,
+    GetOpenWeatherCityCode,
+    GetMeasurementUnits,
     GetDockLaunchers
 };
 

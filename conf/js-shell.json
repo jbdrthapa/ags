@@ -1,4 +1,7 @@
 {
+    "open_weather_api_key": "",
+    "open_weather_city_code": "",
+    "measurement_units": "",
     "dock_launchers": [
         "brave",
         "kitty",

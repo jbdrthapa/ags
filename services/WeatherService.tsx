@@ -1,6 +1,7 @@
 import GObject from "gi://GObject";
 import { execAsync } from "ags/process";
 import GLib from "gi://GLib";
+import Config from "../conf/Config"
 
 const WeatherServiceProperties = {
     'temperature': GObject.ParamSpec.string(
@@ -78,8 +79,8 @@ class InternalWeatherService extends GObject.Object {
     }
 
     api_key = '';
-    city_id = '5350734';
-    units = 'imperial'; // metric | imperial
+    city_id = '';
+    units = '';
 
     temperature = '?';
     temperature_low = '?';
@@ -94,6 +95,12 @@ class InternalWeatherService extends GObject.Object {
 
     constructor() {
         super();
+
+        this.api_key = Config.GetOpenWeatherAPIKey();
+
+        this.city_id = Config.GetOpenWeatherCityCode();
+
+        this.units = Config.GetMeasurementUnits();
 
         this.fetchWeather();
 
@@ -174,21 +181,21 @@ class InternalWeatherService extends GObject.Object {
     }
 
     private getCompassDirection(degrees: number): string {
-    const directions = [
-        "N", "NNE", "NE", "ENE", 
-        "E", "ESE", "SE", "SSE", 
-        "S", "SSW", "SW", "WSW", 
-        "W", "WNW", "NW", "NNW"
-    ];
-    
-    // Normalize degrees to 0-359
-    const normalizedDegrees = ((degrees % 360) + 360) % 360;
-    
-    // Split the circle into 16 sectors (22.5 degrees each)
-    const index = Math.round(normalizedDegrees / 22.5) % 16;
-    
-    return directions[index];
-}
+        const directions = [
+            "N", "NNE", "NE", "ENE",
+            "E", "ESE", "SE", "SSE",
+            "S", "SSW", "SW", "WSW",
+            "W", "WNW", "NW", "NNW"
+        ];
+
+        // Normalize degrees to 0-359
+        const normalizedDegrees = ((degrees % 360) + 360) % 360;
+
+        // Split the circle into 16 sectors (22.5 degrees each)
+        const index = Math.round(normalizedDegrees / 22.5) % 16;
+
+        return directions[index];
+    }
 
     // Maps OpenWeather's explicit icon string codes to emojis or Nerd Font glyphs
     private mapOpenWeatherIcon(iconCode: string): string {
