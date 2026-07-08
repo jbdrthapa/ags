@@ -1,7 +1,7 @@
 js-shell, custom shell for Tiling Window Managers
  
 ## Bar
- ![Application Launcher](screenshots/Bar.png?v=5)
+ ![Application Launcher](screenshots/Bar.png?v=6)
 
 ## Application Launcher
 ![Application Launcher](screenshots/Launcher.png?v=5)
