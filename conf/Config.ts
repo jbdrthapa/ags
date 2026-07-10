@@ -26,6 +26,47 @@ function loadConfig() {
     }
 }
 
+function reloadConfig() {
+    loadConfig();
+
+    if (!cachedConfig) {
+        console.log("Unable to read config.")
+
+    }
+
+    return cachedConfig;
+}
+
+function saveConfig() {
+
+    if (!cachedConfig) {
+        console.log("No configuration to save.");
+        return false;
+    }
+
+    try {
+        console.log("stringify called");
+        const jsonString = JSON.stringify(cachedConfig, null, 4);
+        const bytes = new TextEncoder().encode(jsonString);
+        const ok = GLib.file_set_contents(configPath, bytes);
+
+        console.log("calling SetMeasurementUnits later on");
+
+        if (!ok) {
+            console.log(`Error: GLib failed to write to ${configPath}`);
+            return false;
+        }
+
+        console.log("Configuration saved successfully.");
+        return true;
+
+    } catch (e) {
+        console.log(`js-shell config save error: ${e}`);
+        return false;
+    }
+}
+
+
 function setupWatcher() {
     const file = Gio.File.new_for_path(configPath);
 
@@ -74,11 +115,29 @@ export function GetDockLaunchers() {
         : [];
 }
 
+export function SetMeasurementUnits(measurement_units: string) {
+    console.log("calling SetMeasurementUnits");
+    if (!reloadConfig()) return;
+
+    console.log("reload config passed");
+
+    try {
+        console.log("saving measurement_units");
+        cachedConfig.measurement_units = measurement_units;
+        console.log("saveconfig called");
+        saveConfig();
+    }
+    catch (e) {
+        console.log("Failed to set measurement units.")
+    }
+}
+
 const Config = {
     GetOpenWeatherAPIKey,
     GetOpenWeatherCityCode,
     GetMeasurementUnits,
-    GetDockLaunchers
+    GetDockLaunchers,
+    SetMeasurementUnits
 };
 
 export default Config;

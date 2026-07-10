@@ -10,6 +10,7 @@ import { WiredNetworkSettings } from "./WiredNetworkSettings";
 import { WirelessNetworkSettings } from "./WirelessNetworkSettings";
 import { BluetoothSettings } from "./BluetoothSettings";
 import { WallpaperSettings } from "./WallpaperSettings";
+import { Preferences } from "./Preferences";
 import { AboutSettings } from "./AboutSettings";
 
 export function Settings() {
@@ -23,6 +24,7 @@ export function Settings() {
     const wirelessNetworkSettings = WirelessNetworkSettings() as any;
     const bluetoothSettings = BluetoothSettings() as any;
     const wallpaperSettings = WallpaperSettings() as any;
+    const preferences = Preferences() as any;
     const aboutSettings = AboutSettings() as any;
 
 
@@ -40,6 +42,7 @@ export function Settings() {
     notebook.append_page(wirelessNetworkSettings, new Gtk.Label({ label: "Wireless" }));
     notebook.append_page(bluetoothSettings, new Gtk.Label({ label: "Bluetooth" }));
     notebook.append_page(wallpaperSettings, new Gtk.Label({ label: "Wallpaper" }));
+    notebook.append_page(preferences, new Gtk.Label({ label: "Preferences" }));
     notebook.append_page(aboutSettings, new Gtk.Label({ label: "About" }));
 
     const SettingsPopup = new PopupWindow({
