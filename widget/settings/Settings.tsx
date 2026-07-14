@@ -13,6 +13,7 @@ import { WallpaperSettings } from "./WallpaperSettings";
 import { Preferences } from "./Preferences";
 import { AboutSettings } from "./AboutSettings";
 
+
 export function Settings() {
 
     const windowName = WindowName.settings;
@@ -26,7 +27,6 @@ export function Settings() {
     const wallpaperSettings = WallpaperSettings() as any;
     const preferences = Preferences() as any;
     const aboutSettings = AboutSettings() as any;
-
 
     let notebook = new Gtk.Notebook({
         tabPos: Gtk.PositionType.LEFT,
@@ -75,5 +75,27 @@ export function Settings() {
         )
     });
 
+    const win = app.get_window(windowName);
+
+    if (win) {
+        (win as any).Settings = () => {
+            notebook.set_current_page(0);
+        };
+
+        (win as any).Power = () => {
+            notebook.set_current_page(0);
+        };
+
+        (win as any).Display = () => {
+            notebook.set_current_page(1);
+        };
+
+        (win as any).Wallpaper = () => {
+            notebook.set_current_page(6);
+        };
+    }
+
     return SettingsPopup;
+
 }
+

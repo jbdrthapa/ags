@@ -13,11 +13,13 @@ import { DesktopMenu } from "./DesktopMenu"
 import { WindowName } from "../constants"
 import Dock from "./bar/Dock"
 import IPCService from "../services/IPCService"
+import WidgetManager from "../WidgetManager"
+import PopupWindow from "./PopupWindow"
 
 let modulesLeft: any;
 let modulesCenter: any;
 let modulesRight: any;
-let settings: any;
+let settings: typeof PopupWindow;
 let dock: any;
 let desktopMenu = DesktopMenu();
 
@@ -36,7 +38,7 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
   modulesLeft = new (ModulesLeft as any)();
   modulesCenter = new (ModulesCenter as any)();
   modulesRight = new (ModulesRight as any)();
-  settings = new (Settings as any)();
+  settings = WidgetManager.GetSettingsWindow();
   dock = new (Dock as any)();
 
   const workspaceWidget = WorkspaceWidget();

@@ -3,6 +3,7 @@ import PopupWindow from "../widget/PopupWindow"
 import { Astal } from "ags/gtk4"
 import { WindowName } from "../constants"
 import app from "ags/gtk4/app";
+import WidgetManager from "../WidgetManager";
 
 const windowName = WindowName.desktopMenu;
 const settingsWindowName = WindowName.settings
@@ -16,17 +17,25 @@ export function DesktopMenu() {
         child: (
             <box orientation={Gtk.Orientation.VERTICAL}>
 
-                <button cssName="desktop-menu-button" onClicked={() => {
-                    var settingsWindow = app.get_window(settingsWindowName) as InstanceType<typeof PopupWindow>;
-                    app.toggle_window(windowName);
-                    settingsWindow.toggle();
-                }}>Settings</button>
 
                 <button cssName="desktop-menu-button" onClicked={() => {
-                    var settingsWindow = app.get_window(settingsWindowName) as InstanceType<typeof PopupWindow>;
-                    app.toggle_window(windowName);
-                    settingsWindow.toggle();
+                    let settings = WidgetManager.GetSettingsWindow();
+                    settings.Display();
+                    settings.toggle();
+                }}>Display</button>
+
+                <button cssName="desktop-menu-button" onClicked={() => {
+                    let settings = WidgetManager.GetSettingsWindow();
+                    settings.Wallpaper();
+                    settings.toggle();
                 }}>Wallpaper</button>
+
+                <button cssName="desktop-menu-button" onClicked={() => {
+                    let settings = WidgetManager.GetSettingsWindow();
+                    settings.Settings();
+                    settings.toggle();
+
+                }}>Settings</button>
 
             </box>
         )
