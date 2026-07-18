@@ -6,8 +6,16 @@ export function TrayWidget() {
   const tray = AstalTray.get_default()
   const items = createBinding(tray, "items")
 
-  const init = (btn: Gtk.MenuButton, item: AstalTray.TrayItem) => {
-    btn.menuModel = item.menuModel
+  const init = (btn: Gtk.Button, item: AstalTray.TrayItem) => {
+    const popover = Gtk.PopoverMenu.new_from_model(item.menuModel)
+    popover.set_parent(btn)
+
+    const gesture = new Gtk.GestureClick({ button: 3 })
+    gesture.connect("released", () => {
+      popover.popup()
+    })
+    btn.add_controller(gesture)
+
     btn.insert_action_group("dbusmenu", item.actionGroup)
     item.connect("notify::action-group", () => {
       btn.insert_action_group("dbusmenu", item.actionGroup)
@@ -18,9 +26,9 @@ export function TrayWidget() {
     <box cssName="tray-container">
       <For each={items}>
         {(item) => (
-          <menubutton $={(self) => init(self, item)} cssName="tray-module-button">
+          <button $={(self) => init(self, item)} cssName="tray-module-button">
             <image gicon={createBinding(item, "gicon")} cssName="tray-module-button-image" />
-          </menubutton>
+          </button>
         )}
       </For>
     </box>
