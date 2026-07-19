@@ -10,7 +10,9 @@ import { WiredNetworkSettings } from "./WiredNetworkSettings";
 import { WirelessNetworkSettings } from "./WirelessNetworkSettings";
 import { BluetoothSettings } from "./BluetoothSettings";
 import { WallpaperSettings } from "./WallpaperSettings";
+import { Preferences } from "./Preferences";
 import { AboutSettings } from "./AboutSettings";
+
 
 export function Settings() {
 
@@ -23,8 +25,8 @@ export function Settings() {
     const wirelessNetworkSettings = WirelessNetworkSettings() as any;
     const bluetoothSettings = BluetoothSettings() as any;
     const wallpaperSettings = WallpaperSettings() as any;
+    const preferences = Preferences() as any;
     const aboutSettings = AboutSettings() as any;
-
 
     let notebook = new Gtk.Notebook({
         tabPos: Gtk.PositionType.LEFT,
@@ -40,6 +42,7 @@ export function Settings() {
     notebook.append_page(wirelessNetworkSettings, new Gtk.Label({ label: "Wireless" }));
     notebook.append_page(bluetoothSettings, new Gtk.Label({ label: "Bluetooth" }));
     notebook.append_page(wallpaperSettings, new Gtk.Label({ label: "Wallpaper" }));
+    notebook.append_page(preferences, new Gtk.Label({ label: "Preferences" }));
     notebook.append_page(aboutSettings, new Gtk.Label({ label: "About" }));
 
     const SettingsPopup = new PopupWindow({
@@ -72,5 +75,27 @@ export function Settings() {
         )
     });
 
+    const win = app.get_window(windowName);
+
+    if (win) {
+        (win as any).Settings = () => {
+            notebook.set_current_page(0);
+        };
+
+        (win as any).Power = () => {
+            notebook.set_current_page(0);
+        };
+
+        (win as any).Display = () => {
+            notebook.set_current_page(1);
+        };
+
+        (win as any).Wallpaper = () => {
+            notebook.set_current_page(6);
+        };
+    }
+
     return SettingsPopup;
+
 }
+

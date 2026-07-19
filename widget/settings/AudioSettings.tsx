@@ -35,6 +35,7 @@ export function AudioSettings() {
     const CONFIG_DIR = `${Utils.GetUserConfigDirectory()}/ags`;
 
     const CHANNEL_LAYOUT: Record<number, [string, string]> = {
+        0: [`${CONFIG_DIR}/assets/speaker_layout/unknown.svg`, "Unknown"],
         1: [`${CONFIG_DIR}/assets/speaker_layout/mono.svg`, "Mono"],
         2: [`${CONFIG_DIR}/assets/speaker_layout/stereo.svg`, "Stereo"],
         4: [`${CONFIG_DIR}/assets/speaker_layout/quad.svg`, "Quadraphonic"],
