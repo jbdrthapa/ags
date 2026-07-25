@@ -8,6 +8,7 @@ import { ModulesRight } from "./modules-right/ModulesRight"
 import { Settings } from "./settings/Settings"
 import { TrayWidget } from "./bar/TrayWidget"
 import { PowerProfileWidget } from "./bar/PowerProfileWidget"
+import { GraphicsWidget } from "./bar/GraphicsWidget"
 import { BatteryWidget } from "./bar/BatteryWidget"
 import { DesktopMenu } from "./DesktopMenu"
 import { WindowName } from "../constants"
@@ -44,6 +45,7 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
   const workspaceWidget = WorkspaceWidget();
   const trayWidget = TrayWidget();
   const powerProfileWidget = PowerProfileWidget();
+  const graphicsWidget = GraphicsWidget();
   const batteryWidget = BatteryWidget();
   const ipcService = new IPCService();
 
@@ -89,6 +91,7 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
         </box>
         <box $type="end" spacing={10}>
           {powerProfileWidget}
+          {graphicsWidget}
           {batteryWidget}
           {trayWidget}
           {modulesRight}
