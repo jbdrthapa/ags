@@ -66,13 +66,13 @@ class InternalGraphicsService extends GObject.Object {
                 if (current_mode !== this.dgpu_mode) {
                     this.dgpu_mode = current_mode;
                     this.notify("dgpu-mode");
-                    console.log("dgpu mode : " + this.dgpu_mode);
+                    // console.log("dgpu mode : " + this.dgpu_mode);
 
                     let current_dgpu_in_use = this.dgpu_mode === "suspended" ? false : true;
                     if (current_dgpu_in_use !== this.dgpu_in_use) {
                         this.dgpu_in_use = current_dgpu_in_use;
                         this.notify("dgpu-in-use");
-                        console.log("dgpu in use : " + this.dgpu_in_use);
+                        // console.log("dgpu in use : " + this.dgpu_in_use);
                     }
                 }
             }
