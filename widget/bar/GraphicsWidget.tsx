@@ -29,7 +29,7 @@ export function GraphicsWidget() {
 
   return (
     <button vexpand valign={Gtk.Align.CENTER} cssName="power-profile-button">
-      <image file={graphicsStatusIconPath} pixelSize={38} tooltipText={graphicsStatus} cssName="settings-param-icon" halign={Gtk.Align.START} />
+      <image file={graphicsStatusIconPath} pixelSize={38} tooltipText={graphicsStatus} css="filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.9));" cssName="settings-param-icon" halign={Gtk.Align.START} />
     </button>
   )
 }
