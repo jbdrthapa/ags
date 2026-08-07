@@ -1,14 +1,14 @@
 import Gtk from "gi://Gtk?version=4.0";
 import { DisplayWidget } from "./DisplayWidget";
-import { WirelessPillWidget } from "./WirelessPillWidget";
+import { WiredNetworkWidget } from "./WiredNetworkWidget";
+import { AccordionController } from "./AccordionController";
 
+const accordion = new AccordionController();
 
 export function PillWidgets() {
 
-    const displayWidget = DisplayWidget();
-    const displayWidget2 = DisplayWidget();
-    const displayWidget3 = DisplayWidget();
-    const displayWidget4 = DisplayWidget();
+    const displayWidget = DisplayWidget(accordion);
+    const wiredNetworkWidget = WiredNetworkWidget(accordion);
 
     return (
 
@@ -19,19 +19,10 @@ export function PillWidgets() {
                 </box>
 
                 <box orientation={Gtk.Orientation.VERTICAL}>
-                    {displayWidget2}
+                    {wiredNetworkWidget}
                 </box>
             </box>
 
-            <box orientation={Gtk.Orientation.HORIZONTAL}>
-                <box orientation={Gtk.Orientation.VERTICAL}>
-                    {displayWidget3}
-                </box>
-
-                <box orientation={Gtk.Orientation.VERTICAL} vexpand={true}>
-                    {displayWidget4}
-                </box>
-            </box>
         </box>
 
     );

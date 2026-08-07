@@ -2,7 +2,9 @@ import Gtk from "gi://Gtk?version=4.0";
 import { AccordionController } from "./AccordionController";
 import { PillWidget } from "./PillWidget";
 
-export function DisplayWidget(controller: AccordionController) {
+const accordion = new AccordionController();
+
+export function WiredNetworkWidget(controller: AccordionController) {
     const content = (
         <box orientation={Gtk.Orientation.VERTICAL} cssName="pill-content">
             <label label="Brightness: 75%" />
@@ -11,11 +13,11 @@ export function DisplayWidget(controller: AccordionController) {
     ) as Gtk.Box;
 
     return PillWidget({
-        id: "display",
+        id: "wired-network",
         controller: controller,
         iconName: "",
-        title: "Display",
-        detail: "Display Detail",
+        title: "Wired",
+        detail: "Wired Detail",
         content,
     });
 }

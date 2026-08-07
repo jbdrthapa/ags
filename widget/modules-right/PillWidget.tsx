@@ -1,11 +1,16 @@
 import Gtk from "gi://Gtk?version=4.0";
+import { AccordionController } from "./AccordionController";
 
 export function PillWidget({
+    id,
+    controller,
     iconName,
     title,
     detail,
     content,
 }: {
+    id: string;
+    controller: AccordionController;
     iconName: string;
     title: string;
     detail?: string;
@@ -15,6 +20,13 @@ export function PillWidget({
     const revealer = new Gtk.Revealer({
         reveal_child: false,
         transition_type: Gtk.RevealerTransitionType.SLIDE_DOWN,
+    });
+
+    // Register with controller
+    controller.register(id, (openedId) => {
+        if (openedId !== id) {
+            revealer.set_reveal_child(false);
+        }
     });
 
     const button = (
@@ -32,8 +44,12 @@ export function PillWidget({
     ) as Gtk.Button;
 
     button.connect("clicked", () => {
-        const current = revealer.get_reveal_child();
-        revealer.set_reveal_child(!current);
+        const newState = !revealer.get_reveal_child();
+        revealer.set_reveal_child(newState);
+
+        if (newState) {
+            controller.open(id);
+        }
     });
 
     revealer.set_child(content);
