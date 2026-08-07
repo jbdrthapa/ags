@@ -13,7 +13,7 @@ export function DisplayWidget(controller: AccordionController) {
     return PillWidget({
         id: "display",
         controller: controller,
-        iconName: "",
+        iconName: "󰍹",
         title: "Display",
         detail: "Display Detail",
         content,

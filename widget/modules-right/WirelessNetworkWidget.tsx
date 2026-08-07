@@ -4,18 +4,18 @@ import { PillWidget } from "./PillWidget";
 
 const accordion = new AccordionController();
 
-export function WiredNetworkWidget(controller: AccordionController) {
+export function WirelessNetworkWidget(controller: AccordionController) {
     const content = (
         <box orientation={Gtk.Orientation.VERTICAL} cssName="pill-content">
-            <label label="Wired Network" />
+            <label label="Wireless Network" />
         </box>
     ) as Gtk.Box;
 
     return PillWidget({
-        id: "wired-network",
+        id: "wireless-network",
         controller: controller,
-        iconName: "󰈀",
-        title: "Wired",
+        iconName: "",
+        title: "Wireless",
         detail: "Connected",
         content,
     });

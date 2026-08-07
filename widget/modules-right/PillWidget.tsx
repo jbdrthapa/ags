@@ -20,6 +20,7 @@ export function PillWidget({
     const revealer = new Gtk.Revealer({
         reveal_child: false,
         transition_type: Gtk.RevealerTransitionType.SLIDE_DOWN,
+        transitionDuration: 400
     });
 
     // Register with controller
