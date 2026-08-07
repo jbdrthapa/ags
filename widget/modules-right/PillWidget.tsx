@@ -1,10 +1,12 @@
 import Gtk from "gi://Gtk?version=4.0";
 
 export function PillWidget({
+    iconName,
     title,
     detail,
     content,
 }: {
+    iconName: string;
     title: string;
     detail?: string;
     content: Gtk.Widget;
@@ -18,7 +20,7 @@ export function PillWidget({
     const button = (
         <button cssName="pill-button">
             <box orientation={Gtk.Orientation.HORIZONTAL} spacing={8}>
-                <image iconName="i" cssName="pill-button-image" />
+                <label label={iconName} cssName="pill-button-image" />
                 <box orientation={Gtk.Orientation.VERTICAL}>
                     <label xalign={0} label={title} cssName="pill-button-name" />
                     {detail && (

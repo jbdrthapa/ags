@@ -6,28 +6,33 @@ import { WirelessPillWidget } from "./WirelessPillWidget";
 export function PillWidgets() {
 
     const displayWidget = DisplayWidget();
-    const wirelessPillWidget2 = WirelessPillWidget();
-    const wirelessPillWidget3 = WirelessPillWidget();
-    const wirelessPillWidget4 = WirelessPillWidget();
+    const displayWidget2 = DisplayWidget();
+    const displayWidget3 = DisplayWidget();
+    const displayWidget4 = DisplayWidget();
 
     return (
-        <box orientation={Gtk.Orientation.VERTICAL} >
-            <box orientation={Gtk.Orientation.HORIZONTAL} halign={Gtk.Align.CENTER} valign={Gtk.Align.START} vexpand={false} cssName="pill-container">
-                <box valign={Gtk.Align.START}>
+
+        <box orientation={Gtk.Orientation.VERTICAL} spacing={10}>
+            <box orientation={Gtk.Orientation.HORIZONTAL}>
+                <box orientation={Gtk.Orientation.VERTICAL}>
                     {displayWidget}
                 </box>
-                <box valign={Gtk.Align.START}>
-                    {wirelessPillWidget2}
+
+                <box orientation={Gtk.Orientation.VERTICAL}>
+                    {displayWidget2}
                 </box>
             </box>
-            <box orientation={Gtk.Orientation.HORIZONTAL} halign={Gtk.Align.CENTER} valign={Gtk.Align.START} vexpand={false} cssName="pill-container">
-                <box valign={Gtk.Align.START}>
-                    {wirelessPillWidget3}
+
+            <box orientation={Gtk.Orientation.HORIZONTAL}>
+                <box orientation={Gtk.Orientation.VERTICAL}>
+                    {displayWidget3}
                 </box>
-                <box valign={Gtk.Align.START}>
-                    {wirelessPillWidget4}
+
+                <box orientation={Gtk.Orientation.VERTICAL} vexpand={true}>
+                    {displayWidget4}
                 </box>
             </box>
         </box>
+
     );
 }
