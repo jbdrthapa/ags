@@ -4,7 +4,12 @@ import GLib from "gi://GLib";
 
 let displayDevice: null | string = null;
 let devicePath: null | string = null;
-const targetOutput = 'output "Samsung Display Corp. ATNA40CU05-0  Unknown"';
+const TARGET_OUTPUT = 'output "Samsung Display Corp. ATNA40CU05-0  Unknown"';
+
+const HDR_MIN = 10;
+const HDR_LOW = 184;
+const HDR = 384;
+const HDR_MAX = 584;
 
 const DisplayServiceProperties = {
     'brightness-percent': GObject.ParamSpec.int(
@@ -130,7 +135,7 @@ class InternalDisplayService extends GObject.Object {
 
             const text = new TextDecoder().decode(content);
 
-            const startIndex = text.indexOf(targetOutput);
+            const startIndex = text.indexOf(TARGET_OUTPUT);
             if (startIndex === -1) {
                 print("Target monitor block not found");
                 return;
@@ -164,10 +169,10 @@ class InternalDisplayService extends GObject.Object {
                 const value = Number(hdrMatch[1]);
 
                 const luminanceMap: Record<number, string> = {
-                    10: "HDR Min",
-                    84: "HDR Low",
-                    384: "HDR",
-                    584: "HDR Max",
+                    [HDR_MIN]: "HDR Min",
+                    [HDR_LOW]: "HDR Low",
+                    [HDR]: "HDR",
+                    [HDR_MAX]: "HDR Max",
                 };
 
                 mode = luminanceMap[value] ?? "HDR";
@@ -223,7 +228,7 @@ class InternalDisplayService extends GObject.Object {
             let text = new TextDecoder().decode(content);
 
             // Find the output block
-            const startIndex = text.indexOf(targetOutput);
+            const startIndex = text.indexOf(TARGET_OUTPUT);
             if (startIndex === -1) {
                 print("Target monitor block not found");
                 return;
@@ -259,14 +264,11 @@ class InternalDisplayService extends GObject.Object {
                 ""
             );
 
-            //
-            // 2. HDR luminance mapping
-            //
             const luminanceMap: Record<string, number> = {
-                "HDR Min": 10,
-                "HDR Low": 84,
-                "HDR": 384,
-                "HDR Max": 584,
+                "HDR Min": HDR_MIN,
+                "HDR Low": HDR_LOW,
+                "HDR": HDR,
+                "HDR Max": HDR_MAX,
             };
 
             //
