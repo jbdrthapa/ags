@@ -7,8 +7,8 @@ let devicePath: null | string = null;
 const TARGET_OUTPUT = 'output "Samsung Display Corp. ATNA40CU05-0  Unknown"';
 
 const HDR_MIN = 10;
-const HDR_LOW = 184;
-const HDR = 384;
+const HDR_LOW = 100;
+const HDR = 234;
 const HDR_MAX = 584;
 
 const DisplayServiceProperties = {
