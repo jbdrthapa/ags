@@ -4,6 +4,7 @@ import GLib from "gi://GLib";
 
 let displayDevice: null | string = null;
 let devicePath: null | string = null;
+const targetOutput = 'output "Samsung Display Corp. ATNA40CU05-0  Unknown"';
 
 const DisplayServiceProperties = {
     'brightness-percent': GObject.ParamSpec.int(
@@ -127,25 +128,61 @@ class InternalDisplayService extends GObject.Object {
             const [success, content] = GLib.file_get_contents(filePath);
             if (!success) return;
 
-            const outputContent = new TextDecoder().decode(content).trim();
+            const text = new TextDecoder().decode(content);
 
-            // Check if the file contains the HDR text
-            // This looks for: hdr mode="on"
-            let display_mode = outputContent.includes('hdr mode="on"') ? "HDR" : "SDR";
-
-            // Exit early before performing any object updates
-            if (this.last_display_mode === display_mode) {
+            const startIndex = text.indexOf(targetOutput);
+            if (startIndex === -1) {
+                print("Target monitor block not found");
                 return;
             }
-            this.last_display_mode = display_mode;
-            this.display_mode = display_mode;
 
+            // Find block boundaries
+            const blockStart = text.indexOf("{", startIndex);
+            let depth = 0;
+            let blockEnd = -1;
+
+            for (let i = blockStart; i < text.length; i++) {
+                if (text[i] === "{") depth++;
+                else if (text[i] === "}") depth--;
+
+                if (depth === 0) {
+                    blockEnd = i;
+                    break;
+                }
+            }
+
+            const block = text.slice(blockStart, blockEnd + 1);
+
+            //
+            // Detect HDR inside THIS block only
+            //
+            const hdrMatch = block.match(/reference-luminance\s+(\d+)/);
+
+            let mode = "SDR";
+
+            if (hdrMatch) {
+                const value = Number(hdrMatch[1]);
+
+                const luminanceMap: Record<number, string> = {
+                    10: "HDR Min",
+                    84: "HDR Low",
+                    384: "HDR",
+                    584: "HDR Max",
+                };
+
+                mode = luminanceMap[value] ?? "HDR";
+            }
+
+            if (this.last_display_mode === mode) return;
+
+            this.last_display_mode = mode;
+            this.display_mode = mode;
             this.notify("display-mode");
+
         } catch (err) {
-            print("Unable to resolve display mode: ", err);
+            print("Unable to resolve display mode:", err);
         }
     }
-
 
     updateBrightnessIcon() {
 
@@ -185,11 +222,8 @@ class InternalDisplayService extends GObject.Object {
 
             let text = new TextDecoder().decode(content);
 
-            // Target monitor name
-            const target = 'output "Samsung Display Corp. ATNA40CU05-0  Unknown"';
-
             // Find the output block
-            const startIndex = text.indexOf(target);
+            const startIndex = text.indexOf(targetOutput);
             if (startIndex === -1) {
                 print("Target monitor block not found");
                 return;
