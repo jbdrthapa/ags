@@ -14,7 +14,8 @@ pill-button {
   border-radius: 99px;
   border: 2px solid $surface0;
   transition: all 600ms cubic-bezier(0.4, 0, 0.2, 1);
-  min-width: 200px;
+  min-width: 250px;
+  min-height: 50px;
   margin-left: 5px;
   margin-right: 5px;
 }
@@ -52,7 +53,7 @@ pill-content {
   background-color: $mantle;
   border-radius: $border-radius;
   border: 2px solid $surface0;
-  margin:5px;
+  margin: 5px;
   margin-top: 10px;
   margin-bottom: 10px;
   min-height: 200px;
@@ -98,4 +99,22 @@ wifi-access-point-item {
 
 wifi-access-point-item:hover {
   color: $accent-background;
+}
+
+pill-param-caption {
+  color: $subtext0;
+  font-weight: 800;
+  min-width: 45px;
+  padding: 5px;
+  margin: 2px;
+}
+
+pill-param-value {
+  background-color: $surface0-transparent;
+  color: $text;
+  border: 1px solid $surface1;
+  min-width: 80px;
+  border-radius: 99px;
+  padding: 5px;
+  margin: 2px;
 }
