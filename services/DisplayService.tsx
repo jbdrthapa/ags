@@ -21,6 +21,13 @@ const DisplayServiceProperties = {
         'The Nerd Font character string for the icon',
         GObject.ParamFlags.READWRITE,
         '\u{f0cb5}'
+    ),
+    'display-mode': GObject.ParamSpec.string(
+        'display-mode',
+        'Display Mode',
+        'Display Mode string',
+        GObject.ParamFlags.READWRITE,
+        ''
     )
 };
 
@@ -37,6 +44,8 @@ class InternalDisplayService extends GObject.Object {
     private last_brightness_percent = 0;
     private brightness_percent = 0;
     private brightness_icon = "\u{f0cb5}";
+    private last_display_mode = "";
+    private display_mode = "";
     private adjustment_value = 5;
 
     constructor() {
@@ -73,8 +82,11 @@ class InternalDisplayService extends GObject.Object {
 
         this.updateBrightnessPercent();
 
+        this.updateDisplayMode();
+
         GLib.timeout_add(GLib.PRIORITY_DEFAULT, checkTimer, () => {
             this.updateBrightnessPercent();
+            this.updateDisplayMode();
             return GLib.SOURCE_CONTINUE;
         });
 
@@ -107,6 +119,34 @@ class InternalDisplayService extends GObject.Object {
         }
     }
 
+    updateDisplayMode() {
+        try {
+            const configDir = GLib.get_user_config_dir();
+            const filePath = `${configDir}/niri/niri.d/output.kdl`;
+
+            const [success, content] = GLib.file_get_contents(filePath);
+            if (!success) return;
+
+            const outputContent = new TextDecoder().decode(content).trim();
+
+            // Check if the file contains the HDR text
+            // This looks for: hdr mode="on"
+            let display_mode = outputContent.includes('hdr mode="on"') ? "HDR" : "SDR";
+
+            // Exit early before performing any object updates
+            if (this.last_display_mode === display_mode) {
+                return;
+            }
+            this.last_display_mode = display_mode;
+            this.display_mode = display_mode;
+
+            this.notify("display-mode");
+        } catch (err) {
+            print("Unable to resolve display mode: ", err);
+        }
+    }
+
+
     updateBrightnessIcon() {
 
         let icon;
@@ -131,6 +171,115 @@ class InternalDisplayService extends GObject.Object {
 
         this.notify("brightness-icon");
     }
+
+    apply_display_mode(mode: string) {
+        try {
+            const configDir = GLib.get_user_config_dir();
+            const filePath = `${configDir}/niri/niri.d/output.kdl`;
+
+            const [success, content] = GLib.file_get_contents(filePath);
+            if (!success) {
+                print("Failed to read Niri output.kdl");
+                return;
+            }
+
+            let text = new TextDecoder().decode(content);
+
+            // Target monitor name
+            const target = 'output "Samsung Display Corp. ATNA40CU05-0  Unknown"';
+
+            // Find the output block
+            const startIndex = text.indexOf(target);
+            if (startIndex === -1) {
+                print("Target monitor block not found");
+                return;
+            }
+
+            // Find the block boundaries { ... }
+            const blockStart = text.indexOf("{", startIndex);
+            let depth = 0;
+            let blockEnd = -1;
+
+            for (let i = blockStart; i < text.length; i++) {
+                if (text[i] === "{") depth++;
+                else if (text[i] === "}") depth--;
+
+                if (depth === 0) {
+                    blockEnd = i;
+                    break;
+                }
+            }
+
+            if (blockEnd === -1) {
+                print("Failed to parse monitor block");
+                return;
+            }
+
+            const block = text.slice(blockStart, blockEnd + 1);
+
+            //
+            // 1. Remove ONLY the hdr block inside this monitor block
+            //
+            let newBlock = block.replace(
+                /^\s*hdr\s+mode="on"\s*\{[\s\S]*?\}\s*/m,
+                ""
+            );
+
+            //
+            // 2. HDR luminance mapping
+            //
+            const luminanceMap: Record<string, number> = {
+                "HDR Min": 10,
+                "HDR Low": 84,
+                "HDR": 384,
+                "HDR Max": 584,
+            };
+
+            //
+            // 3. Insert HDR block if needed
+            //
+            if (mode !== "SDR") {
+                const luminance = luminanceMap[mode] ?? 84;
+
+                // Remove trailing whitespace before final brace
+                newBlock = newBlock.replace(/\s*}$/, "");
+
+                // Ensure a clean newline before HDR block
+                const hdrBlock =
+                    `\n    hdr mode="on" {\n` +
+                    `        reference-luminance ${luminance}\n` +
+                    `    }\n`;
+
+                // Insert HDR block cleanly
+                newBlock += hdrBlock + "}\n";
+            }
+
+            //
+            // 4. Replace the old block with the new one
+            //
+            const updatedText =
+                text.slice(0, blockStart) +
+                newBlock +
+                text.slice(blockEnd + 1);
+
+            //
+            // 5. Write back to file
+            //
+            GLib.file_set_contents(filePath, updatedText);
+
+            //
+            // 6. Update internal state
+            //
+            this.display_mode = mode;
+            this.last_display_mode = mode;
+            this.notify("display-mode");
+
+            print(`Display mode applied: ${mode}`);
+        } catch (err) {
+            print("apply_display_mode failed:", err);
+        }
+    }
+
 
     setBrightnessValue(value: number) {
         const target = Math.round(value);

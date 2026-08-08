@@ -1,4 +1,5 @@
 import Gtk from "gi://Gtk?version=4.0";
+import { createBinding } from "gnim";
 import { AccordionController } from "./AccordionController";
 
 export function PillWidget({
@@ -13,7 +14,7 @@ export function PillWidget({
     controller: AccordionController;
     iconName: string;
     title: string;
-    detail?: string;
+    detail?: string | ReturnType<typeof createBinding>;
     content: Gtk.Widget;
 }) {
 
