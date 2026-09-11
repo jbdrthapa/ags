@@ -1,66 +1,77 @@
 /*
-* Latte-Mocha
+* Latte-Mocha — GitHub Dark Mode Edition
 */
 
 $border-radius: 15px;
 
-$border: #414868;
+/* Borders */
+$border: #30363d;
 
-$hover-background: #9aa5ce;
-$hover-foreground: #1a1b26;
+/* Hover */
+$hover-background: #21262d;
+$hover-foreground: #c9d1d9;
 
-$text: #c0caf5;
-$subtext0: #a9b1d6;
-$subtext1: #9aa5ce;
+/* Text */
+$text: #c9d1d9;
+$subtext0: #8b949e;
+$subtext1: #6e7681;
 
-$accent-background: #009efe;
-$accent-background-transparent: #009efefa;
-$accent-foreground: #1a1b26;
+/* Accent (GitHub Blue) */
+$accent-background: #1f6feb;
+$accent-background-transparent: #1f6febfa;
+$accent-foreground: #0d1117;
 
-$base: #1a1b26;
-$base-transparent: #1a1b26e0;
+/* Base Layers */
+$base: #0d1117;
+$base-transparent: #0d1117e0;
 
-$mantle: #24283b;
-$mantle-transparent: #24283bf2;
+$mantle: #161b22;
+$mantle-transparent: #161b22f2;
 
-$crust: #1a1b26;
-$crust-transparent: #1a1b26f2;
+$crust: #0d1117;
+$crust-transparent: #0d1117f2;
 
-$surface0: #1f2335;
-$surface0-transparent: #1f2335fa;
+/* Surfaces */
+$surface0: #161b22;
+$surface0-transparent: #161b22fa;
 
-$surface1: #2a2f4b;
-$surface1-transparent: #2a2f4bfa;
+$surface1: #21262d;
+$surface1-transparent: #21262dfa;
 
-$surface2: #3b4261;
-$surface2-transparent: #3b4261fa;
+$surface2: #30363d;
+$surface2-transparent: #30363dfa;
 
-$overlay0: #414868;
-$overlay0-transparent: #414868fa;
+/* Overlays */
+$overlay0: #30363d;
+$overlay0-transparent: #30363dfa;
 
-$overlay1: #565f89;
-$overlay1-transparent: #565f89fa;
+$overlay1: #484f58;
+$overlay1-transparent: #484f58fa;
 
-$overlay2: #9aa5ce;
-$overlay2-transparent: #9aa5cefa;
+$overlay2: #6e7681;
+$overlay2-transparent: #6e7681fa;
 
-$red: #f7768e;
-$orange: #ff9e64;
-$yellow: #e0af68;
-$green: #9ece6a;
-$teal: #73daca;
-$cyan: #7dcfff;
-$blue: #7aa2f7;
-$magenta: #bb9af7;
-$white: #c0caf5;
-$black: #1a1b26;
+/* Semantic Colors */
+$red: #f85149;
+$orange: #db6d28;
+$yellow: #f2cc60;
+$green: #238636;
+$teal: #39c5cf;
+$cyan: #58a6ff;
+$blue: #1f6feb;
+$magenta: #d2a8ff;
 
-$lavender: #7287fd;
-$sapphire: #209fb5;
-$sky: #04a5e5;
-$peach: #fe640b;
-$maroon: #e64553;
-$mauve: #8839ef;
-$pink: #ea76cb;
-$flamingo: #dd7878;
-$rosewater: #dc8a78;
+/* Neutral */
+$white: #c9d1d9;
+$black: #0d1117;
+
+/* Extra Palette */
+$lavender: #b4b9ff;
+$sapphire: #58a6ff;
+$sky: #79c0ff;
+$peach: #ffb77a;
+$maroon: #a0111f;
+$mauve: #d2a8ff;
+$pink: #ff80c8;
+$flamingo: #ff9b9b;
+$rosewater: #ffd7c2;

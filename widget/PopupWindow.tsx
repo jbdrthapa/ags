@@ -30,7 +30,7 @@ export default GObject.registerClass(
       const revealer = new Gtk.Revealer({
         child,
         transition_type: Gtk.RevealerTransitionType.SLIDE_DOWN,
-        transition_duration: 300,
+        transition_duration: 100,
         reveal_child: false,
       });
 
