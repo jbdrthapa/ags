@@ -26,7 +26,7 @@ function launch(app?: Apps.Application) {
 
 export default function Dock() {
     return (
-        <box>
+        <box cssName="dock-window">
             {DOCK_LAUNCHERS.map(appName => {
                 const app: Apps.Application = appsService.fuzzy_query(appName)?.[0]
                     || appsService.get_list().find(a => a.name.toLowerCase().includes(appName.toLowerCase()))

@@ -163,8 +163,8 @@ class InternalTimeService extends GObject.Object {
                 return { timezone: data.timezone, latitude: data.latitude, longitude: data.longitude };
             }
         }
-        catch {
-            console.log("Get timezone failed");
+        catch (error) {
+            console.debug("Get timezone failed. \n" + error);
         }
     }
 
