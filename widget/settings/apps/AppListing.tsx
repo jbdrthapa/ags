@@ -7,22 +7,20 @@ import { execAsync, subprocess } from "ags/process";
 const terminal = "kitty";
 let cached: Gtk.Widget | null = null;
 
-// ---------------------------------------------------------
-// Launch Logic
-// ---------------------------------------------------------
 function launch(app?: Apps.Application) {
     if (!app) return;
 
+    // Close the compositor overview
     execAsync("niri msg action close-overview");
 
-    const needsTerminal = app.app.get_boolean("Terminal");
-    const cmd = needsTerminal
-        ? `${terminal} -e ${app.executable}`
-        : app.executable;
+    const needsTerminal = app.get_key("Terminal") === "true";
 
-    needsTerminal
-        ? subprocess(["bash", "-c", `${cmd} >/dev/null 2>&1 &`])
-        : app.launch();
+    if (needsTerminal) {
+        const cmd = `${terminal} -e ${app.executable}`;
+        subprocess(["bash", "-c", `${cmd} >/dev/null 2>&1 &`]);
+    } else {
+        app.launch();
+    }
 }
 
 // ---------------------------------------------------------
